@@ -1,8 +1,8 @@
 CREATE TABLE if not exists users  (categories
-
     varchar(15) not null,
     dni int (8) not null,
     primary key (dni),
+    unique(dni),
     created_at datetime,
     update_at datetime
     );
@@ -41,6 +41,28 @@ create table if not exists options (
     created_at datetime,
     update_at datetime
     );
+
+create table if not exists answers (
+	id_answers int(1) not null auto_increment primary key,
+    answ text not null,
+    id_opcion int not null,
+    constraint fkanswer foreign key (id_opcion) references options (id_option),
+    created_at datetime,
+    update_at datetime
+    );
+    
+create table if not exists statistics (
+	id_stat int(10) not null auto_increment primary key,
+    created_at datetime,
+    update_at datetime
+    );
+
+create table if  not exists games(
+	id_game int not null auto_increment primary key,
+    created_at datetime,
+    update_at datetime
+    );
+	
     
     
  
