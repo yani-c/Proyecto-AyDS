@@ -1,6 +1,6 @@
 CREATE TABLE if not exists users (
     name varchar(15) not null,
-    lastname varchar(15) not null,
+	lastname varchar(15) not null,
     dni int (8) not null,
     primary key (dni),
     unique(dni),
