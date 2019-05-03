@@ -14,6 +14,8 @@ import trivia.User;
 import com.google.gson.Gson;
 import java.util.Map;
 
+ import java.util.List;
+
 public class App
 {
     public static void main( String[] args )
@@ -29,6 +31,17 @@ public class App
       get("/hello/:name", (req, res) -> {
         return "hello" + req.params(":name");
       });
+
+
+	//agregar para ver que haya usuarios antes de querer mostrarlos
+	get("/users" , (req, res) ->{
+		List<User> users = User.findAll();
+		String u="";
+		for(User i : users){
+			u=u+i;
+		}
+		return u;
+	});
 
 
       post("/users", (req, res) -> {
