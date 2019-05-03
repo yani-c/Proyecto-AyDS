@@ -30,12 +30,13 @@ public class App
         return "hello" + req.params(":name");
       });
 
+
       post("/users", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-
         User user = new User();
-        user.set("username", bodyParams.get("username"));
-        user.set("password", bodyParams.get("password"));
+	    user.set("dni", bodyParams.get("dni"));
+		user.set("lastname", bodyParams.get("lastname"));
+		user.set("name", bodyParams.get("name"));
         user.saveIt();
 
         res.type("application/json");
