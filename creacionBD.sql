@@ -2,7 +2,8 @@ CREATE TABLE if not exists users (
     name varchar(15) not null,
     lastname varchar(15) not null,
     dni int (8) not null,
-    primary key (dni),
+    id_user int not null auto_increment,
+    primary key (id_user),
     unique(dni),
     created_at datetime,
     update_at datetime
