@@ -52,10 +52,56 @@ public class App
 		user.set("name", bodyParams.get("name"));
         user.saveIt();
 
+	
+
         res.type("application/json");
 
         return user.toJson(true);
       });
+
+	 post("/categories", (req, res) -> {
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+       	Category c = new Category();
+	    c.set("category_name", bodyParams.get("category_name"));
+        c.saveIt();
+
+	res.type("application/json");
+
+        return c.toJson(true);
+      });
+
+	post("/questions", (req, res) -> {
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        Question q = new Question();
+	    q.set("descrip_q", bodyParams.get("descrip_q"));
+		q.set("id_cat", bodyParams.get("id_cat"));
+        q.saveIt();
+
+	
+
+        res.type("application/json");
+
+        return q.toJson(true);
+      });
+
+	post("/options", (req, res) -> {
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        Option o = new Option();
+	    o.set("descrip_o", bodyParams.get("descrip_o"));
+		o.set("id_q", bodyParams.get("id_q"));
+		o.set("correct", bodyParams.get("correct"));
+        o.saveIt();
+
+	
+
+        res.type("application/json");
+
+        return o.toJson(true);
+      });
+
+	
+
+        
     }
 }
 

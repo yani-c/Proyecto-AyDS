@@ -1,8 +1,9 @@
+create database if not exists trivia_dev;
 CREATE TABLE if not exists users (
     name varchar(15) not null,
 	lastname varchar(15) not null,
     dni int (8) not null,
-    id_user int not null auto_increment,
+    id_user int(50) not null auto_increment,
     primary key (id_user),
     unique(dni),
     created_at datetime,
@@ -11,7 +12,7 @@ CREATE TABLE if not exists users (
 
 create table if not exists categories (
 	id_category int(1) auto_increment  not null,
-	category_name enum ('1','2','3','4','5','6'),
+	category_name varchar(20),
 	primary key(id_category),
     created_at datetime,
     update_at datetime
@@ -39,16 +40,26 @@ create table if not exists options (
 	id_option int(1) not null auto_increment primary key,
     descrip_o varchar(25),
     id_q int(1),
+    correct boolean,
     constraint fktable foreign key (id_q) references questions (id_q),
     created_at datetime,
     update_at datetime
     );
 
+create table if  not exists games(
+	id_game int(50) not null auto_increment primary key,
+    created_at datetime,
+    update_at datetime
+    );
+    
 create table if not exists answers (
 	id_answers int(1) not null auto_increment primary key,
-    answ text not null,
-    id_opcion int not null,
-    constraint fkanswer foreign key (id_opcion) references options (id_option),
+    id_opcion int(1) not null,
+    id_game int(50) not null,
+    id_user int(50) not null,
+    constraint fkgames foreign key (id_game) references games (id_game),
+    constraint fkuser foreign key (id_user) references users(id_user),
+    constraint fkanswer foreign key (id_opcion) references options(id_option),
     created_at datetime,
     update_at datetime
     );
@@ -59,11 +70,7 @@ create table if not exists statistics (
     update_at datetime
     );
 
-create table if  not exists games(
-	id_game int not null auto_increment primary key,
-    created_at datetime,
-    update_at datetime
-    );
+
 	
     
     
