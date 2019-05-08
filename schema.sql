@@ -3,8 +3,8 @@ CREATE TABLE if not exists users (
     name varchar(15) not null,
 	lastname varchar(15) not null,
     dni int (8) not null,
-    id_user int(50) not null auto_increment,
-    primary key (id_user),
+    id int(50) not null auto_increment,
+    primary key (id),
     unique(dni),
     created_at datetime,
     update_at datetime
@@ -58,7 +58,7 @@ create table if not exists answers (
     id_game int(50) not null,
     id_user int(50) not null,
     constraint fkgames foreign key (id_game) references games (id_game),
-    constraint fkuser foreign key (id_user) references users(id_user),
+    constraint fkuser foreign key (id_user) references users(id),
     constraint fkanswer foreign key (id_opcion) references options(id_option),
     created_at datetime,
     update_at datetime

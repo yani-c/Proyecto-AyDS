@@ -38,8 +38,9 @@ public class App
 		List<User> users = User.findAll();
 		String u="";
 		for(User i : users){
-			u=u+i;
+			u=u+"\n"+i;
 		}
+		res.type("application/json");
 		return u;
 	});
 
@@ -99,21 +100,14 @@ public class App
         return o.toJson(true);
       });
 	
-// intento de borrado.Todavia no anda
+// borra usuario
 	post("/deleteuser", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-        User u = new User();
-	u= User.findById("id_user");
+        User u = User.findById(bodyParams.get("id"));
 	    u.delete();
-
-	
-
-        res.type("application/json");
-
-        return u.toJson(true);
+ 		res.type("application/json");
+        return u.toJson(true,"id","dni");
       });
-
-        
     }
 }
 
