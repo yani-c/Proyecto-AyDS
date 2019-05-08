@@ -43,7 +43,7 @@ public class App
 		return u;
 	});
 
-
+//CARGADO BASE DE DATOS	
       post("/users", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         User user = new User();
@@ -98,7 +98,20 @@ public class App
 
         return o.toJson(true);
       });
+	
+// intento de borrado
+	post("/users", (req, res) -> {
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        User u = new User();
+	u= User.findById("id_user");
+	    u.delete();
 
+	
+
+        res.type("application/json");
+
+        return u.toJson(true);
+      });
 	
 
         
