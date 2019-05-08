@@ -43,7 +43,7 @@ public class App
 		return u;
 	});
 
-//CARGADO BASE DE DATOS	
+	//carga usuario
       post("/users", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         User user = new User();
@@ -59,6 +59,7 @@ public class App
         return user.toJson(true);
       });
 
+	//carga categoria
 	 post("/categories", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
        	Category c = new Category();
@@ -70,20 +71,19 @@ public class App
         return c.toJson(true);
       });
 
+	//carga pregunta
 	post("/questions", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         Question q = new Question();
 	    q.set("descrip_q", bodyParams.get("descrip_q"));
 		q.set("id_cat", bodyParams.get("id_cat"));
         q.saveIt();
-
-	
-
         res.type("application/json");
 
         return q.toJson(true);
       });
 
+	//carga opcion
 	post("/options", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         Option o = new Option();
@@ -99,8 +99,8 @@ public class App
         return o.toJson(true);
       });
 	
-// intento de borrado
-	post("/users", (req, res) -> {
+// intento de borrado.Todavia no anda
+	post("/deleteuser", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         User u = new User();
 	u= User.findById("id_user");
@@ -112,7 +112,6 @@ public class App
 
         return u.toJson(true);
       });
-	
 
         
     }
