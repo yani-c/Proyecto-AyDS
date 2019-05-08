@@ -164,7 +164,7 @@ public class App
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         Category c = Category.findById(bodyParams.get("id"));
 		if(c!=null){
-			c.set("name_category", bodyParams.get("name_category"));
+			c.set("category_name", bodyParams.get("category_name"));
 			c.saveIt();	
 			res.type("application/json");
       		return "Actualizado con exito : "+c.toJson(true);
