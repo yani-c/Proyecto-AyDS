@@ -100,7 +100,7 @@ public class App
         return o.toJson(true);
       });
 	
-// borra usuario
+// borra un usuario
 	post("/deleteuser", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         User u = User.findById(bodyParams.get("id"));
@@ -108,6 +108,19 @@ public class App
  		res.type("application/json");
         return u.toJson(true,"id","dni");
       });
+
+	//actualizar datos de un usuario
+	post("/updateuser", (req, res) -> {
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        User u = User.findById(bodyParams.get("id"));
+		u.set("dni", bodyParams.get("dni"));
+		u.set("lastname", bodyParams.get("lastname"));
+		u.set("name", bodyParams.get("name"));
+		u.saveIt();		
+		res.type("application/json");
+        return u.toJson(true);
+      });
     }
+
 }
 
