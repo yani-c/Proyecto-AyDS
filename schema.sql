@@ -4,7 +4,7 @@ CREATE TABLE if not exists users (
     name varchar(15) not null,
     dni int (8) not null,
     id int(11) not null auto_increment,
-    admin BOOLEAN,
+    administrator BOOLEAN,
     password VARCHAR(56),
     primary key (id),
     unique(dni),
@@ -64,7 +64,7 @@ create table if not exists answers (
     id_game int(50) not null,
     id_user int(50) not null,
     constraint fkgames foreign key (id_game) references games (id),
-    constraint fkuser foreign key (id_user) references users(id),
+    constraint fkusere foreign key (id_user) references users(id),
     constraint fkanswer foreign key (id_opcion) references options(id),
     created_at datetime,
     update_at datetime

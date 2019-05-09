@@ -49,7 +49,7 @@ public class App
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         User user = new User();
 	    user.set("dni", bodyParams.get("dni"));
-		user.set("lastname", bodyParams.get("lastname"));
+		user.set("password", bodyParams.get("password"));
 		user.set("name", bodyParams.get("name"));
         user.saveIt();
 
@@ -78,6 +78,8 @@ public class App
         Question q = new Question();
 	    q.set("descrip_q", bodyParams.get("descrip_q"));
 		q.set("id_cat", bodyParams.get("id_cat"));
+		q.set("user_id", bodyParams.get("user_id");
+		q.set("active", false);
         q.saveIt();
         res.type("application/json");
 
@@ -141,7 +143,7 @@ public class App
         User u = User.findById(bodyParams.get("id"));
 		if(u!=null){
 			u.set("dni", bodyParams.get("dni"));
-			u.set("lastname", bodyParams.get("lastname"));
+			u.set("password", bodyParams.get("password"));
 			u.set("name", bodyParams.get("name"));
 			u.saveIt();	
 			res.type("application/json");
@@ -158,6 +160,7 @@ public class App
 		if(q!=null){
 			q.set("descrip_q", bodyParams.get("descrip_q"));
 			q.set("id_cat", bodyParams.get("id_cat"));
+			q.set("active", bodyParams.get("active"));
 			q.saveIt();	
 			res.type("application/json");
       		return "Actualizado con exito : "+q.toJson(true);
