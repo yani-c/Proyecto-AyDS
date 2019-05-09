@@ -41,7 +41,8 @@ create table if not exists options (
     descrip_o varchar(25),
     id_q int(1),
     correct boolean,
-    constraint fktable foreign key (id_q) references questions (id),
+    constraint fktable foreign key (id_q) references questions (id)
+    ON DELETE CASCADE,
     created_at datetime,
     update_at datetime
     );

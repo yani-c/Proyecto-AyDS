@@ -111,6 +111,29 @@ public class App
 		}
 		return "Error: No se pudo borrar.No se encontraron registro de la persona";
       });
+//borrar una pregunta y sus opciones
+	post("/deletequestions", (req, res) -> {
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        Question q = Question.findById(bodyParams.get("id"));
+		if(q!=null){
+	  		q.delete();
+ 			res.type("application/json");
+     		return "Se ha borrado"+q.toJson(true,"id","descrip_q");
+		}
+		return "Error: No se pudo borrar.No se encontraron registro de la pregunta";
+      });
+//borrar una opcion
+	post("/deleteoptions", (req, res) -> {
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        Option o = Option.findById(bodyParams.get("id"));
+		if(o!=null){
+	  		o.delete();
+ 			res.type("application/json");
+     		return "Se ha borrado"+o.toJson(true,"id","descrip_o");
+		}
+		return "Error: No se pudo borrar.No se encontraron registro de la opcion";
+      });
+
 
 	//actualizar datos de un usuario
 	post("/updateuser", (req, res) -> {
