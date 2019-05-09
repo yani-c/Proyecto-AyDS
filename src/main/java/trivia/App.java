@@ -51,6 +51,7 @@ public class App
 	    user.set("dni", bodyParams.get("dni"));
 		user.set("password", bodyParams.get("password"));
 		user.set("name", bodyParams.get("name"));
+		user.set("administrator",bodyParams.get("administrator"));
         user.saveIt();
 
 	
@@ -78,7 +79,7 @@ public class App
         Question q = new Question();
 	    q.set("descrip_q", bodyParams.get("descrip_q"));
 		q.set("id_cat", bodyParams.get("id_cat"));
-		q.set("user_id", bodyParams.get("user_id");
+		q.set("user_id", bodyParams.get("user_id"));
 		q.set("active", false);
         q.saveIt();
         res.type("application/json");
