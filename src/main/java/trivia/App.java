@@ -44,6 +44,109 @@ public class App
 		return u;
 	});
 
+
+
+//mostrar usuario id ----------------------------------------------------------------
+	get("/users/search1/:id" , (req, res) ->{
+
+
+        User u = User.findById(req.params(":id"));
+		if(u!=null){
+		    res.type("application/json");
+		    return u;
+        }
+		return "Error: No se encontro la persona";
+     });
+
+//------------------------------------------------------------------
+
+//mostrar categoria id ----------------------------------------------------------------
+	get("/categories/search1/:id" , (req, res) ->{
+
+        Category c  = Category.findById(req.params(":id"));
+        //return c.toJson(true);
+
+		if(c!=null){
+		    res.type("application/json");
+		    return c;
+		    //return "hola";
+        }
+		return "Error: No se encontro la categoria";
+
+
+     });
+
+//------------------------------------------------------------------
+
+//mostrar pregunta id ----------------------------------------------------------------
+	get("/questions/search1/:id" , (req, res) ->{
+
+        Question q = Question.findById(req.params(":id"));
+		if(q!=null){
+		    res.type("application/json");
+		    return q;
+        }
+		return "Error: No se encontro la pregunta";
+     });
+
+//------------------------------------------------------------------
+
+//mostrar todas las preguntas--------------------
+	get("/questions/search" , (req, res) ->{
+		List<Question> questions = Question.findAll();
+		String q="";
+		for(Question i : questions){
+			q=q+"\n"+i;
+		}
+		res.type("application/json");
+		return q;
+	});
+//-------------------------------------------------
+
+
+
+
+//mostrar opciones id ----------------------------------------------------------------
+	get("/options/search1/:id" , (req, res) ->{
+
+        Option o  =  Option.findById(req.params(":id"));
+		if(o!=null){
+		    res.type("application/json");
+		    return o;
+        }
+		return "Error: No se encontro la opcion";
+     });
+
+//------------------------------------------------------------------
+
+//mostrar todas las opciones--------------------
+	get("/options/search" , (req, res) ->{
+		List<Option> options = Option.findAll();
+		String o="";
+		for(Option i : options){
+			o=o+"\n"+i;
+		}
+		res.type("application/json");
+		return o;
+	});
+//-------------------------------------------------
+
+
+
+
+//mostrar todas las categorias--------------------
+	get("/categories/search" , (req, res) ->{
+		List<Category> categories = Category.findAll();
+		String c="";
+		for(Category i : categories){
+			c=c+"\n"+i;
+		}
+		res.type("application/json");
+		return c;
+	});
+//-------------------------------------------------
+
+
 	//carga usuario
       post("/users", (req, res) -> {
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
