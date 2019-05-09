@@ -118,7 +118,7 @@ public class App
 		if(q!=null){
 	  		q.delete();
  			res.type("application/json");
-     		return "Se ha borrado"+q.toJson(true,"id","descrip_q");
+     		return "Se ha borrado"+q.toJson(true,"id","descrip_q")+" y sus respectivas opciones";
 		}
 		return "Error: No se pudo borrar.No se encontraron registro de la pregunta";
       });
