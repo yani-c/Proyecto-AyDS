@@ -1,6 +1,6 @@
 package trivia;
 
-import trivia.User;
+import trivia.Category;
 
 import org.javalite.activejdbc.Base;
 import org.junit.After;
@@ -9,17 +9,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class UserTest {
+public class CategoryTest {
   @Before
   public void before(){
       Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/triviavet_test", "root", "root");
-      System.out.println("UserTest setup");
+      System.out.println("CategoryTest setup");
       Base.openTransaction();
   }
 
   @After
   public void after(){
-      System.out.println("UserTest tearDown");
+      System.out.println("CategoryTest tearDown");
       Base.rollbackTransaction();
       Base.close();
   }
@@ -27,8 +27,8 @@ public class UserTest {
 
   @Test
   public void validatePresenceOfParams() {
-    User u = new User();
-    assertEquals("A parametre can't be empty", u.isValid(), false);
+    Category c = new Category();
+    assertEquals("A parametre can't be empty", c.isValid(), false);
   }
 
 
