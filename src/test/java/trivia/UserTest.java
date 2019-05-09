@@ -24,14 +24,17 @@ public class UserTest {
       Base.close();
   }
 
-  @Test
-  public void validateTruth() {
-    assertEquals("True is true", true, true);
-  }
 
   @Test
-  public void validatePresenceOfUsername() {
+  public void validatePresenceOfParams() {
     User u = new User();
-    assertEquals("username can't be blank", u.isValid(), false);
+    assertEquals("A parametre can't be empty", u.isValid(), false);
   }
+
+	@Test
+	public void validateCorrectnessOfParams(){
+		
+	}
+
+
 }
