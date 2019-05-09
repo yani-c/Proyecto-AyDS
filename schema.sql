@@ -1,9 +1,11 @@
 create database if not exists trivia_dev;
+use trivia_dev;
 CREATE TABLE if not exists users (
     name varchar(15) not null,
-	lastname varchar(15) not null,
     dni int (8) not null,
-    id int(50) not null auto_increment,
+    id int(11) not null auto_increment,
+    admin BOOLEAN,
+    password VARCHAR(56),
     primary key (id),
     unique(dni),
     created_at datetime,
@@ -22,7 +24,10 @@ create table if not exists questions(
 	id int auto_increment not null,
 	descrip_q text, -- descripcion pregunta
 	id_cat int(1) not null,
+	user_id int(11),
     primary key (id),
+    active BOOLEAN,
+    constraint fkuser foreign key (user_id) references users (id),
 	constraint fkquestion foreign key (id_cat) references categories (id),
     created_at datetime,
     update_at datetime
