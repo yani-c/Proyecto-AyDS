@@ -1,0 +1,102 @@
+
+//////////////////////////////////////////////////////////////////////////////////////
+   
+    // ALGUNOS COMANDOS DE GIT Y CURL 
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//-------------------------clonar----------------------------------------------------------
+
+pablo@DELL ~/Escritorio/analisis $ git clone https://github.com/yani-c/Proyecto-AyDS.git
+
+/------------------------------------------------------------------------------------------
+
+
+
+//---------------------------commit------------------------------------------------------
+
+pablo@DELL ~/Escritorio/analisis/Proyecto-AyDS $ git pull
+
+pablo@DELL ~/Escritorio/analisis/Proyecto-AyDS/Documentacion $ git add README 
+
+pablo@DELL ~/Escritorio/analisis/Proyecto-AyDS/Documentacion $ git commit -m "."
+
+        [master 20625e3] .
+         1 file changed, 1 insertion(+), 1 deletion(-)
+//---------------------------------------------------------------------------------------
+
+
+
+//-----------------------------push---------------------------------------------------------
+
+pablo@DELL ~/Escritorio/analisis/Proyecto-AyDS/Documentacion $ git push origin master
+
+        git: «credential-cache--timeout=86400» no es una orden de git. Vea «git --help»
+        Username for 'https://github.com': martinezpablo06
+        Password for 'https://martinezpablo06@github.com': 
+        git: «credential-cache--timeout=86400» no es una orden de git. Vea «git --help»
+        Counting objects: 4, done.
+        Delta compression using up to 4 threads.
+        Compressing objects: 100% (4/4), done.
+        Writing objects: 100% (4/4), 341 bytes | 0 bytes/s, done.
+        Total 4 (delta 3), reused 0 (delta 0)
+        remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+        To https://github.com/yani-c/Proyecto-AyDS.git
+           8119dd6..20625e3  master -> master
+//----------------------------------------------------------------------------------
+
+
+
+//---------- para no logearse en git por 24 hs al momento del push ---------------------
+
+[17:55, 30/4/2019] Pablo: git config --global credential.helper store
+[17:55, 30/4/2019] Pablo: git config --global credential.helper 'cache --timeout=86400'
+
+//--------------------------------------------------------------------------------------
+
+
+
+
+
+//---------------------------------compilar------------------------------------
+
+pablo@DELL ~/Escritorio/analisis/Proyecto-AyDS $ ./run.sh
+
+//-----------------------------------------------------------------------------
+
+
+
+
+//------------------------------------------- cargar usuario  y borrar usuario curl -------------------------------------------------------------------------------
+
+curl -X POST http://localhost:4567/users  -H 'content-type: application/json'   -d '{"name":"Alan","password":"Turing","dni":"37127650","administrator":true}'
+
+curl -X POST http://localhost:4567/deleteuser  -H 'content-type: application/json'   -d '{"id" : "1" }'
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//-------------------------------- cargar categorias curl ------------------------------------------------------------------ 
+
+curl -X POST http://localhost:4567/categories  -H 'content-type: application/json'   -d '{"category_name":"Biologia"}'
+
+curl -X POST http://localhost:4567/categories  -H 'content-type: application/json'   -d '{"category_name":"huesos"}'
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
