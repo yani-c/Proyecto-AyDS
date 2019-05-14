@@ -33,18 +33,17 @@ pablo@DELL ~/Escritorio/analisis/Proyecto-AyDS/Documentacion $ git commit -m "."
 
 pablo@DELL ~/Escritorio/analisis/Proyecto-AyDS/Documentacion $ git push origin master
 
-        git: «credential-cache--timeout=86400» no es una orden de git. Vea «git --help»
-        Username for 'https://github.com': martinezpablo06
-        Password for 'https://martinezpablo06@github.com': 
-        git: «credential-cache--timeout=86400» no es una orden de git. Vea «git --help»
-        Counting objects: 4, done.
-        Delta compression using up to 4 threads.
-        Compressing objects: 100% (4/4), done.
-        Writing objects: 100% (4/4), 341 bytes | 0 bytes/s, done.
-        Total 4 (delta 3), reused 0 (delta 0)
-        remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
-        To https://github.com/yani-c/Proyecto-AyDS.git
-           8119dd6..20625e3  master -> master
+Username for 'https://github.com': martinezpablo06
+Password for 'https://martinezpablo06@github.com': 
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 1.22 KiB | 0 bytes/s, done.
+Total 4 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/yani-c/Proyecto-AyDS.git
+   2de710e..30fc394  master -> master
+
 //----------------------------------------------------------------------------------
 
 
