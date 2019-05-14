@@ -8,4 +8,5 @@ public class User extends Model {
 		validatePresenceOf("name", "password", "dni", "administrator");
 	}
 
+
 }
