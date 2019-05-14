@@ -206,7 +206,7 @@ public class App{
 
 
 	//borra un usuario
-		post("/deleteuser", (req, res) -> {
+		delete("/delete/user", (req, res) -> {
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			User u = User.findById(bodyParams.get("id"));
 			if(u!=null){
@@ -219,7 +219,7 @@ public class App{
 
 
 	//borrar una pregunta y sus opciones
-		post("/deletequestions", (req, res) -> {
+		delete("/delete/question", (req, res) -> {
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			Question q = Question.findById(bodyParams.get("id"));
 			if(q!=null){
@@ -232,7 +232,7 @@ public class App{
 
 
 	//borrar una opcion
-		post("/deleteoptions", (req, res) -> {
+		delete("/delete/option", (req, res) -> {
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			Option o = Option.findById(bodyParams.get("id"));
 			if(o!=null){
