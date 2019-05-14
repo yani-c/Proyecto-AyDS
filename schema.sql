@@ -22,7 +22,7 @@ create table if not exists categories (
 
 create table if not exists questions(
 	id int auto_increment not null,
-	descrip_q text, -- descripcion pregunta
+	description_q text, -- descripcion pregunta
 	category_id int(1) not null,
 	user_id int(11),
     primary key (id),
@@ -43,7 +43,7 @@ create table if not exists levels (
     
 create table if not exists options (
 	id int(1) not null auto_increment primary key,
-    descrip_o varchar(25),
+    description_o varchar(25),
     question_id int(1),
     correct boolean,
     constraint fktable foreign key (question_id) references questions (id)

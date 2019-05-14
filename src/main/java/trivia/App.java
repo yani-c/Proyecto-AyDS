@@ -180,27 +180,36 @@ public class App{
 		post("/questions", (req, res) -> {
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			Question q = new Question();
-			q.set("descrip_q", bodyParams.get("descrip_q"));
+			q.set("description_q", bodyParams.get("description_q"));
 			q.set("id_cat", bodyParams.get("id_cat"));
 			q.set("user_id", bodyParams.get("user_id"));
 			q.set("active", false);
 			q.saveIt();
+			for (int i=0; i<=4; i++){
+				Option o = new Option();
+				o.set("description_o", bodyParams.get("description_o"));
+				o.set("id_q", bodyParams.get("id_q"));
+				o.set("correct", bodyParams.get("correct"));
+		    o.saveIt();
+				q.add(o);
+			}	
 			res.type("application/json");
 			return q.toJson(true);
 		});
 
 
 	//carga una opcion
-		post("/options", (req, res) -> {
+
+		/*post("/options", (req, res) -> {
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			Option o = new Option();
-			o.set("descrip_o", bodyParams.get("descrip_o"));
+			o.set("description_o", bodyParams.get("description_o"));
 			o.set("id_q", bodyParams.get("id_q"));
 			o.set("correct", bodyParams.get("correct"));
-		    o.saveIt();
+		        o.saveIt();
 			res.type("application/json");
 			return o.toJson(true);
-		});
+		}); */
 		
 //------------------------------------DELETE------------------------------------
 
@@ -225,7 +234,7 @@ public class App{
 			if(q!=null){
 				q.delete();
 				res.type("application/json");
-				return "Se ha borrado"+q.toJson(true,"id","descrip_q")+" y sus respectivas opciones";
+				return "Se ha borrado"+q.toJson(true,"id","description_q")+" y sus respectivas opciones";
 			}
 			return "Error: No se pudo borrar.No se encontraron registro de la pregunta";
 		});
@@ -238,7 +247,7 @@ public class App{
 			if(o!=null){
 				o.delete();
 				res.type("application/json");
-				return "Se ha borrado"+o.toJson(true,"id","descrip_o");
+				return "Se ha borrado"+o.toJson(true,"id","description_o");
 			}
 			return "Error: No se pudo borrar.No se encontraron registro de la opcion";
 		});
@@ -267,7 +276,7 @@ public class App{
 			Question q = Question.findById(req.params(":id"));
 			if(q!=null){
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-				q.set("descrip_q", bodyParams.get("descrip_q"));
+				q.set("description_q", bodyParams.get("description_q"));
 				q.set("id_cat", bodyParams.get("id_cat"));
 				q.set("active", bodyParams.get("active"));
 				q.saveIt();	
@@ -285,7 +294,7 @@ public class App{
 			if(o!=null){
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				o.set("id_q", bodyParams.get("id_q"));
-				o.set("descrip_o", bodyParams.get("descrip_o"));
+				o.set("description_o", bodyParams.get("description_o"));
 				o.set("correct", bodyParams.get("correct"));
 				o.saveIt();	
 				res.type("application/json");
