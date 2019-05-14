@@ -15,6 +15,20 @@ import java.util.Map;
 
  import java.util.List;
 
+
+class QuestionParam
+{
+  String description;
+  ArrayList<OptionParam> options;
+}
+
+class OptionParam
+{
+  String description;
+  Boolean correct;
+}
+
+
 public class App{
 
 	public static void main( String[] args ){
@@ -196,6 +210,26 @@ public class App{
 			res.type("application/json");
 			return q.toJson(true);
 		});
+
+
+/*
+      post("/questions", (req, res) -> {
+        QuestionParam bodyParams = new Gson().fromJson(req.body(), QuestionParam.class);
+
+        Question question = new Question();
+        question.set("description", bodyParams.description);
+        question.save();
+
+        for(OptionParam item: bodyParams.options) {
+          Option option = new Option();
+          option.set("description", item.description).set("correct", item.correct);
+          question.add(option);
+        }
+
+        return question;
+      });
+*/
+
 
 
 	//carga una opcion
