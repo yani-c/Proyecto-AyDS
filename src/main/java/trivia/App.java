@@ -18,15 +18,16 @@ import java.util.Map;
 
 class QuestionParam
 {
-  String description;
-  ArrayList<OptionParam> options;
+	int user_id;
+	String description;
+	ArrayList<OptionParam> options;
 	int category_id;
 }
 
 class OptionParam
 {
-  String description;
-  Boolean correct;
+	String description;
+	Boolean correct;
 }
 
 
@@ -140,27 +141,19 @@ public class App{
 		 });
 
 
-	//muestra una pregunta dado su id 
+	//muestra una pregunta y sus opciones dado su id 
 		get("/question/:id" , (req, res) ->{
 		    Question q = Question.findById(req.params(":id"));
 			if(q!=null){
-				String aux= q.toJson(true);
+				List<Option> options= Option.where("question_id = ?", req.params(":id"));
+				String aux= q.toJson(true)+"\n";
+				for(Option o : options){
+					aux= aux+"\n"+o.toJson(true);
+				}
 				res.type("application/json");
 				return aux;
 		    }
 			return "Error: No se encontro la pregunta";
-		 });
-
-
-	//muestar una opcion dado su id 
-		get("/option/:id" , (req, res) ->{
-		    Option o  =  Option.findById(req.params(":id"));
-			if(o!=null){
-				String aux= o.toJson(true);
-				res.type("application/json");
-				return aux;
-		    }
-			return "Error: No se encontro la opcion";
 		 });
 
 
@@ -197,6 +190,7 @@ public class App{
         Question question = new Question();
 		question.set("description", bodyParams.description);
 		question.set("category_id", bodyParams.category_id);
+		question.set("user_id",bodyParams.user_id);
 		question.set("active", false);
         question.save();
         for(OptionParam item: bodyParams.options) {
@@ -204,7 +198,8 @@ public class App{
           option.set("description", item.description).set("correct", item.correct);
           question.add(option);
         }
-        return question;
+		String json= question.toJson(true);
+        return json;
       });
 
 //------------------------------------DELETE------------------------------------
