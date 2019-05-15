@@ -194,19 +194,16 @@ public class App{
 	//carga una pregunta y sus opciones
       post("/questions", (req, res) -> {
         QuestionParam bodyParams = new Gson().fromJson(req.body(), QuestionParam.class);
-
         Question question = new Question();
-	//question.set("description", bodyParams.get("description"));
-	//question.set("category_id", bodyParams.get("category_id"));
-	question.set("active", false);
-        question.saveIt();
-
+		question.set("description", bodyParams.description);
+		question.set("category_id", bodyParams.category_id);
+		question.set("active", false);
+        question.save();
         for(OptionParam item: bodyParams.options) {
           Option option = new Option();
           option.set("description", item.description).set("correct", item.correct);
           question.add(option);
         }
-
         return question;
       });
 
@@ -214,10 +211,10 @@ public class App{
 
 
 	//borra un usuario
-		delete("/delete/user", (req, res) -> {
-			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-			User u = User.findById(bodyParams.get("id"));
+		delete("/user/:id", (req, res) -> {
+			User u = User.findById(req.params(":id"));
 			if(u!=null){
+				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				u.delete();
 				res.type("application/json");
 				return "Se ha borrado"+u.toJson(true,"id","dni");
@@ -227,10 +224,10 @@ public class App{
 
 
 	//borrar una pregunta y sus opciones
-		delete("/delete/question", (req, res) -> {
-			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-			Question q = Question.findById(bodyParams.get("id"));
+		delete("/question/:id", (req, res) -> {
+			Question q = Question.findById(req.params(":id"));
 			if(q!=null){
+				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				q.delete();
 				res.type("application/json");
 				return "Se ha borrado"+q.toJson(true,"id","description")+" y sus respectivas opciones";
@@ -240,10 +237,10 @@ public class App{
 
 
 	//borrar una opcion
-		delete("/delete/option", (req, res) -> {
-			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-			Option o = Option.findById(bodyParams.get("id"));
+		delete("/option/:id", (req, res) -> {
+			Option o = Option.findById(req.params(":id"));
 			if(o!=null){
+				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				o.delete();
 				res.type("application/json");
 				return "Se ha borrado"+o.toJson(true,"id","description");
