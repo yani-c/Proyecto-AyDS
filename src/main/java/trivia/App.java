@@ -1,7 +1,7 @@
 package trivia;
 
 import static spark.Spark.*;
-
+import java.util.*;
 import static spark.Spark.before;
 import static spark.Spark.after;
 
@@ -20,6 +20,7 @@ class QuestionParam
 {
   String description;
   ArrayList<OptionParam> options;
+	int category_id;
 }
 
 class OptionParam
@@ -190,35 +191,15 @@ public class App{
 		});
 
 
-	//carga una pregunta
-		post("/questions", (req, res) -> {
-			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-			Question q = new Question();
-			q.set("description_q", bodyParams.get("description_q"));
-			q.set("id_cat", bodyParams.get("id_cat"));
-			q.set("user_id", bodyParams.get("user_id"));
-			q.set("active", false);
-			q.saveIt();
-			for (int i=0; i<=4; i++){
-				Option o = new Option();
-				o.set("description_o", bodyParams.get("description_o"));
-				o.set("id_q", bodyParams.get("id_q"));
-				o.set("correct", bodyParams.get("correct"));
-		    o.saveIt();
-				q.add(o);
-			}	
-			res.type("application/json");
-			return q.toJson(true);
-		});
-
-
-/*
+	//carga una pregunta y sus opciones
       post("/questions", (req, res) -> {
         QuestionParam bodyParams = new Gson().fromJson(req.body(), QuestionParam.class);
 
         Question question = new Question();
-        question.set("description", bodyParams.description);
-        question.save();
+	//question.set("description", bodyParams.get("description"));
+	//question.set("category_id", bodyParams.get("category_id"));
+	question.set("active", false);
+        question.saveIt();
 
         for(OptionParam item: bodyParams.options) {
           Option option = new Option();
@@ -228,23 +209,7 @@ public class App{
 
         return question;
       });
-*/
 
-
-
-	//carga una opcion
-
-		/*post("/options", (req, res) -> {
-			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-			Option o = new Option();
-			o.set("description_o", bodyParams.get("description_o"));
-			o.set("id_q", bodyParams.get("id_q"));
-			o.set("correct", bodyParams.get("correct"));
-		        o.saveIt();
-			res.type("application/json");
-			return o.toJson(true);
-		}); */
-		
 //------------------------------------DELETE------------------------------------
 
 
@@ -268,7 +233,7 @@ public class App{
 			if(q!=null){
 				q.delete();
 				res.type("application/json");
-				return "Se ha borrado"+q.toJson(true,"id","description_q")+" y sus respectivas opciones";
+				return "Se ha borrado"+q.toJson(true,"id","description")+" y sus respectivas opciones";
 			}
 			return "Error: No se pudo borrar.No se encontraron registro de la pregunta";
 		});
@@ -281,7 +246,7 @@ public class App{
 			if(o!=null){
 				o.delete();
 				res.type("application/json");
-				return "Se ha borrado"+o.toJson(true,"id","description_o");
+				return "Se ha borrado"+o.toJson(true,"id","description");
 			}
 			return "Error: No se pudo borrar.No se encontraron registro de la opcion";
 		});
@@ -310,8 +275,8 @@ public class App{
 			Question q = Question.findById(req.params(":id"));
 			if(q!=null){
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-				q.set("description_q", bodyParams.get("description_q"));
-				q.set("id_cat", bodyParams.get("id_cat"));
+				q.set("description", bodyParams.get("description"));
+				q.set("category_id", bodyParams.get("category_id"));
 				q.set("active", bodyParams.get("active"));
 				q.saveIt();	
 				res.type("application/json");
@@ -328,7 +293,7 @@ public class App{
 			if(o!=null){
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				o.set("id_q", bodyParams.get("id_q"));
-				o.set("description_o", bodyParams.get("description_o"));
+				o.set("description", bodyParams.get("description"));
 				o.set("correct", bodyParams.get("correct"));
 				o.saveIt();	
 				res.type("application/json");

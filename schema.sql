@@ -22,7 +22,7 @@ create table if not exists categories (
 
 create table if not exists questions(
 	id int auto_increment not null,
-	description_q text, -- descripcion pregunta
+	description text, -- descripcion pregunta
 	category_id int(1) not null,
 	user_id int(11),
     primary key (id),
@@ -43,8 +43,8 @@ create table if not exists levels (
     
 create table if not exists options (
 	id int(1) not null auto_increment primary key,
-    description_o varchar(25),
-    question_id int(1),
+    description varchar(25),
+    question_id int(11),
     correct boolean,
     constraint fktable foreign key (question_id) references questions (id)
     ON DELETE CASCADE,
@@ -52,29 +52,32 @@ create table if not exists options (
     update_at datetime
     );
 
-create table if  not exists games(
-	id int(50) not null auto_increment primary key,
-    created_at datetime,
-    update_at datetime
-    );
-    
 create table if not exists answers (
 	id int(1) not null auto_increment primary key,
     option_id int(1) not null,
     game_id int(50) not null,
     user_id int(50) not null,
-    constraint fkgames foreign key (game_id) references games (id),
     constraint fkusere foreign key (user_id) references users(id),
     constraint fkanswer foreign key (option_id) references options(id),
     created_at datetime,
     update_at datetime
     );
-    
+
 create table if not exists statistics (
 	id int(10) not null auto_increment primary key,
     created_at datetime,
     update_at datetime
     );
+    
+create table if  not exists games(
+	id int(11) auto_increment primary key,
+    created_at datetime,
+    supdate_at datetime
+    );
+    
+
+    
+
 
 
 	
