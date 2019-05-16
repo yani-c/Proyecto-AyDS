@@ -74,7 +74,9 @@ public class App{
 			if(!questions.isEmpty()){
 				String q="";
 				for(Question i : questions){
+					if(i.getBoolean("active")){
 					q=q+"\n"+i.toJson(true);
+					}
 				}
 				res.type("application/json");
 				return q;
@@ -145,18 +147,23 @@ public class App{
 		get("/question/:id" , (req, res) ->{
 		    Question q = Question.findById(req.params(":id"));
 			if(q!=null){
-				List<Option> options= Option.where("question_id = ?", req.params(":id"));
-				String aux= q.toJson(true,"id","description")+"\n";
-				for(Option o : options){
-					aux= aux+"\n"+o.toJson(true,"id","description");
+				if(q.getBoolean("active")){
+					List<Option> options= Option.where("question_id = ?", req.params(":id"));
+					String aux= q.toJson(true,"id","description")+"\n";
+					for(Option o : options){
+						aux= aux+"\n"+o.toJson(true,"id","description");
+					}
+					res.type("application/json");
+					return aux;
 				}
-				res.type("application/json");
-				return aux;
+				else{
+					return "Error: esta pregunta no esta activa";
+				}
 		    }
 			return "Error: No se encontro la pregunta";
 		 });
 
-	//muestra todas las categorias
+	//muestra todas las respuestas
 		get("/answers" , (req, res) ->{
 			List<Answer> answer = Answer.findAll();
 			if(!answer.isEmpty()){
@@ -213,6 +220,7 @@ public class App{
           option.set("description", item.description).set("correct", item.correct);
           question.add(option);
         }
+		question.set("active", question.comprobateActive());
 		String json= question.toJson(true);
         return json;
       });
@@ -284,7 +292,6 @@ public class App{
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				q.set("description", bodyParams.get("description"));
 				q.set("category_id", bodyParams.get("category_id"));
-				q.set("active", bodyParams.get("active"));
 				q.saveIt();	
 				res.type("application/json");
 				return "Actualizado con exito : "+q.toJson(true);
@@ -299,10 +306,13 @@ public class App{
 			Option o = Option.findById(req.params(":id"));
 			if(o!=null){
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-				o.set("question_id", bodyParams.get("question_id"));
 				o.set("description", bodyParams.get("description"));
 				o.set("correct", bodyParams.get("correct"));
 				o.saveIt();	
+				//controla el campo active de la pregunta donde pertenece esta opcion
+				Question q= Question.findById(o.get("question_id"));
+				q.set("active", q.comprobateActive());
+				q.saveIt();
 				res.type("application/json");
 				return "Actualizado con exito : "+o.toJson(true);
 			}	

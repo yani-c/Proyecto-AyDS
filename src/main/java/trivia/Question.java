@@ -18,7 +18,7 @@ public class Question extends Model {
 		    for(Option o : options){
                 
                 if ( o.getBoolean("correct")) {
-                    corectas ++;                    
+                    correctas ++;                    
                 }
                 totales ++;
 		    }
