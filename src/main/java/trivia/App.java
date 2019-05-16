@@ -155,6 +155,75 @@ public class App{
 		    }
 			return "Error: No se encontro la pregunta";
 		 });
+		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      // dado un usuario, su password, una pregunta y un opcion
+      // valida que todos los datos existan y que sean correctos
+      // y retorna si respondio bien o mal.  
+
+      get("/answer/:id_u/:pass/:id_q/:id_o" , (req,res) ->{
+
+        User u = User.findById(req.params(":id_u"));
+        Question q = Question.findById(req.params(":id_q"));
+        Option o = Option.findById(req.params(":id_o"));
+
+        String r_answer = "";
+        String login = " login fail ";
+
+        if(u!=null){
+
+            String u_pass = "";
+            String pass = "";
+            int flag_u = 0;
+
+            u_pass = u_pass + u.get("password");
+            pass = pass + req.params(":pass");
+
+            if (u_pass.equals(pass)){
+              login = " login ok -> "; 
+              flag_u = 1;
+            }
+            r_answer = r_answer + login;
+
+            if(flag_u == 1) {
+
+                if((q!=null) && (o!=null) ) {
+
+                    String str_o = ""; 
+                    String str_q = "";
+                    String q_id = ""; 
+                    String o_q_id = "";
+                    String op_c ="";
+
+                    str_o = str_o + o.get("description");
+                    str_q = str_q + q.get("description");
+                    q_id  = q_id  + req.params(":id_q");
+                    o_q_id = o_q_id + o.get("question_id");
+                    op_c = op_c + o.get("correct");
+
+                    r_answer = r_answer + str_q + " - " + str_o;
+
+                    if((o_q_id.equals(q_id)) && ( op_c.equals("true"))){
+                      r_answer = r_answer +" -> opcion correcta ";
+
+                    }else{
+                      r_answer = r_answer + " -> Opcion incorrecta ";
+                    }
+
+
+                }else{
+                    r_answer = r_answer + " No se encuentra la pregunta o la opcion ";
+                }
+            }
+        }
+
+        return r_answer;
+           
+      });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 //------------------------------------POST------------------------------------
