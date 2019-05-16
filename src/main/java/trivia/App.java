@@ -190,6 +190,9 @@ public class App{
 
                 if((q!=null) && (o!=null) ) {
 
+		//sino creo un string vacio y despues lo concateno
+	        // no compila el .get()
+			
                     String str_o = ""; 
                     String str_q = "";
                     String q_id = ""; 
@@ -224,10 +227,50 @@ public class App{
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	//muestra todas las categorias
+		get("/answers" , (req, res) ->{
+			List<Answer> answer = Answer.findAll();
+			if(!answer.isEmpty()){
+				String a="";
+				for(Answer i : answer){
+					a=a+"\n"+i.toJson(true);
+				}
+				res.type("application/json");
+				return a;
+			}
+			else{
+				return "Error: No hay respuestas cargadas. Nada para mostrar";
+			}
+		});
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //------------------------------------POST------------------------------------
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//carga una respuesta
+		post("/answer", (req, res) -> {
+
+			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+
+			Answer answer = new Answer();
+
+			answer.set("user_id", bodyParams.get("user_id")); 
+
+			answer.set("option_id", bodyParams.get("option_id"));
+
+			answer.set("game_id", bodyParams.get("game_id"));
+
+			answer.saveIt();
+
+		   // answer.type("application/json");
+
+			return answer.toJson(true);
+		});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//carga un usuario
 		post("/users", (req, res) -> {
