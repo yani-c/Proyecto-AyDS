@@ -139,7 +139,7 @@ mysql> insert into questions (description,category_id,user_id,active) values ('p
 Query OK, 1 row affected (0,03 sec)
 
 
-
+curl -X POST http://localhost:4567/users  -H 'content-type: application/json'   -d '{"option_id":"1","game_id":"1","user_id":"2"}'
 
 
 
