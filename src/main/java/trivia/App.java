@@ -146,9 +146,9 @@ public class App{
 		    Question q = Question.findById(req.params(":id"));
 			if(q!=null){
 				List<Option> options= Option.where("question_id = ?", req.params(":id"));
-				String aux= q.toJson(true)+"\n";
+				String aux= q.toJson(true,"id","description")+"\n";
 				for(Option o : options){
-					aux= aux+"\n"+o.toJson(true);
+					aux= aux+"\n"+o.toJson(true,"id","description");
 				}
 				res.type("application/json");
 				return aux;
