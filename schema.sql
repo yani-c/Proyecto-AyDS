@@ -55,7 +55,6 @@ create table if not exists options (
 create table if not exists answers (
 	id int(1) not null auto_increment primary key,
     option_id int(1) not null,
-    game_id int(50) not null,
     user_id int(50) not null,
     constraint fkusere foreign key (user_id) references users(id),
     constraint fkanswer foreign key (option_id) references options(id),

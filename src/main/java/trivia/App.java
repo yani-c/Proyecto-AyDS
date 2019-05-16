@@ -155,79 +155,6 @@ public class App{
 		    }
 			return "Error: No se encontro la pregunta";
 		 });
-		
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-      // dado un usuario, su password, una pregunta y un opcion
-      // valida que todos los datos existan y que sean correctos
-      // y retorna si respondio bien o mal.  
-
-      get("/answer/:id_u/:pass/:id_q/:id_o" , (req,res) ->{
-
-        User u = User.findById(req.params(":id_u"));
-        Question q = Question.findById(req.params(":id_q"));
-        Option o = Option.findById(req.params(":id_o"));
-
-        String r_answer = "";
-        String login = " login fail ";
-
-        if(u!=null){
-
-            String u_pass = "";
-            String pass = "";
-            int flag_u = 0;
-
-            u_pass = u_pass + u.get("password");
-            pass = pass + req.params(":pass");
-
-            if (u_pass.equals(pass)){
-              login = " login ok -> "; 
-              flag_u = 1;
-            }
-            r_answer = r_answer + login;
-
-            if(flag_u == 1) {
-
-                if((q!=null) && (o!=null) ) {
-
-		//sino creo un string vacio y despues lo concateno
-	        // no compila el .get()
-			
-                    String str_o = ""; 
-                    String str_q = "";
-                    String q_id = ""; 
-                    String o_q_id = "";
-                    String op_c ="";
-
-                    str_o = str_o + o.get("description");
-                    str_q = str_q + q.get("description");
-                    q_id  = q_id  + req.params(":id_q");
-                    o_q_id = o_q_id + o.get("question_id");
-                    op_c = op_c + o.get("correct");
-
-                    r_answer = r_answer + str_q + " - " + str_o;
-
-                    if((o_q_id.equals(q_id)) && ( op_c.equals("true"))){
-                      r_answer = r_answer +" -> opcion correcta ";
-
-                    }else{
-                      r_answer = r_answer + " -> Opcion incorrecta ";
-                    }
-
-
-                }else{
-                    r_answer = r_answer + " No se encuentra la pregunta o la opcion ";
-                }
-            }
-        }
-
-        return r_answer;
-           
-      });
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//muestra todas las categorias
 		get("/answers" , (req, res) ->{
@@ -246,31 +173,7 @@ public class App{
 		});
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //------------------------------------POST------------------------------------
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//carga una respuesta
-		post("/answer", (req, res) -> {
-
-			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-
-			Answer answer = new Answer();
-
-			answer.set("user_id", bodyParams.get("user_id")); 
-
-			answer.set("option_id", bodyParams.get("option_id"));
-
-			answer.set("game_id", bodyParams.get("game_id"));
-
-			answer.saveIt();
-
-		   // answer.type("application/json");
-
-			return answer.toJson(true);
-		});
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//carga un usuario
 		post("/users", (req, res) -> {
@@ -396,7 +299,7 @@ public class App{
 			Option o = Option.findById(req.params(":id"));
 			if(o!=null){
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-				o.set("id_q", bodyParams.get("id_q"));
+				o.set("question_id", bodyParams.get("question_id"));
 				o.set("description", bodyParams.get("description"));
 				o.set("correct", bodyParams.get("correct"));
 				o.saveIt();	
@@ -421,9 +324,54 @@ public class App{
 			res.type("application/json");
 			return "Error: No se pudo actualizar.No se encontraron registros de la persona";
 		});
+	
 
+//------------------------------------GAME------------------------------------
+	
+	
+	
+      // dado un usuario, su password, 
+      // valida que todos los datos existan y que sean correctos
+      // y redirecciona a mostrar una pregunta
+
+      get("/game/:user_id/:password" , (req,res) ->{
+        User u = User.findById(req.params(":user_id"));
+        if(u!=null){
+			String aux= req.params(":password");
+            if (aux.equals(u.get("password").toString())){
+				//agregar un aleatorio para elegir preg aleatoriamente
+				res.redirect("/question/2");
+				return "";
+			}
+			else{
+				return "Error: Contraseña incorrecta";
+			}
+		}
+		  return "Error: usuario no encontrado";
+	  });
+	
+	
+		//Recibe una respuesta, la carga e informa si es correcta o no
+		post("/answer/:id" , (req,res) ->{
+			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+			Answer a= new Answer();
+			a.set("user_id", bodyParams.get("user_id"));
+			a.set("option_id", req.params(":id"));
+			a.saveIt();
+			Option o = Option.findById(a.get("option_id"));
+			if(o!=null){
+				if(o.getBoolean("correct")){
+					return "Correcto";
+				}
+				else{
+					return false;
+				}
+			}
+			return "Respuesta invalida";
+		});
 
 	}//end main
+	
 
 }//end class
 
