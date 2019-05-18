@@ -338,46 +338,81 @@ public class App{
 
 //------------------------------------GAME------------------------------------
 	
-	
-	
-      // dado un usuario, su password, 
-      // valida que todos los datos existan y que sean correctos
-      // y redirecciona a mostrar una pregunta
 
-      get("/game/:user_id/:password" , (req,res) ->{
-        User u = User.findById(req.params(":user_id"));
-        if(u!=null){
-			String aux= req.params(":password");
-            if (aux.equals(u.get("password").toString())){
-				//agregar un aleatorio para elegir preg aleatoriamente
-				res.redirect("/question/2");
-				return "";
+		post("/login", (req,res) -> {
+			if(req.session().attribute("username")==null){
+				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+				String username= (String) bodyParams.get("name");
+				User u = User.findFirst("name = ?", username);
+				if(u!=null && (u.get("password").equals(bodyParams.get("password")))){
+					req.session().attribute("username",username);
+					System.out.println("aja  "+req.session().attribute("username"));
+					return "Ok";
+				}
+				return "Error: usuario no encontrado";
 			}
 			else{
-				return "Error: Contraseña incorrecta";
+				return "Ya esta alguien logueado";
 			}
-		}
-		  return "Error: usuario no encontrado";
-	  });
+		});	
+
+
+	//SE DEBE HACER UN ".txt" QUE DIGA EL USERNAME. SE DEBE UBICAR DESDE DONDE LLAMO A CURL
+		post("/logout", (req,res) -> {
+			if(req.session().attribute("username")!=null){
+				System.out.println("PRIMERO "+req.session().attribute("username"));
+				req.session().removeAttribute("username");
+				System.out.println(""+req.session().attribute("username"));
+				return "Adios"; 
+			}
+			return "Error: primero debe loguearse";
+		});
+
+
+		//elige una pregunta aleatoriamente y redirecciona a mostrarla
+		get("/game" , (req,res) ->{
+			if(req.session().attribute("username")==null){
+				return "Usted debe loguearse";
+			}
+			else{
+				List<Question> questions = Question.where("active = ? ", true);
+				if(!questions.isEmpty()){
+					int num = (int) (Math.random() * questions.size());
+					System.out.println("de : "+questions.toString()+" saco el "+num);
+					System.out.println("VAMO PA "+"/question/"+questions.get(num).get("id"));
+					res.redirect("/question/"+questions.get(num).get("id"));
+					return "";
+				}
+				else{
+					return "No hay preguntas cargadas";
+				}
+			}
+		});
 	
 	
 		//Recibe una respuesta, la carga e informa si es correcta o no
-		post("/answer/:id" , (req,res) ->{
-			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-			Answer a= new Answer();
-			a.set("user_id", bodyParams.get("user_id"));
-			a.set("option_id", req.params(":id"));
-			a.saveIt();
-			Option o = Option.findById(a.get("option_id"));
-			if(o!=null){
-				if(o.getBoolean("correct")){
-					return "Correcto";
-				}
-				else{
-					return false;
-				}
+		post("/answer" , (req,res) ->{
+			if(req.session().attribute("username")==null){
+				return "usted debe loguearse";
 			}
-			return "Respuesta invalida";
+			else{
+				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+				Answer a= new Answer();
+				User u = User.findFirst("name =?",(String)  req.session().attribute("username"));
+				a.set("user_id",u.get("id"));
+				a.set("option_id", bodyParams.get("id"));
+				a.saveIt();
+				Option o = Option.findById(a.get("option_id"));
+				if(o!=null){
+					if(o.getBoolean("correct")){
+						return "Correcto";
+					}
+					else{
+						return false;
+					}
+				}
+				return "Respuesta invalida";
+			}
 		});
 
 	}//end main
