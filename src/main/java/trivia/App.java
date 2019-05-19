@@ -1,19 +1,17 @@
 package trivia;
 
 import static spark.Spark.*;
-import java.util.*;
-import static spark.Spark.before;
-import static spark.Spark.after;
 
 import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.DB;
 
 import trivia.User;
+import trivia.BasicAuth;
 
 import com.google.gson.Gson;
 import java.util.Map;
 
- import java.util.List;
+ import java.util.*;
 
 
 class QuestionParam
@@ -33,16 +31,26 @@ class OptionParam
 
 public class App{
 
+	static User currentUser;
+
 	public static void main( String[] args ){
 
 	//Lo que se ejecuta antes que todo
 		before((request, response) -> {
 			Base.open();
+			String headerToken = (String) request.headers("Authorization");
+			if (headerToken == null || headerToken.isEmpty() || !BasicAuth.authorize(headerToken)){
+				halt(401);
+			}
+			currentUser = BasicAuth.getUser(headerToken);
 		});
 
 	//Lo que se ejecuta despues de todo
 		after((request, response) -> {
 			Base.close();
+			response.header("Access-Control-Allow-Origin", "*");
+        	response.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+        	response.header("Access-Control-Allow-Headers","Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
 		});
 
 	//Metodo de ejemplo
@@ -340,77 +348,50 @@ public class App{
 	
 
 		post("/login", (req,res) -> {
-			if(req.session().attribute("username")==null){
-				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-				String username= (String) bodyParams.get("name");
-				User u = User.findFirst("name = ?", username);
-				if(u!=null && (u.get("password").equals(bodyParams.get("password")))){
-					req.session().attribute("username",username);
-					System.out.println("aja  "+req.session().attribute("username"));
-					return "Ok";
-				}
-				return "Error: usuario no encontrado";
-			}
-			else{
-				return "Ya esta alguien logueado";
-			}
+			res.type("application/json");
+			// if there is currentUser is because headers are correct, so we only
+			// return the current user here
+			return currentUser.toJson(true);
 		});	
 
 
-	//SE DEBE HACER UN ".txt" QUE DIGA EL USERNAME. SE DEBE UBICAR DESDE DONDE LLAMO A CURL
 		post("/logout", (req,res) -> {
-			if(req.session().attribute("username")!=null){
-				System.out.println("PRIMERO "+req.session().attribute("username"));
-				req.session().removeAttribute("username");
-				System.out.println(""+req.session().attribute("username"));
-				return "Adios"; 
-			}
-			return "Error: primero debe loguearse";
+			return "";
 		});
 
 
 		//elige una pregunta aleatoriamente y redirecciona a mostrarla
 		get("/game" , (req,res) ->{
-			if(req.session().attribute("username")==null){
-				return "Usted debe loguearse";
+			List<Question> questions = Question.where("active = ? ", true);
+			if(!questions.isEmpty()){
+				int num = (int) (Math.random() * questions.size());
+				res.redirect("/question/"+questions.get(num).get("id"));
+				return "";
 			}
 			else{
-				List<Question> questions = Question.where("active = ? ", true);
-				if(!questions.isEmpty()){
-					int num = (int) (Math.random() * questions.size());
-					System.out.println("de : "+questions.toString()+" saco el "+num);
-					System.out.println("VAMO PA "+"/question/"+questions.get(num).get("id"));
-					res.redirect("/question/"+questions.get(num).get("id"));
-					return "";
-				}
-				else{
-					return "No hay preguntas cargadas";
-				}
+				return "No hay preguntas cargadas";
 			}
 		});
 	
 	
 		//Recibe una respuesta, la carga e informa si es correcta o no
+		//VER SI OPCION PERTENECE A PREG QUE MANDE
 		post("/answer" , (req,res) ->{
-			if(req.session().attribute("username")==null){
-				return "usted debe loguearse";
+			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+			Answer a= new Answer();
+			a.set("user_id",currentUser.get("id"));
+			a.set("option_id", bodyParams.get("id"));
+			a.saveIt();
+			Option o = Option.findById(a.get("option_id"));
+			if(o!=null){
+				if(o.getBoolean("correct")){
+					return "Correcto";
+				}
+				else{
+					return "Incorrecto";
+				}
 			}
 			else{
-				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-				Answer a= new Answer();
-				User u = User.findFirst("name =?",(String)  req.session().attribute("username"));
-				a.set("user_id",u.get("id"));
-				a.set("option_id", bodyParams.get("id"));
-				a.saveIt();
-				Option o = Option.findById(a.get("option_id"));
-				if(o!=null){
-					if(o.getBoolean("correct")){
-						return "Correcto";
-					}
-					else{
-						return false;
-					}
-				}
 				return "Respuesta invalida";
 			}
 		});
