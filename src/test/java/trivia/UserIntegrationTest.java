@@ -20,6 +20,14 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Base64;
 
+//
+
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import spark.utils.IOUtils;
+//
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.AfterClass;
@@ -34,6 +42,13 @@ import spark.Spark;
 import java.io.OutputStreamWriter;
 
 import com.google.gson.Gson;
+
+
+
+
+
+
+//////////////////////////////////////////////////////////7
 
 public class UserIntegrationTest {
     private static int PORT = 4567;
@@ -76,7 +91,7 @@ public class UserIntegrationTest {
 
     @Test
     public void canCreateUser() {
-      /*String name = "Alan";
+      String name = "Alan";
       String password = "Turing";
 	  String dni= "37127650";
 	  String administrator= "true";
@@ -94,8 +109,24 @@ public class UserIntegrationTest {
       assertNotNull(response.body);
       assertEquals(200, response.status);
       assertEquals(jsonResponse.get("name"), name);
-	  */
+
     }
+
+    @Test
+    public void canDeleteUser() {
+	Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
+     // Map<String, String> parameters = new HashMap<>();
+	User u= User.findFirst("name= ?", "Alan"); //Busco el que cree con canCreateUser
+      TestResponse response = request("DELETE", "/user/"+(int)u.get("id"));
+      //Map<String, Object> jsonResponse = new Gson().fromJson(response.body, Map.class);
+	
+      assertNotNull(response);
+      assertNotNull(response.body);
+		assertEquals(200, response.status);
+		Base.close();
+    }
+
+
 
     private static UrlResponse doRequest(String requestMethod, String path, Map body) {
         UrlResponse response = new UrlResponse();
@@ -149,5 +180,42 @@ public class UserIntegrationTest {
       public Map<String, List<String>> headers;
       private String body;
       private int status;
+    }
+	
+	
+	///////////////////////
+
+private static class TestResponse {
+
+        public final String body;
+        public final int status;
+
+        public TestResponse(int status, String body) {
+            this.status = status;
+            this.body = body;
+        }
+	
+    }
+	
+	
+private TestResponse request(String method, String path) {
+        try {
+            URL url = new URL("http://localhost:4567" + path);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod(method);
+			//
+			// Set User to get Authorized request
+      String userCredentials = ADMIN_USERNAME + ":" + ADMIN_PASSWORD;
+      String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes()));
+      connection.setRequestProperty("Authorization", basicAuth);
+			//
+            connection.setDoOutput(true);
+            connection.connect();
+            String body = IOUtils.toString(connection.getInputStream());
+            return new TestResponse(connection.getResponseCode(), body);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
