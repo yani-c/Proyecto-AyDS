@@ -20,13 +20,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Base64;
 
-//
-
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import spark.utils.IOUtils;
-//
 
 import org.junit.After;
 import org.junit.Before;
@@ -115,9 +108,9 @@ public class UserIntegrationTest {
     @Test
     public void canDeleteUser() {
 	Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
-     // Map<String, String> parameters = new HashMap<>();
+     Map<String, String> parameters = new HashMap<>();
 	User u= User.findFirst("name= ?", "Alan"); //Busco el que cree con canCreateUser
-      TestResponse response = request("DELETE", "/user/"+(int)u.get("id"));
+      UrlResponse response = doRequest("DELETE", "/user/"+(int)u.get("id"),parameters);
       //Map<String, Object> jsonResponse = new Gson().fromJson(response.body, Map.class);
 	
       assertNotNull(response);
@@ -182,40 +175,5 @@ public class UserIntegrationTest {
       private int status;
     }
 	
-	
-	///////////////////////
 
-private static class TestResponse {
-
-        public final String body;
-        public final int status;
-
-        public TestResponse(int status, String body) {
-            this.status = status;
-            this.body = body;
-        }
-	
-    }
-	
-	
-private TestResponse request(String method, String path) {
-        try {
-            URL url = new URL("http://localhost:4567" + path);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(method);
-			//
-			// Set User to get Authorized request
-      String userCredentials = ADMIN_USERNAME + ":" + ADMIN_PASSWORD;
-      String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes()));
-      connection.setRequestProperty("Authorization", basicAuth);
-			//
-            connection.setDoOutput(true);
-            connection.connect();
-            String body = IOUtils.toString(connection.getInputStream());
-            return new TestResponse(connection.getResponseCode(), body);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
