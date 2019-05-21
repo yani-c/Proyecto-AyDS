@@ -143,8 +143,25 @@ curl -X POST http://localhost:4567/users  -H 'content-type: application/json'   
 
 
 
+///////////////////////////////////  Loguearse  ///////////////////////////////////////////////////////////////////////////////
+
+Curl - u username:password -X POST http://localhost:4567/login -H 'content-type: application/json'
+
+[3:04, 19/5/2019] Yani: Curl - u username:password - L http://localhost:4567/game
+[3:04, 19/5/2019] Yani: El -L es para que vaya a donde lo redireccionamos
+Y lo otro como lo venimos Haciendo pero con curl -u username:password adelante siempre
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+[14:48, 18/5/2019] Yani: curl -c cookie-jar.txt  -X POST http://localhost:4567/login -H 'content-type: application/json'   -d '{"name":"aturing","password":"turing"}'
+[14:48, 18/5/2019] Yani: asi nos logueamos
+
+[14:49, 18/5/2019] Yani: curl -L -b cookie-jar.txt  -X POST http://localhost:4567/answer -H 'content-type: application/json'   -d '{"id":"9"}'
+[14:49, 18/5/2019] Yani: asi respondemos
+
+[14:49, 18/5/2019] Yani: curl -L -b cookie-jar.txt  -X POST http://localhost:4567/logout -H 'content-type: application/json'
+[14:49, 18/5/2019] Yani: asi hacemos logout
 
 
 
