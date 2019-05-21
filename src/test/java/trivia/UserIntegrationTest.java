@@ -63,13 +63,14 @@ public class UserIntegrationTest {
 
 		// Create an admin user to log into system using Basic Auth before run the test
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
-        User u = new User();
-        u.set("name", ADMIN_USERNAME);
-        u.set("password", ADMIN_PASSWORD);
-		u.set("dni", ADMIN_DNI);
-		u.set("administrator", true);
-		
-        u.saveIt();
+        User u = User.findFirst("name= ?",ADMIN_USERNAME);
+		if(u==null){
+		    u.set("name", ADMIN_USERNAME);
+		    u.set("password", ADMIN_PASSWORD);
+			u.set("dni", ADMIN_DNI);
+			u.set("administrator", true);
+		    u.saveIt();
+		}
         Base.close();
     }
 
