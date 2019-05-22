@@ -1,5 +1,5 @@
-create database if not exists trivia_dev;
-use trivia_dev;
+create database if not exists trivia_test;
+use trivia_test;
 CREATE TABLE if not exists users (
     name varchar(15) not null,
     dni int (8) not null,
@@ -72,6 +72,13 @@ create table if not exists statistics (
     );
     
 
+    
+
+    
+
+
+
+	
     
     
  

@@ -28,6 +28,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import trivia.User;
+import trivia.Category;
 import spark.utils.IOUtils;
 
 import spark.Spark;
@@ -37,11 +38,15 @@ import java.io.OutputStreamWriter;
 import com.google.gson.Gson;
 
 
-public class UserIntegrationTest {
+
+public class GameIntegrationTest {
     private static int PORT = 4567;
 	private static String ADMIN_USERNAME = "admin";
     private static String ADMIN_PASSWORD = "admin";
 	private static String ADMIN_DNI="11111111";
+	
+	private static String CATEGORY = "Category";
+	private static String DESCRIPTION="Question";
 
     @AfterClass
     public static void tearDown() {
@@ -50,11 +55,13 @@ public class UserIntegrationTest {
 
     @After
     public void clear() {
+		Base.close();
     }
 
 
     @Before
     public void beforeTest() {
+		Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
     }
 
     @BeforeClass
@@ -67,52 +74,59 @@ public class UserIntegrationTest {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
         User u = User.findFirst("name= ?",ADMIN_USERNAME);
 		if(u==null){
-		    u.set("name", ADMIN_USERNAME);
-		    u.set("password", ADMIN_PASSWORD);
-			u.set("dni", ADMIN_DNI);
-			u.set("administrator", true);
-		    u.saveIt();
+			User us= new User();
+		    us.set("name", ADMIN_USERNAME);
+		    us.set("password", ADMIN_PASSWORD);
+			us.set("dni", ADMIN_DNI);
+			us.set("administrator", true);
+		    us.saveIt();
 		}
         Base.close();
     }
 
-    @Test
-    public void canCreateUser() {
-      String name = "Alan";
-      String password = "Turing";
-	  String dni= "37127650";
-	  String administrator= "true";
 
-      Map<String, String> parameters = new HashMap<>();
-      parameters.put("name", name);
-      parameters.put("password", password);
-	  parameters.put("dni", dni);
- 	  parameters.put("administrator", administrator);
-
-      UrlResponse response = doRequest("POST", "/users", parameters);
-      Map<String, Object> jsonResponse = new Gson().fromJson(response.body, Map.class);
-
-      assertNotNull(response);
-      assertNotNull(response.body);
-      assertEquals(200, response.status);
-      assertEquals(jsonResponse.get("name"), name);
-
-    }
-
-    @Test
-    public void canDeleteUser() {
-	Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
-     Map<String, String> parameters = new HashMap<>();
-	User u= User.findFirst("name= ?", "Alan"); //Busco el que cree con canCreateUser
-      UrlResponse response = doRequest("DELETE", "/user/"+(int)u.get("id"),parameters);
-      //Map<String, Object> jsonResponse = new Gson().fromJson(response.body, Map.class);
 	
-      assertNotNull(response);
-      assertNotNull(response.body);
-		assertEquals(200, response.status);
-		Base.close();
+    @Test
+    public void canCreateQuestion() {
+		Question q= Question.findFirst("description=?",DESCRIPTION);
+		 if(q==null){
+			  String category_id= "1";//le pongo el id de una de las creadas en "insertDB.sql"
+			  User u= User.findFirst("name =?",ADMIN_USERNAME);
+			  String user_id=u.get("id").toString();
+
+			  Map<String, String> parameters = new HashMap<>();
+			  parameters.put("description", DESCRIPTION);
+			   parameters.put("category_id", category_id);
+			  parameters.put("user_id", user_id);
+			  parameters.put("options", "[{description:OptionONE, correct:false},{description:OptionTWO,correct:true},{description:OptionTHRE,correct:false},{description:OptionFOUR, correct:false}]");
+			  UrlResponse response = doRequest("POST", "/questions", parameters);
+			  Map<String, Object> jsonResponse = new Gson().fromJson(response.body, Map.class);
+
+			  assertNotNull(response);
+			  assertNotNull(response.body);
+			  assertEquals(200, response.status);
+			  assertEquals(jsonResponse.get("description"), DESCRIPTION);
+			  assertEquals(jsonResponse.get("active"), true);
+		 }
+
     }
 
+
+    @Test
+    public void canPlay() {
+			Map<String, String> parameters = new HashMap<>();
+			Question q= Question.findFirst("description =?",DESCRIPTION);
+		Option o = Option.findFirst("description =?","OptionTWO");
+			 parameters.put("id",o.get("id").toString());
+		  UrlResponse response = doRequest("POST", "/answer", parameters);
+		  Map<String, Object> jsonResponse = new Gson().fromJson(response.body, Map.class);
+
+			assertNotNull(response);
+		  assertNotNull(response.body);
+		  assertEquals(200, response.status);
+		assertEquals(jsonResponse.get("Respuesta"), true);
+
+    }
 
 
     private static UrlResponse doRequest(String requestMethod, String path, Map body) {

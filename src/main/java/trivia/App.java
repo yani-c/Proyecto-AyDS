@@ -220,7 +220,7 @@ public class App{
         Question question = new Question();
 		question.set("description", bodyParams.description);
 		question.set("category_id", bodyParams.category_id);
-		question.set("user_id",bodyParams.user_id);
+		question.set("user_id",currentUser.get("id"));
 		question.set("active", false);
         question.save();
         for(OptionParam item: bodyParams.options) {
@@ -229,6 +229,7 @@ public class App{
           question.add(option);
         }
 		question.set("active", question.comprobateActive());
+		  question.saveIt();
 		String json= question.toJson(true);
         return json;
       });
@@ -385,10 +386,12 @@ public class App{
 			Option o = Option.findById(a.get("option_id"));
 			if(o!=null){
 				if(o.getBoolean("correct")){
-					return "Correcto";
+					String json = "{\"Respuesta\":true}";
+					return json;
 				}
 				else{
-					return "Incorrecto";
+					String json = "{\"Respuesta\":false}";
+					return json;
 				}
 			}
 			else{
