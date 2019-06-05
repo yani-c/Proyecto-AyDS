@@ -8,6 +8,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
+  Alert,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -26,24 +28,24 @@ export default class HomeScreen extends React.Component {
             <Image
               source={
                 __DEV__
-                  ? require('../assets/images/robot-dev.png')
+                  ? require('../assets/images/perro.jpeg')
                   : require('../assets/images/robot-prod.png')
               }
               style={styles.welcomeImage}
             />
           </View>
 
-          <View style={styles.getStartedContainer}>
+         <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
+            <Text style={styles.getStartedText}>Trivia Veterinaria</Text>
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
+              <MonoText style={styles.codeHighlightText}>Menu Principal </MonoText>
             </View>
 
             <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
+              HOLA!
             </Text>
 
             <Text onPress={this._handleLogout} style={styles.logout}>
@@ -66,10 +68,11 @@ export default class HomeScreen extends React.Component {
           </View>
         </View>
       </View>
+
     );
   }
 
-  _handleLogout = async () => {
+ _handleLogout = async () => {
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth');
   };
