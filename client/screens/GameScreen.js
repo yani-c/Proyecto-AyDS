@@ -26,6 +26,10 @@ export default class GameScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
+    const opcion1 = navigation.getParam('descriptionOpcion1', 'NO-Option');
+    const opcion2 = navigation.getParam('descriptionOpcion2', 'NO-Option');
+    const opcion3 = navigation.getParam('descriptionOpcion3', 'NO-Option');
+    const opcion4 = navigation.getParam('descriptionOpcion4', 'NO-Option');
     const date = navigation.getParam('description', 'NO-Question');
     //const otherParam = navigation.getParam('otherParam', 'some default value');
     return (
@@ -38,6 +42,19 @@ export default class GameScreen extends React.Component {
                      <Text style={styles.getQuestionText}>
                        Pregunta: {JSON.stringify(date)}
                      </Text>
+                    <Text style={styles.getOptionText}>
+                      Opcion 1: {JSON.stringify(opcion1)}
+                     </Text>
+                    <Text style={styles.getOptionText}>
+                      Opcion 2: {JSON.stringify(opcion2)}
+                    </Text>
+                    <Text style={styles.getOptionText}>
+                      Opcion 3: {JSON.stringify(opcion3)}
+                    </Text>
+                    <Text style={styles.getOptionText}>
+                      Opcion 4: {JSON.stringify(opcion4)}
+                    </Text>
+
                      <Text>
                      {JSON.stringify(AsyncStorage.getItem('userToken'))}
                      </Text>
@@ -46,6 +63,7 @@ export default class GameScreen extends React.Component {
         </View>
     )};
 }
+
 
 
 const styles = StyleSheet.create({
@@ -82,6 +100,11 @@ const styles = StyleSheet.create({
     getQuestionText:{
       alignItems: 'center',
       fontSize: 50,
+
+    },
+    getOptionText:{
+      alignItems: 'center',
+      fontSize: 20,
 
     },
     homeScreenFilename: {
@@ -146,4 +169,3 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
   });
-  

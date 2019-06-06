@@ -92,8 +92,16 @@ export default class HomeScreen extends React.Component {
           .then(response => JSON.parse(JSON.stringify(response)))
           .then(response => {
             var a =JSON.parse(JSON.stringify(response.data.Pregunta));
+            var o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
+            var o2 =JSON.parse(JSON.stringify(response.data.Opcion2));
+            var o3 =JSON.parse(JSON.stringify(response.data.Opcion3));
+            var o4 =JSON.parse(JSON.stringify(response.data.Opcion4));
             console.log(a);
-            this.props.navigation.navigate('Game', {'description': JSON.parse(JSON.stringify(a.description))});
+           this.props.navigation.navigate('Game', {'description': JSON.parse(JSON.stringify(a.description)),
+           'descriptionOpcion1': JSON.parse(JSON.stringify(o1.description)),
+           'descriptionOpcion2': JSON.parse(JSON.stringify(o2.description)),
+           'descriptionOpcion3': JSON.parse(JSON.stringify(o3.description)),
+           'descriptionOpcion4': JSON.parse(JSON.stringify(o4.description))});
           })
     };
 
