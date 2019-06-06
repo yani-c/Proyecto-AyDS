@@ -1,4 +1,5 @@
 import React from 'react';
+import {API_HOST} from 'react-native-dotenv';
 import {
   AsyncStorage,
   Image,
@@ -11,6 +12,8 @@ import {
   Button,
   Alert,
 } from 'react-native';
+
+import axios from 'axios';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
@@ -53,6 +56,10 @@ export default class HomeScreen extends React.Component {
             </Text>
           </View>
 
+          <View style={styles.container}>
+            <Button title="Jugar" onPress={() => this.props.navigation.navigate('Game')} />
+          </View>
+
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
               <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
@@ -71,6 +78,21 @@ export default class HomeScreen extends React.Component {
 
     );
   }
+/*
+  _Jugar = () => {
+    axios.get(API_HOST+"/games", {
+      auth: {
+        username: "admin",
+        password: "admin"
+      }
+    })
+      .then(response => JSON.stringify(response))
+      .then(response => {
+        // Handle the JWT response here
+        AsyncStorage.setItem('userToken', response.data);
+        this.props.navigation.navigate('Game');
+      })
+  };*/
 
  _handleLogout = async () => {
     await AsyncStorage.clear();
