@@ -368,12 +368,15 @@ public class App{
 			if(!questions.isEmpty()){
 				int num = (int) (Math.random() * questions.size());
 				Question q = Question.findById(questions.get(num).get("id"));
-				//List<Option> options= Option.where("question_id = ?", q.get("id"));
-				String aux=  "{\"Pregunta\":"+ q.toJson(true,"id","description", "category_id")+"}";
-//(q.toJson(true,"id","description", "category_id")) + "\n";
-				/*for(Option o : options){
-					aux= aux+"\n"+o.toJson(true,"id","description");
-				}*/
+				List<Option> options= Option.where("question_id = ?", q.get("id"));
+				String aux=  "{\"Pregunta\":"+ q.toJson(true,"id","description", "category_id");
+				//aux= aux+", \"Opciones\": {\"";  
+				int i=1;
+				for(Option o : options){
+					aux= aux+", \"Opcion"+i+"\" : "+o.toJson(true,"id","description");
+					i++;
+				}
+				aux=aux+"}";
 				res.type("application/json");
 				return aux;
 			}

@@ -35,7 +35,12 @@ export default class GameScreen extends React.Component {
                     <Text style={styles.getStartedText}>
                     HOLA ESTAS JUGANDO!
                     </Text>
-                     <Text>Pregunta: {JSON.stringify(date)}</Text>
+                     <Text style={styles.getQuestionText}>
+                       Pregunta: {JSON.stringify(date)}
+                     </Text>
+                     <Text>
+                     {JSON.stringify(AsyncStorage.getItem('userToken'))}
+                     </Text>
                 </View>
             </ScrollView>
         </View>
@@ -73,6 +78,11 @@ const styles = StyleSheet.create({
     getStartedContainer: {
       alignItems: 'center',
       marginHorizontal: 50,
+    },
+    getQuestionText:{
+      alignItems: 'center',
+      fontSize: 50,
+
     },
     homeScreenFilename: {
       marginVertical: 7,

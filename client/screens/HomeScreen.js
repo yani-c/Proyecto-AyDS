@@ -79,8 +79,8 @@ export default class HomeScreen extends React.Component {
     );
   }
 
+
     _Game = () => {
-    
         axios.post(API_HOST+"/game", {
             category_id:1
             }, {
