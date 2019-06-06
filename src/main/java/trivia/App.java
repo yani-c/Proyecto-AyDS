@@ -60,7 +60,7 @@ public class App{
 
 //------------------------------------GET------------------------------------
 
-	//muestra todos los usuarios 
+	//muestra todos los usuarios
 		get("/users" , (req, res) ->{
 			List<User> users = User.findAll();
 			if(!users.isEmpty()){
@@ -127,7 +127,7 @@ public class App{
 		});
 
 
-	//muestra un usuario dado su id 
+	//muestra un usuario dado su id
 		get("/user/:id" , (req, res) ->{
 			User u = User.findById(req.params(":id"));
 			if(u!=null){
@@ -139,7 +139,7 @@ public class App{
 		});
 
 
-	//muestra una categoria dado su id 
+	//muestra una categoria dado su id
 		get("/category/:id" , (req, res) ->{
 		    Category c  = Category.findById(req.params(":id"));
 			if(c!=null){
@@ -151,13 +151,13 @@ public class App{
 		 });
 
 
-	//muestra una pregunta y sus opciones dado su id 
+	//muestra una pregunta y sus opciones dado su id
 		get("/question/:id" , (req, res) ->{
 		    Question q = Question.findById(req.params(":id"));
 			if(q!=null){
 				if(q.getBoolean("active")){
 					List<Option> options= Option.where("question_id = ?", req.params(":id"));
-					String aux= q.toJson(true,"id","description")+"\n";
+					String aux= (q.toJson(true,"id","description, category_id"))) + "\n";
 					for(Option o : options){
 						aux= aux+"\n"+o.toJson(true,"id","description");
 					}
@@ -218,19 +218,19 @@ public class App{
       post("/questions", (req, res) -> {
         QuestionParam bodyParams = new Gson().fromJson(req.body(), QuestionParam.class);
         Question question = new Question();
-		question.set("description", bodyParams.description);
-		question.set("category_id", bodyParams.category_id);
-		question.set("user_id",currentUser.get("id"));
-		question.set("active", false);
+		    question.set("description", bodyParams.description);
+		    question.set("category_id", bodyParams.category_id);
+		    question.set("user_id",currentUser.get("id"));
+		    question.set("active", false);
         question.save();
         for(OptionParam item: bodyParams.options) {
           Option option = new Option();
           option.set("description", item.description).set("correct", item.correct);
           question.add(option);
         }
-		question.set("active", question.comprobateActive());
-		  question.saveIt();
-		String json= question.toJson(true);
+		    question.set("active", question.comprobateActive());
+		    question.saveIt();
+		    String json= question.toJson(true);
         return json;
       });
 
@@ -285,10 +285,10 @@ public class App{
 				u.set("dni", bodyParams.get("dni"));
 				u.set("password", bodyParams.get("password"));
 				u.set("name", bodyParams.get("name"));
-				u.saveIt();	
+				u.saveIt();
 				res.type("application/json");
 				return "Actualizado con exito : "+u.toJson(true);
-			}	
+			}
 			res.type("application/json");
 			return "Error: No se pudo actualizar.No se encontraron registros de la persona";
 		});
@@ -301,10 +301,10 @@ public class App{
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				q.set("description", bodyParams.get("description"));
 				q.set("category_id", bodyParams.get("category_id"));
-				q.saveIt();	
+				q.saveIt();
 				res.type("application/json");
 				return "Actualizado con exito : "+q.toJson(true);
-			}	
+			}
 			res.type("application/json");
 			return "Error: No se pudo actualizar.No se encontraron registros de la persona";
 		});
@@ -317,14 +317,14 @@ public class App{
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				o.set("description", bodyParams.get("description"));
 				o.set("correct", bodyParams.get("correct"));
-				o.saveIt();	
+				o.saveIt();
 				//controla el campo active de la pregunta donde pertenece esta opcion
 				Question q= Question.findById(o.get("question_id"));
 				q.set("active", q.comprobateActive());
 				q.saveIt();
 				res.type("application/json");
 				return "Actualizado con exito : "+o.toJson(true);
-			}	
+			}
 			res.type("application/json");
 			return "Error: No se pudo actualizar.No se encontraron registros de la persona";
 		});
@@ -336,24 +336,24 @@ public class App{
 			if(c!=null){
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				c.set("category_name", bodyParams.get("category_name"));
-				c.saveIt();	
+				c.saveIt();
 				res.type("application/json");
 				return "Actualizado con exito : "+c.toJson(true);
-			}	
+			}
 			res.type("application/json");
 			return "Error: No se pudo actualizar.No se encontraron registros de la persona";
 		});
-	
+
 
 //------------------------------------GAME------------------------------------
-	
+
 
 		post("/login", (req,res) -> {
 			res.type("application/json");
 			// if there is currentUser is because headers are correct, so we only
 			// return the current user here
 			return currentUser.toJson(true);
-		});	
+		});
 
 
 		post("/logout", (req,res) -> {
@@ -363,7 +363,8 @@ public class App{
 
 		//elige una pregunta aleatoriamente y redirecciona a mostrarla
 		get("/game" , (req,res) ->{
-			List<Question> questions = Question.where("active = ? ", true);
+      int cataleatoria = (int) (Math.random() * 6);
+			List<Question> questions = Question.where("active = ? and category_id = ? ", true, cataleatoria);
 			if(!questions.isEmpty()){
 				int num = (int) (Math.random() * questions.size());
 				res.redirect("/question/"+questions.get(num).get("id"));
@@ -373,8 +374,10 @@ public class App{
 				return "No hay preguntas cargadas";
 			}
 		});
-	
-	
+
+
+
+
 		//Recibe una respuesta, la carga e informa si es correcta o no
 		//VER SI OPCION PERTENECE A PREG QUE MANDE
 		post("/answer" , (req,res) ->{
@@ -400,7 +403,6 @@ public class App{
 		});
 
 	}//end main
-	
+
 
 }//end class
-

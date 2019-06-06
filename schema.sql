@@ -36,6 +36,7 @@ create table if not exists questions(
 );
 create table if not exists levels (
 	id int(2) auto_increment not null,
+    lvl int(2) not null default 0,  
     category_id int(1) not null,
     constraint fklevel foreign key (category_id) references categories (id),
     primary key(id),
