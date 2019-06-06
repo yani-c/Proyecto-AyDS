@@ -57,7 +57,7 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.container}>
-            <Button title="Jugar" onPress={() => this.props.navigation.navigate('Game')} />
+            <Button title="Jugar" onPress= {this._Game} />
           </View>
 
           <View style={styles.helpContainer}>
@@ -78,21 +78,24 @@ export default class HomeScreen extends React.Component {
 
     );
   }
-/*
-  _Jugar = () => {
-    axios.get(API_HOST+"/games", {
-      auth: {
-        username: "admin",
-        password: "admin"
-      }
-    })
-      .then(response => JSON.stringify(response))
-      .then(response => {
-        // Handle the JWT response here
-        AsyncStorage.setItem('userToken', response.data);
-        this.props.navigation.navigate('Game');
-      })
-  };*/
+
+    _Game = () => {
+    
+        axios.post(API_HOST+"/game", {
+            category_id:1
+            }, {
+            auth: {
+                username: "admin",
+                password: "admin"
+          }
+        })
+          .then(response => JSON.parse(JSON.stringify(response)))
+          .then(response => {
+            var a =JSON.parse(JSON.stringify(response.data.Pregunta));
+            console.log(a);
+            this.props.navigation.navigate('Game', {'description': JSON.parse(JSON.stringify(a.description))});
+          })
+    };
 
  _handleLogout = async () => {
     await AsyncStorage.clear();

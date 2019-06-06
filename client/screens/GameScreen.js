@@ -25,6 +25,9 @@ export default class GameScreen extends React.Component {
 
 
   render() {
+    const { navigation } = this.props;
+    const date = navigation.getParam('description', 'NO-Question');
+    //const otherParam = navigation.getParam('otherParam', 'some default value');
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -32,29 +35,11 @@ export default class GameScreen extends React.Component {
                     <Text style={styles.getStartedText}>
                     HOLA ESTAS JUGANDO!
                     </Text>
-                    <View style={styles.container}>
-                        <Button title="Ver pregunta" onPress={this._Pregunta} />
-                    </View>
+                     <Text>Pregunta: {JSON.stringify(date)}</Text>
                 </View>
             </ScrollView>
         </View>
     )};
-
-    _Pregunta = () => {
-    
-        axios.get(API_HOST+"/game", {
-            auth: {
-                username: "admin",
-                password: "admin"
-          }
-        })
-          .then(response => JSON.stringify(response))
-          .then(response => {
-
-              //console.log("KHE ONDA");
-            //console.log(response);
-          })
-    };
 }
 
 

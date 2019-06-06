@@ -157,7 +157,7 @@ public class App{
 			if(q!=null){
 				if(q.getBoolean("active")){
 					List<Option> options= Option.where("question_id = ?", req.params(":id"));
-					String aux= (q.toJson(true,"id","description, category_id")) + "\n";
+					String aux= (q.toJson(true,"id","description", "category_id")) + "\n";
 					for(Option o : options){
 						aux= aux+"\n"+o.toJson(true,"id","description");
 					}
@@ -362,13 +362,20 @@ public class App{
 
 
 		//elige una pregunta aleatoriamente y redirecciona a mostrarla
-		get("/game" , (req,res) ->{
-      int cataleatoria = (int) (Math.random() * 6);
-			List<Question> questions = Question.where("active = ? and category_id = ? ", true, cataleatoria);
+		post("/game" , (req,res) ->{
+			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+			List<Question> questions = Question.where("active = ? and category_id = ? ", true, bodyParams.get("category_id"));
 			if(!questions.isEmpty()){
 				int num = (int) (Math.random() * questions.size());
-				res.redirect("/question/"+questions.get(num).get("id"));
-				return "";
+				Question q = Question.findById(questions.get(num).get("id"));
+				//List<Option> options= Option.where("question_id = ?", q.get("id"));
+				String aux=  "{\"Pregunta\":"+ q.toJson(true,"id","description", "category_id")+"}";
+//(q.toJson(true,"id","description", "category_id")) + "\n";
+				/*for(Option o : options){
+					aux= aux+"\n"+o.toJson(true,"id","description");
+				}*/
+				res.type("application/json");
+				return aux;
 			}
 			else{
 				return "No hay preguntas cargadas";
