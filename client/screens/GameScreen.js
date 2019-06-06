@@ -20,7 +20,7 @@ import { MonoText } from '../components/StyledText';
 
 export default class GameScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Juego'
   };
 
 
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     getQuestionText:{
       alignItems: 'center',
-      fontSize: 50,
+      fontSize: 30,
 
     },
     getOptionText:{
