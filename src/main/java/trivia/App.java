@@ -157,7 +157,7 @@ public class App{
 			if(q!=null){
 				if(q.getBoolean("active")){
 					List<Option> options= Option.where("question_id = ?", req.params(":id"));
-					String aux= (q.toJson(true,"id","description, category_id"))) + "\n";
+					String aux= (q.toJson(true,"id","description, category_id")) + "\n";
 					for(Option o : options){
 						aux= aux+"\n"+o.toJson(true,"id","description");
 					}
