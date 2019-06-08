@@ -6,6 +6,7 @@ import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.DB;
 
 import trivia.User;
+import trivia.Statistic;
 import trivia.BasicAuth;
 
 import com.google.gson.Gson;
@@ -413,13 +414,24 @@ public class App{
 			a.set("user_id",currentUser.get("id"));
 			a.set("option_id", bodyParams.get("id"));
 			a.saveIt();
+			Statistic s= Statistic.findFirst("user_id = ?",currentUser.get("id"));
+			if(s==null){
+				s= new Statistic();
+				s.set("user_id", currentUser.get("id"));
+				s.set("correct", 0);
+				s.set("incorrect", 0);
+			}
 			Option o = Option.findById(a.get("option_id"));
 			if(o!=null){
 				if(o.getBoolean("correct")){
+					s.set("correct",s.getInteger("correct")+1);
+					s.saveIt();
 					String json = "{\"Respuesta\":true}";
 					return json;
 				}
 				else{
+					s.set("incorrect", s.getInteger("incorrect")+1);
+					s.saveIt();
 					String json = "{\"Respuesta\":false}";
 					return json;
 				}
