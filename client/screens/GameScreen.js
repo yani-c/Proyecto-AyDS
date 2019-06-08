@@ -23,24 +23,49 @@ export default class GameScreen extends React.Component {
     title: 'Juego'
   };
 
+  constructor(props){
+    super(props);
+    this.state = {category:"",
+      question: "", option1:"",option2:"",option3:"",option4:"",
+    };
+  }
+
+  async componentWillMount () {
+    const { navigation } = this.props;
+    const cat = navigation.getParam('category', 'NO-Category');
+    const name_c=navigation.getParam('name_c','NO-NameCategory');
+    axios.post(API_HOST+"/game", {
+      category_id: cat
+      }, {
+        headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
+    })
+    .then(response => JSON.parse(JSON.stringify(response)))
+    .then(response => {
+      const q =JSON.parse(JSON.stringify(response.data.Pregunta.description));
+      const o1 =JSON.parse(JSON.stringify(response.data.Opcion1.description));
+      const o2 =JSON.parse(JSON.stringify(response.data.Opcion2.description));
+      const o3 =JSON.parse(JSON.stringify(response.data.Opcion3.description));
+      const o4 =JSON.parse(JSON.stringify(response.data.Opcion4.description));
+      this.setState({category:name_c,question: q, option1: o1, option2: o2, option3: o3, option4: o4});
+    });
+  }
 
   render() {
-    const { navigation } = this.props;
-    const opcion1 = navigation.getParam('descriptionOpcion1', 'NO-Option');
-    const opcion2 = navigation.getParam('descriptionOpcion2', 'NO-Option');
-    const opcion3 = navigation.getParam('descriptionOpcion3', 'NO-Option');
-    const opcion4 = navigation.getParam('descriptionOpcion4', 'NO-Option');
-    const date = navigation.getParam('description', 'NO-Question');
-    //const otherParam = navigation.getParam('otherParam', 'some default value');
+    const c=this.state.category;
+    const q=this.state.question;
+    const opcion1=this.state.option1;
+    const opcion2=this.state.option2;
+    const opcion3=this.state.option3;
+    const opcion4=this.state.option4;
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
                     <Text style={styles.getStartedText}>
-                    HOLA ESTAS JUGANDO!
+                    Categoria: {JSON.stringify(c)}
                     </Text>
                      <Text style={styles.getQuestionText}>
-                       Pregunta: {JSON.stringify(date)}
+                       Pregunta: {JSON.stringify(q)}
                      </Text>
                     <Text style={styles.getOptionText}>
                       Opcion 1: {JSON.stringify(opcion1)}
@@ -58,6 +83,8 @@ export default class GameScreen extends React.Component {
             </ScrollView>
         </View>
     )};
+
+    //aca
 }
 
 

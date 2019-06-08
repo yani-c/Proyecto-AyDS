@@ -82,25 +82,17 @@ export default class HomeScreen extends React.Component {
 
     _Game = async () => {
         console.log(AsyncStorage.getItem('userToken'));
-        axios.post(API_HOST+"/game", {
-            category_id:1
-            }, {
+        axios.get(API_HOST+"/randomCategory", {
               headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
         })
-          .then(response => JSON.parse(JSON.stringify(response)))
-          .then(response => {
-            var a =JSON.parse(JSON.stringify(response.data.Pregunta));
-            var o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
-            var o2 =JSON.parse(JSON.stringify(response.data.Opcion2));
-            var o3 =JSON.parse(JSON.stringify(response.data.Opcion3));
-            var o4 =JSON.parse(JSON.stringify(response.data.Opcion4));
-            console.log(a);
-           this.props.navigation.navigate('Game', {'description': JSON.parse(JSON.stringify(a.description)),
-           'descriptionOpcion1': JSON.parse(JSON.stringify(o1.description)),
-           'descriptionOpcion2': JSON.parse(JSON.stringify(o2.description)),
-           'descriptionOpcion3': JSON.parse(JSON.stringify(o3.description)),
-           'descriptionOpcion4': JSON.parse(JSON.stringify(o4.description))});
-          })
+        .then(response => JSON.parse(JSON.stringify(response)))
+        .then(response => {
+          var category= response.data.cat ;
+          var name=response.data.name;
+          console.log(category);
+          console.log(name);
+          this.props.navigation.navigate('Game',{'category': category,'name_c':name});
+        })
     };
 
  _handleLogout = async () => {

@@ -125,6 +125,23 @@ public class App{
 				return "Error: No hay categorias cargadas. Nada para mostrar";
 			}
 		});
+	
+	
+		//muestra una categoria aleatoria
+		get("/randomCategory" , (req, res) ->{
+			List<Category> categories = Category.findAll();
+			if(!categories.isEmpty()){
+				int random= (int) (Math.random() * categories.size());
+				String c="{\"cat\":\""+categories.get(random).get("id")+"\",\"name\": \""+categories.get(random).get("category_name")+"\"}";
+				res.type("application/json");
+				return c;
+			}
+			else{
+				return "{\"cat\":\"null\"";
+			}
+		});
+
+
 
 
 	//muestra un usuario dado su id
