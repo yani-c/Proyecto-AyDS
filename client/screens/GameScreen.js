@@ -54,10 +54,6 @@ export default class GameScreen extends React.Component {
                     <Text style={styles.getOptionText}>
                       Opcion 4: {JSON.stringify(opcion4)}
                     </Text>
-
-                     <Text>
-                     {JSON.stringify(AsyncStorage.getItem('userToken'))}
-                     </Text>
                 </View>
             </ScrollView>
         </View>

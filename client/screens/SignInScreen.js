@@ -45,9 +45,13 @@ export default class SignInScreen extends React.Component {
         />
 
         <Button title="Sign in!" onPress={this._signIn} />
+      
       </View>
     );
   }
+
+
+
 
   _signIn = () => {
     const { username, password } = this.state;
@@ -61,10 +65,10 @@ export default class SignInScreen extends React.Component {
         password: password
       }
     })
-      .then(response => JSON.stringify(response))
+      .then(response => JSON.parse(JSON.stringify(response)))
       .then(response => {
-        // Handle the JWT response here
-        AsyncStorage.setItem('userToken', response.data);
+        //console.log(response.config.headers.Authorization);
+        AsyncStorage.setItem('userToken', response.config.headers.Authorization);
         this.props.navigation.navigate('App');
       })
     .catch((error) => {

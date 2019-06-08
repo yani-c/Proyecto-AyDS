@@ -80,14 +80,12 @@ export default class HomeScreen extends React.Component {
   }
 
 
-    _Game = () => {
+    _Game = async () => {
+        console.log(AsyncStorage.getItem('userToken'));
         axios.post(API_HOST+"/game", {
             category_id:1
             }, {
-            auth: {
-                username: "admin",
-                password: "admin"
-          }
+              headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
         })
           .then(response => JSON.parse(JSON.stringify(response)))
           .then(response => {
