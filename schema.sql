@@ -46,7 +46,7 @@ create table if not exists levels (
     
 create table if not exists options (
 	id int(1) not null auto_increment primary key,
-    description varchar(25),
+    description varchar(100),
     question_id int(11),
     correct boolean,
     constraint fktable foreign key (question_id) references questions (id)
