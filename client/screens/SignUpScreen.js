@@ -10,30 +10,39 @@ import {
   StyleSheet,
 } from 'react-native';
 import axios from 'axios';
+//<Button title="Sign up!" onPress ={this.props.navigation.navigate('SingUp')} />
 
-export default class SignInScreen extends React.Component {
+export default class SignUpScreen extends React.Component {
   static navigationOptions = {
-    title: 'Please sign in',
+    title: 'Registrate',
   };
 
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      dni:''
     }
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}> Login! </Text>
+        <View style={styles.container}>
+            <Text style={styles.welcome}> Ingrese sus datos </Text>
 
         <TextInput
           placeholder="Username"
           style={styles.input}
           onChangeText={(value) => this.setState({ username: value })}
           value={this.state.username}
+        />
+
+        <TextInput
+          placeholder="Dni"
+          style={styles.input}
+          onChangeText={(value) => this.setState({ dni: value })}
+          value={this.state.dni}
         />
 
         <TextInput
@@ -44,43 +53,31 @@ export default class SignInScreen extends React.Component {
           value={this.state.password}
         />
 
-        <Button title="Sign in!" onPress={this._signIn} />
+        <Button title="Sign up!" onPress={this._signUp} />
 
-        <Button title="Sign up!" onPress ={() => this.props.navigation.navigate('SignUp')} />
-      
-      </View>
+        </View>
     );
   }
 
+  _signUp = () => {
+    const { username, password, dni } = this.state;
 
-
-
-  _signIn = () => {
-    const { username, password } = this.state;
-
-    axios.post(API_HOST+"/login", {
+    axios.post(API_HOST+"/users", {
       username: username,
       password: password,
+      dni: dni,
+      administrator: false,
     }, {
       auth: {
-        username: username,
-        password: password
+        username: "admin",
+        password: "admin"
       }
     })
-      .then(response => JSON.parse(JSON.stringify(response)))
+      .then(response => JSON.stringify(response))
       .then(response => {
-        //console.log(response.config.headers.Authorization);
-        AsyncStorage.setItem('userToken', response.config.headers.Authorization);
-        this.props.navigation.navigate('App');
+        // Handle the JWT response here
+        this.props.navigation.navigate('SignIn');
       })
-    .catch((error) => {
-      if(error.toString().match(/401/)) {
-        alert("Username or Password incorrect");
-        return;
-      }
-
-      alert("Networking Error");
-    });
   };
 }
 

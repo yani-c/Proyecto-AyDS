@@ -8,12 +8,12 @@ import trivia.User;
 public class BasicAuth {
   static Boolean authorize(String headerAuth) {
     final String[] creds = getCredentials(headerAuth);
-    return User.findFirst("name = ? AND password = ?", creds[0], creds[1]) != null;
+    return User.findFirst("username = ? AND password = ?", creds[0], creds[1]) != null;
   }
 
   static User getUser(String headerAuth) {
     final String[] creds = getCredentials(headerAuth);
-    return User.findFirst("name = ?", creds[0]);
+    return User.findFirst("username = ?", creds[0]);
   }
 
   private static String[] getCredentials(String headerAuth) {

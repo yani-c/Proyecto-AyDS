@@ -72,10 +72,10 @@ public class GameIntegrationTest {
 
 		// Create an admin user to log into system using Basic Auth before run the test
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
-        User u = User.findFirst("name= ?",ADMIN_USERNAME);
+        User u = User.findFirst("username= ?",ADMIN_USERNAME);
 		if(u==null){
 			User us= new User();
-		    us.set("name", ADMIN_USERNAME);
+		    us.set("username", ADMIN_USERNAME);
 		    us.set("password", ADMIN_PASSWORD);
 			us.set("dni", ADMIN_DNI);
 			us.set("administrator", true);
@@ -91,7 +91,7 @@ public class GameIntegrationTest {
 		Question q= Question.findFirst("description=?",DESCRIPTION);
 		 if(q==null){
 			  String category_id= "1";//le pongo el id de una de las creadas en "insertDB.sql"
-			  User u= User.findFirst("name =?",ADMIN_USERNAME);
+			  User u= User.findFirst("username =?",ADMIN_USERNAME);
 			  String user_id=u.get("id").toString();
 
 			  Map<String, String> parameters = new HashMap<>();

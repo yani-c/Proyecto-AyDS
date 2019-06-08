@@ -65,9 +65,9 @@ public class UserIntegrationTest {
 
 		// Create an admin user to log into system using Basic Auth before run the test
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
-        User u = User.findFirst("name= ?",ADMIN_USERNAME);
+        User u = User.findFirst("username= ?",ADMIN_USERNAME);
 		if(u==null){
-		    u.set("name", ADMIN_USERNAME);
+		    u.set("username", ADMIN_USERNAME);
 		    u.set("password", ADMIN_PASSWORD);
 			u.set("dni", ADMIN_DNI);
 			u.set("administrator", true);
@@ -78,13 +78,13 @@ public class UserIntegrationTest {
 
     @Test
     public void canCreateUser() {
-      String name = "Alan";
+      String username = "Alan";
       String password = "Turing";
 	  String dni= "37127650";
 	  String administrator= "true";
 
       Map<String, String> parameters = new HashMap<>();
-      parameters.put("name", name);
+      parameters.put("username", username);
       parameters.put("password", password);
 	  parameters.put("dni", dni);
  	  parameters.put("administrator", administrator);
@@ -95,7 +95,7 @@ public class UserIntegrationTest {
       assertNotNull(response);
       assertNotNull(response.body);
       assertEquals(200, response.status);
-      assertEquals(jsonResponse.get("name"), name);
+      assertEquals(jsonResponse.get("username"), username);
 
     }
 
@@ -103,7 +103,7 @@ public class UserIntegrationTest {
     public void canDeleteUser() {
 	Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_dev", "root", "root");
      Map<String, String> parameters = new HashMap<>();
-	User u= User.findFirst("name= ?", "Alan"); //Busco el que cree con canCreateUser
+	User u= User.findFirst("username= ?", "Alan"); //Busco el que cree con canCreateUser
       UrlResponse response = doRequest("DELETE", "/user/"+(int)u.get("id"),parameters);
       //Map<String, Object> jsonResponse = new Gson().fromJson(response.body, Map.class);
 	

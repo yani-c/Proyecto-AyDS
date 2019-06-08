@@ -196,7 +196,7 @@ public class App{
 			User user = new User();
 			user.set("dni", bodyParams.get("dni"));
 			user.set("password", bodyParams.get("password"));
-			user.set("name", bodyParams.get("name"));
+			user.set("username", bodyParams.get("username"));
 			user.set("administrator",bodyParams.get("administrator"));
 			user.saveIt();
 		    res.type("application/json");
@@ -284,7 +284,7 @@ public class App{
 				Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 				u.set("dni", bodyParams.get("dni"));
 				u.set("password", bodyParams.get("password"));
-				u.set("name", bodyParams.get("name"));
+				u.set("username", bodyParams.get("username"));
 				u.saveIt();
 				res.type("application/json");
 				return "Actualizado con exito : "+u.toJson(true);

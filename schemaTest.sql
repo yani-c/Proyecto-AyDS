@@ -1,13 +1,13 @@
 create database if not exists trivia_test;
 use trivia_test;
 CREATE TABLE if not exists users (
-    name varchar(15) not null,
+    username varchar(15) not null,
     dni int (8) not null,
     id int(11) not null auto_increment,
     administrator BOOLEAN,
     password VARCHAR(56),
     primary key (id),
-    unique(dni), unique(name),
+    unique(dni), unique(username),
     created_at datetime,
     update_at datetime
     );

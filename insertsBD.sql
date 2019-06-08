@@ -1,12 +1,12 @@
 use trivia_dev;
 -- Carga Usuarios
-INSERT INTO users (name, dni, administrator, password)
+INSERT INTO users (username, dni, administrator, password)
 VALUES ('Hernan', '39546109', true, 'root');
 
-INSERT INTO users (name, dni, administrator, password)
+INSERT INTO users (username, dni, administrator, password)
 VALUES ('Yani', '42024232', true, 'root');
 
-INSERT INTO users (name, dni, administrator, password)
+INSERT INTO users (username, dni, administrator, password)
 VALUES ('Pablo', '39246109', true, 'root');
 -- Carga Categorias
 INSERT INTO categories (category_name)
