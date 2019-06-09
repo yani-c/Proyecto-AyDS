@@ -205,6 +205,18 @@ public class App{
 			}
 		});
 
+		//muestras las estadisticas del current User
+		get("/statistics" , (req,res) ->{
+			Statistic s= Statistic.findFirst("user_id = ?", currentUser.get("id"));
+			if(s==null){
+				s= new Statistic();
+				s.set("user_id", currentUser.get("id"));
+				s.set("correct", 0);
+				s.set("incorrect", 0);
+			}
+			return s.toJson(true,"correct","incorrect");
+		});
+
 
 //------------------------------------POST------------------------------------
 

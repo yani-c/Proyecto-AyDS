@@ -58,6 +58,7 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.container}>
             <Button title="Jugar" onPress= {this._Game} />
+            <Button title="Estadísticas" onPress= {()=> this.props.navigation.navigate('Statistics')} />
           </View>
 
           <View style={styles.helpContainer}>
