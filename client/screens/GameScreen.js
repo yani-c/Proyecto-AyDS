@@ -41,8 +41,7 @@ export default class GameScreen extends React.Component {
     })
     .then(response => JSON.parse(JSON.stringify(response)))
     .then(response => {
-      console.log(response.data.Opcion1);
-      console.log(response.data.Opcion1.description);
+      console.log(response.data);
       const q =JSON.parse(JSON.stringify(response.data.Pregunta));
       const o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
       const o2 =JSON.parse(JSON.stringify(response.data.Opcion2));
@@ -51,6 +50,29 @@ export default class GameScreen extends React.Component {
       this.setState({category:name_c,question: q, option1: o1, option2: o2, option3: o3, option4: o4});
     });
   }
+
+  async componentWillReceiveProps () {
+    const { navigation } = this.props;
+    const cat = navigation.getParam('category', 'NO-Category');
+    const name_c=navigation.getParam('name_c','NO-NameCategory');
+    axios.post(API_HOST+"/game", {
+      category_id: cat
+      }, {
+        headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
+    })
+    .then(response => JSON.parse(JSON.stringify(response)))
+    .then(response => {
+      console.log(response.data);
+      const q =JSON.parse(JSON.stringify(response.data.Pregunta));
+      const o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
+      const o2 =JSON.parse(JSON.stringify(response.data.Opcion2));
+      const o3 =JSON.parse(JSON.stringify(response.data.Opcion3));
+      const o4 =JSON.parse(JSON.stringify(response.data.Opcion4));
+      this.setState({category:name_c,question: q, option1: o1, option2: o2, option3: o3, option4: o4});
+    });
+  }
+
+  
 
   render() {
     const c=this.state.category;
@@ -63,8 +85,6 @@ export default class GameScreen extends React.Component {
     var id2 = this.state.option2.id;
     var id3 = this.state.option3.id;
     var id4 = this.state.option4.id;
-    console.log(opcion1);
-    console.log(JSON.stringify(opcion1));
     return (
         <View style={styles.container}>          
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -73,16 +93,40 @@ export default class GameScreen extends React.Component {
                     Categoria: {JSON.stringify(c)}
                     </Text>
                      <Text style={styles.getQuestionText}>
-                       Pregunta: {JSON.stringify(q.description)}
+                       Pregunta: {q.description}
                      </Text>
-                     <Button title= 'opcion1' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
+                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                     <Button title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
                      />
-                     <Button title= 'opcion2' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
+                     <View style={styles.SeparatorLine} />
+                     <Text style={styles.getStartedText}>
+                      : {opcion1}
+                     </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                     <Button title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
                      />
-                     <Button title= 'opcion3' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
+                     <View style={styles.SeparatorLine} />
+                     <Text style={styles.getStartedText}>
+                      : {opcion2}
+                     </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                     <Button title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
                      />
-                     <Button title= 'opcion4' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
+                     <View style={styles.SeparatorLine} />
+                     <Text style={styles.getStartedText}>
+                      : {opcion3}
+                     </Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                     <Button title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
                      />
+                     <View style={styles.SeparatorLine} />
+                     <Text style={styles.getStartedText}>
+                      : {opcion4}
+                     </Text>
+                     </TouchableOpacity>
                 
                 </View>
             </ScrollView>
@@ -133,7 +177,24 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       fontSize: 20,
 
-    },
+    },SeparatorLine :{
+ 
+      backgroundColor : '#fff',
+      width: 1,
+      height: 40
+       
+      },  
+      ButtonStyle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+       // backgroundColor: '#485a96',
+        borderWidth: 0.5,
+       // borderColor: '#fff',
+        height: 40,
+        width: 220,
+        borderRadius: 5,
+        margin: 5,
+      },
     homeScreenFilename: {
       marginVertical: 7,
     },

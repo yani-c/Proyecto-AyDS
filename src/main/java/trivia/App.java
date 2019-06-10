@@ -141,7 +141,7 @@ public class App{
 				return c;
 			}
 			else{
-				return "{\"cat\":\"null\"";
+				return "{\"cat\":\"null\"}";
 			}
 		});
 

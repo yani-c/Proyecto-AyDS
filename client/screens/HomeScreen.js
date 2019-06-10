@@ -66,14 +66,13 @@ export default class HomeScreen extends React.Component {
 
 
     _Game = async () => {
-        console.log(AsyncStorage.getItem('userToken'));
         axios.get(API_HOST+"/randomCategory", {
               headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
         })
         .then(response => JSON.parse(JSON.stringify(response)))
         .then(response => {
-          var category= response.data.cat ;
-          var name=response.data.name;
+          const category= response.data.cat ;
+          const name=response.data.name;
           this.props.navigation.navigate('Game',{'category': category,'name_c':name});
         })
     };
