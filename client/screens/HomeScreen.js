@@ -78,16 +78,6 @@ export default class HomeScreen extends React.Component {
         })
     };
 
- /*   _Statistics = async () => {
-      axios.get(API_HOST+"/categories", {
-            headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
-      })
-      .then(response => JSON.parse(JSON.stringify(response)))
-      .then(response => {
-        var categories=response.data;
-        this.props.navigation.navigate('Game',{'Categorias': categories});
-      })
-    };*/
 
  _handleLogout = async () => {
     await AsyncStorage.clear();

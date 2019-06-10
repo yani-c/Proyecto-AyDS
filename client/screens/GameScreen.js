@@ -64,6 +64,7 @@ export default class GameScreen extends React.Component {
     var id3 = this.state.option3.id;
     var id4 = this.state.option4.id;
     console.log(opcion1);
+    console.log(JSON.stringify(opcion1));
     return (
         <View style={styles.container}>          
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -72,7 +73,7 @@ export default class GameScreen extends React.Component {
                     Categoria: {JSON.stringify(c)}
                     </Text>
                      <Text style={styles.getQuestionText}>
-                       Pregunta: {JSON.stringify(q)}
+                       Pregunta: {JSON.stringify(q.description)}
                      </Text>
                      <Button title= 'opcion1' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
                      />
