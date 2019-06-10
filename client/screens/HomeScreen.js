@@ -39,41 +39,25 @@ export default class HomeScreen extends React.Component {
           </View>
 
          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Trivia Veterinaria</Text>
+            <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
+              <Text style={styles.getStartedText}>Menu Principal </Text>
+              <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
 
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>Menu Principal </MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              HOLA!
-            </Text>
-
-            <Text onPress={this._handleLogout} style={styles.logout}>
-              Logout
-            </Text>
           </View>
 
           <View style={styles.container}>
             <Button title="Jugar" onPress= {this._Game} />
+            <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
             <Button title="Estadísticas" onPress= {()=> this.props.navigation.navigate('Statistics')} />
           </View>
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+          <Text style={styles.logout} onPress={this._handleLogout} >Logout</Text>
 
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
         </View>
       </View>
 
@@ -90,8 +74,6 @@ export default class HomeScreen extends React.Component {
         .then(response => {
           var category= response.data.cat ;
           var name=response.data.name;
-          console.log(category);
-          console.log(name);
           this.props.navigation.navigate('Game',{'category': category,'name_c':name});
         })
     };
@@ -101,38 +83,12 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate('Auth');
   };
 
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
 
   _handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
   };
 
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
+  
 }
 
 const styles = StyleSheet.create({
@@ -156,8 +112,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 200,
+    height: 180,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
@@ -178,7 +134,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   getStartedText: {
-    fontSize: 17,
+    fontSize: 25,
     color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
     textAlign: 'center',
@@ -223,8 +179,13 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   logout: {
-    fontSize: 14,
+    fontSize: 20,
     color: '#2e78b7',
     textAlign: 'center',
   },
+  espacio: {
+    fontSize: 8,
+    textAlign: 'center',
+    margin: 2,
+  }
 });

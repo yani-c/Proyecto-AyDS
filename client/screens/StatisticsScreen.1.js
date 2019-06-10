@@ -18,79 +18,55 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-export default class GameScreen extends React.Component {
+export default class StatisticsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Juego'
+    header: null,
+    title:'Estadísticas'
   };
 
   constructor(props){
     super(props);
-    this.state = {category:"",
-      question: "", option1:"",option2:"",option3:"",option4:"",
+    this.state = {
+      correct: "", incorrect:"",
     };
   }
 
   async componentWillMount () {
-    const { navigation } = this.props;
-    const cat = navigation.getParam('category', 'NO-Category');
-    const name_c=navigation.getParam('name_c','NO-NameCategory');
-    axios.post(API_HOST+"/game", {
-      category_id: cat
-      }, {
+    axios.get(API_HOST+"/statistics", {
         headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
     })
     .then(response => JSON.parse(JSON.stringify(response)))
     .then(response => {
-      console.log(response.data.Opcion1);
-      console.log(response.data.Opcion1.description);
-      const q =JSON.parse(JSON.stringify(response.data.Pregunta));
-      const o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
-      const o2 =JSON.parse(JSON.stringify(response.data.Opcion2));
-      const o3 =JSON.parse(JSON.stringify(response.data.Opcion3));
-      const o4 =JSON.parse(JSON.stringify(response.data.Opcion4));
-      this.setState({category:name_c,question: q, option1: o1, option2: o2, option3: o3, option4: o4});
+      const c =JSON.parse(JSON.stringify(response.data.correct));
+      const i =JSON.parse(JSON.stringify(response.data.incorrect));
+      console.log(c);
+      console.log(i);
+      this.setState({correct:c,incorrect: i});
     });
   }
 
-  render() {
-    const c=this.state.category;
-    const q=this.state.question;
-    const opcion1=this.state.option1.description;
-    const opcion2=this.state.option2.description;
-    const opcion3=this.state.option3.description;
-    const opcion4=this.state.option4.description;
-    var id1 = this.state.option1.id;
-    var id2 = this.state.option2.id;
-    var id3 = this.state.option3.id;
-    var id4 = this.state.option4.id;
-    console.log(opcion1);
-    return (
-        <View style={styles.container}>          
+
+  render(){
+    const correct=this.state.correct;
+    const incorrect=this.state.incorrect;
+      return(
+        <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
                     <Text style={styles.getStartedText}>
-                    Categoria: {JSON.stringify(c)}
+                    Correctas: {JSON.stringify(correct)}
                     </Text>
-                     <Text style={styles.getQuestionText}>
-                       Pregunta: {JSON.stringify(q)}
-                     </Text>
-                     <Button title= 'opcion1' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
-                     />
-                     <Button title= 'opcion2' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
-                     />
-                     <Button title= 'opcion3' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
-                     />
-                     <Button title= 'opcion4' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
-                     />
-                
+                    <Text style={styles.getStartedText}>
+                    Incorrectas: {JSON.stringify(incorrect)}
+                    </Text>
                 </View>
             </ScrollView>
         </View>
-    )};
+
+      );
+  }
 
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

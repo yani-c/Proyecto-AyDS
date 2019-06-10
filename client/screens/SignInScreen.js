@@ -45,7 +45,7 @@ export default class SignInScreen extends React.Component {
         />
 
         <Button title="Sign in!" onPress={this._signIn} />
-
+        <Text style={styles.espacio}> {"\n"} </Text>
         <Button title="Sign up!" onPress ={() => this.props.navigation.navigate('SignUp')} />
       
       </View>
@@ -89,6 +89,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  espacio: {
+    fontSize: 8,
+    textAlign: 'center',
+    margin: 2,
   },
   welcome: {
     fontSize: 20,
