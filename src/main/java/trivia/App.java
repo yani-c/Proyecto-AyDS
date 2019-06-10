@@ -115,15 +115,18 @@ public class App{
 		get("/categories" , (req, res) ->{
 			List<Category> categories = Category.findAll();
 			if(!categories.isEmpty()){
-				String c="";
-				for(Category i : categories){
-					c=c+"\n"+i.toJson(true);
+				String aux="{";
+				int i=1;
+				for(Category c : categories){
+					aux=aux+"\"Categoria"+i+"\": \""+c.toJson(true,"category_name","id")+"\",";
+					i++;
 				}
 				res.type("application/json");
-				return c;
+				aux=aux+"\"Otro\": \"\"}";
+				return aux;
 			}
 			else{
-				return "Error: No hay categorias cargadas. Nada para mostrar";
+				return "{\"Error\": No hay categorias cargadas. Nada para mostrar}";
 			}
 		});
 	
@@ -205,17 +208,30 @@ public class App{
 			}
 		});
 
-		//muestras las estadisticas del current User
+		//muestras las estadisticas del current User, por categoria
 		get("/statistics" , (req,res) ->{
-			Statistic s= Statistic.findFirst("user_id = ?", currentUser.get("id"));
-			if(s==null){
-				s= new Statistic();
-				s.set("user_id", currentUser.get("id"));
-				s.set("correct", 0);
-				s.set("incorrect", 0);
+			Statistic s= new Statistic();
+			List<Category> categories= Category.findAll();
+			String aux="{";
+			int i=1;
+			for(Category c : categories){
+				s=Statistic.findFirst("user_id= ? and category_id =?", currentUser.get("id"), c.getInteger("id"));
+				if(s==null){
+					s= new Statistic();
+					s.set("user_id", currentUser.get("id"));
+					s.set("category_id",c.getInteger("id"));
+					s.set("correct", 0);
+					s.set("incorrect", 0);
+					s.saveIt();
+				}
+				aux=aux+"\"categoria"+i+"\": {\"nombre\": \""+c.get("category_name")+"\", \"estadisticas\":"+s.toJson(true,"correct","incorrect")+"},";
+				i++;
 			}
-			return s.toJson(true,"correct","incorrect");
+			aux=aux+"\"Otro\":\"\"}";
+			res.type("application/json");
+			return aux;
 		});
+
 
 
 //------------------------------------POST------------------------------------
@@ -426,14 +442,16 @@ public class App{
 			a.set("user_id",currentUser.get("id"));
 			a.set("option_id", bodyParams.get("id"));
 			a.saveIt();
-			Statistic s= Statistic.findFirst("user_id = ?",currentUser.get("id"));
+			Option o= Option.findById(a.getInteger("option_id"));
+			Question q= Question.findById(o.getInteger("question_id"));
+			Statistic s= Statistic.findFirst("user_id = ? and category_id = ?",currentUser.get("id"),q.getInteger("category_id"));
 			if(s==null){
 				s= new Statistic();
 				s.set("user_id", currentUser.get("id"));
+				s.set("category_id",q.getInteger("category_id"));
 				s.set("correct", 0);
 				s.set("incorrect", 0);
 			}
-			Option o = Option.findById(a.get("option_id"));
 			if(o!=null){
 				if(o.getBoolean("correct")){
 					s.set("correct",s.getInteger("correct")+1);

@@ -68,8 +68,10 @@ create table if not exists answers (
 create table if not exists statistics (
 	id int(11) not null auto_increment primary key,
 	user_id int(50) not null,
+    category_id int(11) not null,
     correct int(11), incorrect int(11),
     constraint fku foreign key(user_id) references users(id),
+    constraint fkc foreign key(category_id) references categories(id),
     created_at datetime,
     update_at datetime
     );

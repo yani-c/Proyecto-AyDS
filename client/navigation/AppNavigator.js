@@ -8,7 +8,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import StatisticsScreen from '../screens/StatisticsScreen';
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen,Statistics : StatisticsScreen});
+const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen, Statistics : StatisticsScreen});
 const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: SignUpScreen });
 export default createAppContainer(createSwitchNavigator(
   {

@@ -26,9 +26,7 @@ export default class StatisticsScreen extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      correct: "", incorrect:"",
-    };
+    this.state={c1: "",c2:"",c3:"",c4:"",c5:"",c6:""};
   }
 
   async componentWillMount () {
@@ -37,27 +35,51 @@ export default class StatisticsScreen extends React.Component {
     })
     .then(response => JSON.parse(JSON.stringify(response)))
     .then(response => {
-      const c =JSON.parse(JSON.stringify(response.data.correct));
-      const i =JSON.parse(JSON.stringify(response.data.incorrect));
-      console.log(c);
-      console.log(i);
-      this.setState({correct:c,incorrect: i});
+      const categorias =response.data;
+      this.setState({c1: categorias.categoria1, c2: categorias.categoria2, c3: categorias.categoria3,
+    c4: categorias.categoria4, c5: categorias.categoria5, c6: categorias.categoria6});
     });
   }
 
-
-  render(){
-    const correct=this.state.correct;
-    const incorrect=this.state.incorrect;
+// Correctas: {JSON.stringify(c1.correct)}
+//Incorrectas: {JSON.stringify(c1.incorrect)}
+  render() {
+      //console.log(this.state.categoria1);
+      const c1= this.state.c1;
+      console.log(c1.estadisticas);
+      const c2= this.state.c2;
+      const c3= this.state.c3;
+      const c4= this.state.c4;
+      const c5= this.state.c5;
+      const c6= this.state.c6;
+      //que me traiga las categorias y el nombre
       return(
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
                     <Text style={styles.getStartedText}>
-                    Correctas: {JSON.stringify(correct)}
+                    {JSON.stringify(c1.nombre)} 
+                    {JSON.stringify(c1.estadisticas)} 
                     </Text>
                     <Text style={styles.getStartedText}>
-                    Incorrectas: {JSON.stringify(incorrect)}
+                    {JSON.stringify(c2.nombre)} 
+                    {JSON.stringify(c2.estadisticas)} 
+                    </Text>
+                    <Text style={styles.getStartedText}>
+                    {JSON.stringify(c3.nombre)} 
+                    {JSON.stringify(c3.estadisticas)} 
+                    </Text>
+                    <Text style={styles.getStartedText}>
+                    {JSON.stringify(c4.nombre)} 
+                    {JSON.stringify(c4.estadisticas)} 
+                    </Text>
+                    <Text style={styles.getStartedText}>
+                    {JSON.stringify(c5.nombre)} 
+                    {JSON.stringify(c5.estadisticas)} 
+                    </Text>
+                    <Text style={styles.getStartedText}>
+                    {JSON.stringify(c6.nombre)} 
+                    {JSON.stringify(c6.estadisticas)} 
                     </Text>
                 </View>
             </ScrollView>
