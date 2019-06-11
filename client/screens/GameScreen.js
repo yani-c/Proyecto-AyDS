@@ -92,38 +92,40 @@ export default class GameScreen extends React.Component {
                     <Text style={styles.getStartedText}>
                     Categoria: {JSON.stringify(c)}
                     </Text>
+                    <Text style={styles.welcome}> {"\n"} {"\n"} </Text> 
                      <Text style={styles.getQuestionText}>
-                       Pregunta: {q.description}
+                        ¿{q.description}
                      </Text>
+                     <Text style={styles.welcome}> {"\n"} {"\n"} </Text>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
+                     <Button color={'#20b2aa'} title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
                      />
                      <View style={styles.SeparatorLine} />
-                     <Text style={styles.getStartedText}>
+                     <Text style={styles.opcionStyle}>
                       : {opcion1}
                      </Text>
                      </TouchableOpacity>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
+                     <Button color={'#20b2aa'} title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
                      />
                      <View style={styles.SeparatorLine} />
-                     <Text style={styles.getStartedText}>
+                     <Text style={styles.opcionStyle}>
                       : {opcion2}
                      </Text>
                      </TouchableOpacity>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
+                     <Button color={'#20b2aa'} title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
                      />
                      <View style={styles.SeparatorLine} />
-                     <Text style={styles.getStartedText}>
+                     <Text style={styles.opcionStyle}>
                       : {opcion3}
                      </Text>
                      </TouchableOpacity>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
+                     <Button color={'#20b2aa'} title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
                      />
                      <View style={styles.SeparatorLine} />
-                     <Text style={styles.getStartedText}>
+                     <Text style={styles.opcionStyle}>
                       : {opcion4}
                      </Text>
                      </TouchableOpacity>
@@ -180,7 +182,7 @@ const styles = StyleSheet.create({
     },SeparatorLine :{
  
       backgroundColor : '#fff',
-      width: 1,
+      width: 0,
       height: 40
        
       },  
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
        // borderColor: '#fff',
         height: 40,
-        width: 220,
+        width: 300,
         borderRadius: 5,
         margin: 5,
       },
@@ -211,6 +213,12 @@ const styles = StyleSheet.create({
       color: 'rgba(96,100,109, 1)',
       lineHeight: 24,
       textAlign: 'center',
+    },
+    opcionStyle: {
+      fontSize: 17,
+      color: 'rgba(96,100,109, 1)',
+      lineHeight: 24,
+      textAlign: 'left',
     },
     tabBarInfoContainer: {
       position: 'absolute',

@@ -20,7 +20,6 @@ import { MonoText } from '../components/StyledText';
 
 export default class StatisticsScreen extends React.Component {
   static navigationOptions = {
-    header: null,
     title:'Estadísticas'
   };
 

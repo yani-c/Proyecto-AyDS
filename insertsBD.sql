@@ -4,22 +4,11 @@ INSERT INTO users (username, dni, administrator, password)
 VALUES ('Hernan', '39546109', true, 'root');
 
 INSERT INTO users (username, dni, administrator, password)
-VALUES ('Yani', '42024232', true, 'root');
+VALUES ('Yani', '41824212', true, 'root');
 
 INSERT INTO users (username, dni, administrator, password)
 VALUES ('Pablo', '39246109', true, 'root');
--- Carga Categorias
-INSERT INTO categories (category_name)
-VALUES ('Biologia');
 
-INSERT INTO categories (category_name)
-VALUES ('Quimica');
-
-INSERT INTO categories (category_name)
-VALUES ('Psicologia');
-
-INSERT INTO categories (category_name)
-VALUES ('Veterinaria');
 -- NUEVAS Categorias
 INSERT INTO categories (category_name)
 VALUES ('Geografia');
@@ -39,367 +28,342 @@ VALUES ('Historia');
 INSERT INTO categories (category_name)
 VALUES ('Deporte');
 
--- Carga Pregunta
-INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cual de estas es una cancion de One Direction?', '1', '1', true);
---  Carga Opciones 1ra Pregunta
-INSERT INTO options (description, question_id, correct)
-VALUES ('Easier', '1', false);
-INSERT INTO options (description, question_id, correct)
-VALUES ('Amnesia', '1', false);
-INSERT INTO options (description, question_id, correct)
-VALUES ('Home', '1', true);
-INSERT INTO options (description, question_id, correct)
-VALUES ('Flicker', '1', false);
-
-INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Como se llama el gato que persigue al raton?', '2', '1', true);
--- Carga Opciones 2da Pregunta
-INSERT INTO options (description, question_id, correct)
-VALUES ('Jerry', '2', false);
-INSERT INTO options (description, question_id, correct)
-VALUES ('Tom', '2', true);
-INSERT INTO options (description, question_id, correct)
-VALUES ('Donald', '2', false);
-INSERT INTO options (description, question_id, correct)
-VALUES ('Pluto', '2', false);
-
 -- Preguntas NUEVAS Geometria y opciones
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuál es el país menos turístico de Europa?', '5', '1', true);
+VALUES ('Cual es el pais menos turistico de Europa?', '1', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Armenia', '3', false);
+VALUES ('Armenia', '1', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Moldavia', '3', false);
+VALUES ('Moldavia', '1', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Liechtenstein', '3', true);
+VALUES ('Liechtenstein', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Hungria', '3', false);
+VALUES ('Hungria', '1', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿A qué país pertenece la isla de Tasmania?', '5', '1', true);
+VALUES ('A que pais pertenece la isla de Tasmania?', '1', '1', true);
 --  Carga Opciones
 INSERT INTO options (description, question_id, correct)
-VALUES (' Estados Unidos', '4', false);
+VALUES (' Estados Unidos', '2', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Australia', '4', true);
+VALUES ('Australia', '2', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Portugal', '4', false);
+VALUES ('Portugal', '2', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ninguna es correcta', '4', false);
+VALUES ('Ninguna es correcta', '2', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿En cuál de los siguientes países NO hay ningún desierto?', '5', '1', true);
+VALUES ('En cual de los siguientes paises NO hay ningun desierto?', '1', '1', true);
 --  Carga Opciones
 INSERT INTO options (description, question_id, correct)
-VALUES ('España', '5', false);
+VALUES ('Espana', '3', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Chile', '5', false);
+VALUES ('Chile', '3', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Mongolia', '5', false);
+VALUES ('Mongolia', '3', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Alemania', '5', true);
+VALUES ('Alemania', '3', true);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES (' ¿Cuál es el código internacional para Cuba?', '5', '1', true);
+VALUES (' Cual es el codigo internacional para Cuba?', '1', '1', true);
 --  Carga Opciones
 INSERT INTO options (description, question_id, correct)
-VALUES ('CA', '6', false);
+VALUES ('CA', '4', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('CU', '6', true);
+VALUES ('CU', '4', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('CB', '6', false);
+VALUES ('CB', '4', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ninguna', '6', false);
+VALUES ('Ninguna', '4', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuál es la capital del estado de Arkansas?', '5', '1', true);
+VALUES ('Cual es la capital del estado de Arkansas?', '1', '1', true);
 --  Carga Opciones
 INSERT INTO options (description, question_id, correct)
-VALUES ('Kansas', '7', false);
+VALUES ('Kansas', '5', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Little Rock', '7', true);
+VALUES ('Little Rock', '5', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Hot Springs', '7', false);
+VALUES ('Hot Springs', '5', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Washington', '7', false);
+VALUES ('Washington', '5', false);
 
 -- Preguntas NUEVAS Ciencia
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuál de las sisguientes enfermedades ataca al higado?', '6', '1', true);
+VALUES ('Cual de las sisguientes enfermedades ataca al higado?', '2', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Hepatitis', '8', true);
+VALUES ('Hepatitis', '6', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Diabetes', '8', false);
+VALUES ('Diabetes', '6', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Astrosis', '8', false);
+VALUES ('Astrosis', '6', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Cifoescoliosis', '8', false);
+VALUES ('Cifoescoliosis', '6', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cómo tomarías la sustancia alucinógena natural llamada ayahuasca?', '6', '1', true);
+VALUES ('Como tomarias la sustancia alucinogena natural llamada ayahuasca?', '2', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('inhalada', '9', false);
+VALUES ('inhalada', '7', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Esnifada', '9', false);
+VALUES ('Esnifada', '7', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Inyectada', '9', false);
+VALUES ('Inyectada', '7', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ingerida', '9', true);
+VALUES ('Ingerida', '7', true);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES (' ¿Cuál es la función principal del instestino grueso?', '6', '1', true);
+VALUES (' Cual es la funcion principal del instestino grueso?', '2', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('La absorcion de nutrientes', '10', false);
+VALUES ('La absorcion de nutrientes', '8', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('La digestion mecanica de los alimentos', '10', false);
+VALUES ('La digestion mecanica de los alimentos', '8', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('La absorcion del agua', '10', true);
+VALUES ('La absorcion del agua', '8', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('La digestion quimica de los alimentos', '10', false);
+VALUES ('La digestion quimica de los alimentos', '8', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES (' ¿Qué hay en la boca del estómago? ', '6', '1', true);
+VALUES (' Que hay en la boca del estomago? ', '2', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('El píloro', '11', false);
+VALUES ('El piloro', '9', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('El cardias', '11', true);
+VALUES ('El cardias', '9', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Los ácidos gástricos', '11', false);
+VALUES ('Los acidos gastricos', '9', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('El epilón mayor', '11', false);
+VALUES ('El epilon mayor', '9', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Qué cambio de estado ocurre en la sublimación?', '6', '1', true);
+VALUES ('Que cambio de estado ocurre en la sublimacion?', '2', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De sólido a líquido', '12', false);
+VALUES ('De solido a liquido', '10', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De sólido a gaseoso', '12', true);
+VALUES ('De solido a gaseoso', '10', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De gaseoso a líquido', '12', false);
+VALUES ('De gaseoso a liquido', '10', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De líquido a solido', '12', false);
+VALUES ('De liquido a solido', '10', false);
 
 -- Preguntas NUEVAS Arte
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuál era la nacionalidad de Heri Cartier-Bresson padre del fotoreportaje? ', '7', '1', true);
+VALUES ('Cual era la nacionalidad de Heri Cartier-Bresson padre del fotoreportaje? ', '3', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Británica', '13', false);
+VALUES ('Britanica', '11', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Española', '13', false);
+VALUES ('Espanola', '11', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Alemana', '13', false);
+VALUES ('Alemana', '11', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Francesa', '13', true);
+VALUES ('Francesa', '11', true);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES (' ¿Quién pintó el cuado "El jardín de las delicias"?', '7', '1', true);
+VALUES ('Quien pinto el cuado "El jardin de las delicias"?', '3', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('El Bosco', '14', true);
+VALUES ('El Bosco', '12', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Carvaggio', '14', false);
+VALUES ('Carvaggio', '12', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Velázquez', '14', false);
+VALUES ('Velazquez', '12', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Arcimboldo', '14', false);
+VALUES ('Arcimboldo', '12', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Qué ciudades describe Italo Calvino en "Las ciudades invisibles"?', '7', '1', true);
+VALUES ('Que ciudades describe Italo Calvino en "Las ciudades invisibles"?', '3', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ciudades asiáticas', '15', false);
+VALUES ('Ciudades asiaticas', '13', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Las que Marco Polo visitó en sus viajes', '15', false);
+VALUES ('Las que Marco Polo visito en sus viajes', '13', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ciudades europeas', '15', false);
+VALUES ('Ciudades europeas', '13', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ciudades imaginadas por Marco Polo', '15', true);
+VALUES ('Ciudades imaginadas por Marco Polo', '13', true);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuál es la ciudad fetiche del escritor Paul Auster?', '7', '1', true);
+VALUES ('Cual es la ciudad fetiche del escritor Paul Auster?', '3', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Nueva York', '16', true);
+VALUES ('Nueva York', '14', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Londres', '16', false);
+VALUES ('Londres', '14', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('París', '16', false);
+VALUES ('Paris', '14', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Chicago', '16', false);
+VALUES ('Chicago', '14', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES (' ¿Quién escribió "El viejo y el mar?', '7', '1', true);
+VALUES (' Quien escribio "El viejo y el mar?', '3', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ernest Hemingway', '17', true);
+VALUES ('Ernest Hemingway', '15', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Norman Mailer', '17', false);
+VALUES ('Norman Mailer', '15', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Gabriel García Márquez', '17', false);
+VALUES ('Gabriel Garcia Marquez', '15', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Truman Capote', '17', false);
+VALUES ('Truman Capote', '15', false);
 
 -- Preguntas NUEVAS Entretenimiento
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Qué premiada serie de televisión tiene como protagonista a un publicista?', '8', '1', true);
+VALUES ('Que premiada serie de television tiene como protagonista a un publicista?', '4', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Mad Men', '18', true);
+VALUES ('Mad Men', '16', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Shameless', '18', false);
+VALUES ('Shameless', '16', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Juego de Tronos', '18', false);
+VALUES ('Juego de Tronos', '16', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Downton Abbey', '18', false);
+VALUES ('Downton Abbey', '16', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Como se llamaba la protagonista femenina de la serie de televisión "Scrubs"?', '8', '1', true);
+VALUES ('Como se llamaba la protagonista femenina de la serie de television "Scrubs"?', '4', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Elliot', '19', true);
+VALUES ('Elliot', '17', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Sarah', '19', false);
+VALUES ('Sarah', '17', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Jordan', '19', false);
+VALUES ('Jordan', '17', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Molly', '19', false);
+VALUES ('Molly', '17', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cómo se llamaba el personaje que interpretaba John Travolta en "Grease"? ', '8', '1', true);
+VALUES ('Como se llamaba el personaje que interpretaba John Travolta en "Grease"? ', '4', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Danny Puño', '20', false);
+VALUES ('Danny Puno', '18', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Danny Zuko', '20', true);
+VALUES ('Danny Zuko', '18', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Danny Grease', '20', false);
+VALUES ('Danny Grease', '18', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Danny Chulo', '20', false);
+VALUES ('Danny Chulo', '18', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿En qué año se estrenó la película de Disney "Pinocho"? ', '8', '1', true);
+VALUES ('En que anio se estreno la pelicula de Disney "Pinocho"? ', '4', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES (' 1940', '21', true);
+VALUES (' 1740', '19', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('1950', '21', false);
+VALUES ('1750', '19', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('1952', '21', false);
+VALUES ('1752', '19', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('1946', '21', false);
+VALUES ('1746', '19', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿En qué país nació la Bauhaus? ', '8', '1', true);
+VALUES ('En que pais nacio la Bauhaus? ', '4', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES (' Alemania', '22', true);
+VALUES (' Alemania', '20', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('holanda', '22', false);
+VALUES ('holanda', '20', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('rusia', '22', false);
+VALUES ('rusia', '20', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('estados Unidos', '22', false);
+VALUES ('estados Unidos', '20', false);
 
 -- Preguntas NUEVAS Historia
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuál es la rama mayoritaria del Islam? ', '9', '1', true);
+VALUES ('Cual es la rama mayoritaria del Islam? ', '5', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Chiísmo Nicolás', '23', false);
+VALUES ('Chiismo Nicolas', '21', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Sunismo', '23', true);
+VALUES ('Sunismo', '21', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Jariyismo', '23', false);
+VALUES ('Jariyismo', '21', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Sufismo', '23', false);
+VALUES ('Sufismo', '21', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿De qué fue ministro Manuel Fraga durante el franquismo?', '9', '1', true);
+VALUES ('De que fue ministro Manuel Fraga durante el franquismo?', '5', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De Interior', '24', false);
+VALUES ('De Interior', '22', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De Economía', '24', false);
+VALUES ('De Economia', '22', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De Información y Turismo', '24', true);
+VALUES ('De Informacion y Turismo', '22', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Del Ejército', '24', false);
+VALUES ('Del Ejercito', '22', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿En qué año tuvo lugar el ataque a Pearl Harbor?', '9', '1', true);
+VALUES ('En que anio tuvo lugar el ataque a Pearl Harbor?', '5', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('1939', '25', false);
+VALUES ('1739', '23', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('1940', '25', false);
+VALUES ('1740', '23', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('1941', '25', true);
+VALUES ('1741', '23', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('1942', '25', false);
+VALUES ('1742', '23', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Las revueltas de dónde son llamadas Intifadas?', '9', '1', true);
+VALUES ('Las revueltas de donde son llamadas Intifadas?', '5', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Montenegro', '26', false);
+VALUES ('Montenegro', '24', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Kosovo', '26', false);
+VALUES ('Kosovo', '24', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Palestina', '26', true);
+VALUES ('Palestina', '24', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Chechenia', '26', false);
+VALUES ('Chechenia', '24', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('La Comuna de París fue un movimiento...', '9', '1', true);
+VALUES ('La Comuna de Paris fue un movimiento...', '5', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Del mayo de 68', '27', false);
+VALUES ('Del mayo de 68', '25', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Hippie de los años 60', '27', false);
+VALUES ('Hippie de los anios 60', '25', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Insurrecional autogestionario del XIX', '27', true);
+VALUES ('Insurrecional autogestionario del XIX', '25', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('De la revolución francesa', '27', false);
+VALUES ('De la revolucion francesa', '25', false);
 
 -- Preguntas NUEVAS Deporte
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿De que deporte es el kemari uno de los principales antecesores?', '10', '1', true);
+VALUES ('De que deporte es el kemari uno de los principales antecesores?', '6', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Fútbol', '28', true);
+VALUES ('Futbol', '26', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Ténis', '28', false);
+VALUES ('Tenis', '26', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Rugby', '28', false);
+VALUES ('Rugby', '26', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Karate', '28', false);
+VALUES ('Karate', '26', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuál es el clásico rival del Flamengo (BRA)?', '10', '1', true);
+VALUES ('Cual es el clasico rival del Flamengo (BRA)?', '6', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Corinthians', '29', true);
+VALUES ('Corinthians', '27', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Palmeiras', '29', false);
+VALUES ('Palmeiras', '27', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Cruzeiro', '29', false);
+VALUES ('Cruzeiro', '27', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('São Paulo', '29', false);
+VALUES ('São Paulo', '27', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuántos mangos por lado tiene el futbolín?', '10', '1', true);
+VALUES ('Cuantos mangos por lado tiene el futbolin?', '6', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Luciana Aymar', '30', true);
+VALUES ('Luciana Aymar', '28', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Natascha Keller', '30', false);
+VALUES ('Natascha Keller', '28', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Alyson Annan', '30', false);
+VALUES ('Alyson Annan', '28', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Maartje Paumen', '30', false);
+VALUES ('Maartje Paumen', '28', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Cuántas finales del mundo jugó la Selección Argentina de fútbol?', '10', '1', true);
+VALUES ('Cuantas finales del mundo jugo la Seleccion Argentina de futbol?', '6', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Cinco', '31', false);
+VALUES ('Cinco', '29', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Seis', '31', false);
+VALUES ('Seis', '29', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Cuatro', '31', true);
+VALUES ('Cuatro', '29', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Tres', '31', false);
+VALUES ('Tres', '29', false);
 
 INSERT INTO questions (description, category_id, user_id, active)
-VALUES ('¿Quién marcó el gol 3.500 en Liga del Atlético de Madrid?', '10', '1', true);
+VALUES ('Quien marco el gol 3.500 en Liga del Atletico de Madrid?', '6', '1', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Christian Vieri', '32', true);
+VALUES ('Christian Vieri', '30', true);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Zinedine Zidane', '32', false);
+VALUES ('Zinedine Zidane', '30', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Luka Modric', '32', false);
+VALUES ('Luka Modric', '30', false);
 INSERT INTO options (description, question_id, correct)
-VALUES ('Adrián Escudero', '32', false);
+VALUES ('Adrian Escudero', '30', false);

@@ -51,7 +51,6 @@ create table if not exists options (
     correct boolean,
     constraint fktable foreign key (question_id) references questions (id)
     ON DELETE CASCADE,
-    unique(description),
     created_at datetime,
     update_at datetime
     );

@@ -39,18 +39,25 @@ export default class SignUpScreen extends React.Component {
     const { navigation } = this.props;
     const desc =navigation.getParam('desc','NO-Desc');
     const cor = this.state.respuesta;
-    console.log(cor);
+    var respuesta;
+    if ( JSON.stringify(cor) == "true") {
+      respuesta = "Correcta!"
+    }
+    else {
+      respuesta = "Incorrecta :("
+    }
     return (
         <View style={styles.container}>
-          <Text style={styles.welcome}> Su respuesta {desc} </Text>
-          <Text style={styles.welcome}> ha sido  {JSON.stringify(cor)} </Text>
-          <Button title="Continuar" onPress={this._continuar} />
-          <Text style={styles.welcome}> {"\n"} {"\n"} </Text>
-          <Button title= "Volver" onPress={()=> this.props.navigation.navigate('Home')} />
+          <Text style={styles.respuestac}> Su respuesta "{desc}"</Text>
+          <Text style={styles.respuestac}> ha sido {respuesta}</Text>
+          <Text style={styles.respuestac}> {"\n"} {"\n"} {"\n"} {"\n"} </Text>
+          <Button color={'#20b2aa'} title="Continuar" onPress={this._continuar} />
+          <Text style={styles.espacio}> {"\n"}  </Text>
+          <Button color={'#20b2aa'} title= "Volver" onPress={()=> this.props.navigation.navigate('Home')} />
         </View>
     );
   }
-
+  
   _continuar = async () => {
     axios.get(API_HOST+"/randomCategory", {
           headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
@@ -64,6 +71,7 @@ export default class SignUpScreen extends React.Component {
       this.props.navigation.navigate('Game',{'category': category,'name_c':name});
     })
 };
+
   
 }
 
@@ -74,9 +82,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
-    margin: 10,
+    margin: 5,
+  },
+  
+  respuestac: {
+    fontSize: 30,
+    textAlign: 'center',
+    margin: 5,
+    color: '#191970'
+  },
+ 
+  espacio: {
+    fontSize: 5,
+    textAlign: 'center',
+    margin: 5,
   },
   input: {
     margin: 15,

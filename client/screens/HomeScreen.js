@@ -28,10 +28,11 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
+            <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} </Text>
             <Image
               source={
                 __DEV__
-                  ? require('../assets/images/perro.jpeg')
+                  ? require('../assets/images/logo.png')
                   : require('../assets/images/robot-prod.png')
               }
               style={styles.welcomeImage}
@@ -48,9 +49,9 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.container}>
-            <Button title="Jugar" onPress= {this._Game} />
+            <Button color={'#20b2aa'} title="Jugar" onPress= {this._Game} />
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Button title="Estadísticas" onPress= {()=> this.props.navigation.navigate('Statistics')} />
+            <Button color={'#20b2aa'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('Statistics')} />
           </View>
 
         </ScrollView>
