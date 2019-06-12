@@ -44,10 +44,10 @@ export default class SignInScreen extends React.Component {
           value={this.state.password}
         />
 
-        <Button title="Sign in!" onPress={this._signIn} />
+        <Button color={'#20b2aa'} title="Sign in!" onPress={this._signIn} />
         <Text style={styles.espacio}> {"\n"} </Text>
-        <Button title="Sign up!" onPress ={() => this.props.navigation.navigate('SignUp')} />
-      
+        <Button color={'#20b2aa'} title="Sign up!" onPress ={() => this.props.navigation.navigate('SignUp')} />
+
       </View>
     );
   }

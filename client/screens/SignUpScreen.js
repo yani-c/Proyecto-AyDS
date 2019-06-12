@@ -53,7 +53,7 @@ export default class SignUpScreen extends React.Component {
           value={this.state.password}
         />
 
-        <Button title="Sign up!" onPress={this._signUp} />
+        <Button color={'#20b2aa'} title="Sign up!" onPress={this._signUp} />
 
         </View>
     );

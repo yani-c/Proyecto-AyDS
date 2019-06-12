@@ -51,7 +51,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.container}>
             <Button color={'#20b2aa'} title="Jugar" onPress= {this._Game} />
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Button color={'#20b2aa'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('Statistics')} />
+            <Button color={'#20b2aa'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
           </View>
 
         </ScrollView>
@@ -89,7 +89,7 @@ export default class HomeScreen extends React.Component {
     WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
   };
 
-  
+
 }
 
 const styles = StyleSheet.create({

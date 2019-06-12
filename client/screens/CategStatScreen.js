@@ -15,12 +15,11 @@ import {
 
 import axios from 'axios';
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
 
-export default class StatisticsScreen extends React.Component {
+export default class CategStatScreen extends React.Component {
   static navigationOptions = {
-    title:'Estadísticas'
+    title:'Estadísticas por Categoria'
   };
 
   constructor(props){
@@ -57,28 +56,28 @@ export default class StatisticsScreen extends React.Component {
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c1.nombre)} 
-                    {JSON.stringify(c1.estadisticas)} 
+                    {JSON.stringify(c1.nombre)}
+                    {JSON.stringify(c1.estadisticas)}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c2.nombre)} 
-                    {JSON.stringify(c2.estadisticas)} 
+                    {JSON.stringify(c2.nombre)}
+                    {JSON.stringify(c2.estadisticas)}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c3.nombre)} 
-                    {JSON.stringify(c3.estadisticas)} 
+                    {JSON.stringify(c3.nombre)}
+                    {JSON.stringify(c3.estadisticas)}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c4.nombre)} 
-                    {JSON.stringify(c4.estadisticas)} 
+                    {JSON.stringify(c4.nombre)}
+                    {JSON.stringify(c4.estadisticas)}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c5.nombre)} 
-                    {JSON.stringify(c5.estadisticas)} 
+                    {JSON.stringify(c5.nombre)}
+                    {JSON.stringify(c5.estadisticas)}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c6.nombre)} 
-                    {JSON.stringify(c6.estadisticas)} 
+                    {JSON.stringify(c6.nombre)}
+                    {JSON.stringify(c6.estadisticas)}
                     </Text>
                 </View>
             </ScrollView>

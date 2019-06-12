@@ -15,49 +15,33 @@ import {
 
 import axios from 'axios';
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
 
-export default class StatisticsScreen extends React.Component {
+
+export default class StatisticsMenu extends React.Component {
   static navigationOptions = {
-    title:'Estadísticas'
+    title:'Menu Estadisticas'
   };
 
   constructor(props){
     super(props);
     this.state = {
-      correct: "", incorrect:"",
+      usuario:"",
     };
   }
 
-  async componentWillMount () {
-    axios.get(API_HOST+"/statistics", {
-        headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
-    })
-    .then(response => JSON.parse(JSON.stringify(response)))
-    .then(response => {
-      const c =JSON.parse(JSON.stringify(response.data.correct));
-      const i =JSON.parse(JSON.stringify(response.data.incorrect));
-      console.log(c);
-      console.log(i);
-      this.setState({correct:c,incorrect: i});
-    });
-  }
+
 
 
   render(){
-    const correct=this.state.correct;
-    const incorrect=this.state.incorrect;
       return(
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
-                    <Text style={styles.getStartedText}>
-                    Correctas: {JSON.stringify(correct)}
-                    </Text>
-                    <Text style={styles.getStartedText}>
-                    Incorrectas: {JSON.stringify(incorrect)}
-                    </Text>
+                    <Text style={styles.espacio}> {"\n"} </Text>
+                    <Button color={'#20b2aa'} title="Estadisticas Globales" onPress= {()=> this.props.navigation.navigate('Global')} />
+                    <Text style={styles.espacio1}> {"\n"} </Text>
+                    <Button color={'#20b2aa'} title="Estadísticas por Categoria" onPress= {()=> this.props.navigation.navigate('CatStat')} />
                 </View>
             </ScrollView>
         </View>
@@ -71,6 +55,16 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+    },
+    espacio: {
+      fontSize: 50,
+      textAlign: 'center',
+      margin: 50,
+    },
+    espacio1: {
+      fontSize: 10,
+      textAlign: 'center',
+      margin: 10,
     },
     developmentModeText: {
       marginBottom: 20,
@@ -111,6 +105,7 @@ const styles = StyleSheet.create({
     homeScreenFilename: {
       marginVertical: 7,
     },
+
     codeHighlightText: {
       color: 'rgba(96,100,109, 0.8)',
     },

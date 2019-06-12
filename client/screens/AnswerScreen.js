@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 
-export default class SignUpScreen extends React.Component {
+export default class AnswerScreen extends React.Component {
   static navigationOptions = {
     title: 'Respuesta',
   };
@@ -57,7 +57,7 @@ export default class SignUpScreen extends React.Component {
         </View>
     );
   }
-  
+
   _continuar = async () => {
     axios.get(API_HOST+"/randomCategory", {
           headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
@@ -72,7 +72,7 @@ export default class SignUpScreen extends React.Component {
     })
 };
 
-  
+
 }
 
 const styles = StyleSheet.create({
@@ -86,14 +86,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 5,
   },
-  
+
   respuestac: {
     fontSize: 30,
     textAlign: 'center',
     margin: 5,
     color: '#191970'
   },
- 
+
   espacio: {
     fontSize: 5,
     textAlign: 'center',

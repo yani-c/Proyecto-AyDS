@@ -6,11 +6,13 @@ import OtherScreen from '../screens/OtherScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
-import StatisticsScreen from '../screens/StatisticsScreen';
+import GlobalStatScreen from '../screens/GlobalStatScreen';
 import AnswerScreen from '../screens/AnswerScreen.js';
+import StatisticsMenu from '../screens/StatisticsMenu.js';
+import CategStatScreen from '../screens/CategStatScreen.js';
 
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen,Statistics : StatisticsScreen, Answer : AnswerScreen});
+const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen,Global : GlobalStatScreen, Answer : AnswerScreen, StatsMenu : StatisticsMenu, CatStat : CategStatScreen});
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: SignUpScreen });
 export default createAppContainer(createSwitchNavigator(
