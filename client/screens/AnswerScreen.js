@@ -51,9 +51,9 @@ export default class AnswerScreen extends React.Component {
           <Text style={styles.respuestac}> Su respuesta "{desc}"</Text>
           <Text style={styles.respuestac}> ha sido {respuesta}</Text>
           <Text style={styles.respuestac}> {"\n"} {"\n"} {"\n"} {"\n"} </Text>
-          <Button color={'#20b2aa'} title="Continuar" onPress={this._continuar} />
+          <Button color={'rgba(48, 136, 63,1)'} title="Continuar" onPress={this._continuar} />
           <Text style={styles.espacio}> {"\n"}  </Text>
-          <Button color={'#20b2aa'} title= "Volver" onPress={()=> this.props.navigation.navigate('Home')} />
+          <Button color={'rgba(48, 136, 63,1)'} title= "Volver" onPress={()=> this.props.navigation.navigate('Home')} />
         </View>
     );
   }
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'rgba(94, 0, 86, 1)',
   },
   welcome: {
     fontSize: 30,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     margin: 5,
-    color: '#191970'
+    color: 'rgba(255, 255, 255, 1)'
   },
 
   espacio: {

@@ -90,7 +90,7 @@ export default class GameScreen extends React.Component {
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
                     <Text style={styles.getStartedText}>
-                    Categoria: {JSON.stringify(c)}
+                    Categoria: {c}
                     </Text>
                     <Text style={styles.welcome}> {"\n"} {"\n"} </Text> 
                      <Text style={styles.getQuestionText}>
@@ -98,35 +98,35 @@ export default class GameScreen extends React.Component {
                      </Text>
                      <Text style={styles.welcome}> {"\n"} {"\n"} </Text>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'#20b2aa'} title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
+                     <Button color={'rgba(48, 136, 63,1)'} title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
                      />
                      <View style={styles.SeparatorLine} />
                      <Text style={styles.opcionStyle}>
-                      : {opcion1}
+                       {opcion1}
                      </Text>
                      </TouchableOpacity>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'#20b2aa'} title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
+                     <Button color={'rgba(48, 136, 63,1)'} title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
                      />
                      <View style={styles.SeparatorLine} />
                      <Text style={styles.opcionStyle}>
-                      : {opcion2}
+                       {opcion2}
                      </Text>
                      </TouchableOpacity>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'#20b2aa'} title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
+                     <Button color={'rgba(48, 136, 63,1)'} title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
                      />
                      <View style={styles.SeparatorLine} />
                      <Text style={styles.opcionStyle}>
-                      : {opcion3}
+                       {opcion3}
                      </Text>
                      </TouchableOpacity>
                      <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'#20b2aa'} title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
+                     <Button color={'rgba(48, 136, 63,1)'} title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
                      />
                      <View style={styles.SeparatorLine} />
                      <Text style={styles.opcionStyle}>
-                      : {opcion4}
+                       {opcion4}
                      </Text>
                      </TouchableOpacity>
                 
@@ -142,7 +142,7 @@ export default class GameScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'rgba(94, 0, 86, 1)',
     },
     developmentModeText: {
       marginBottom: 20,
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     getQuestionText:{
       alignItems: 'center',
       fontSize: 30,
+      color: 'rgba(255, 255, 255, 1)',
 
     },
     getOptionText:{
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
       ButtonStyle: {
         flexDirection: 'row',
         alignItems: 'center',
-       // backgroundColor: '#485a96',
+        backgroundColor: 'rgba(48, 136, 63,1)',
         borderWidth: 0.5,
        // borderColor: '#fff',
         height: 40,
@@ -210,13 +211,13 @@ const styles = StyleSheet.create({
     },
     getStartedText: {
       fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
+      color: 'rgba(48, 136, 63,1)',
       lineHeight: 24,
       textAlign: 'center',
     },
     opcionStyle: {
       fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
+      color: 'rgba(255, 255, 255, 1)',
       lineHeight: 24,
       textAlign: 'left',
     },

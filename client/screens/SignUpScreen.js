@@ -53,7 +53,7 @@ export default class SignUpScreen extends React.Component {
           value={this.state.password}
         />
 
-        <Button color={'#20b2aa'} title="Sign up!" onPress={this._signUp} />
+        <Button color={'rgba(48, 136, 63,1)'} title="Sign up!" onPress={this._signUp} />
 
         </View>
     );
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'rgba(94, 0, 86, 1)',
   },
   welcome: {
     fontSize: 20,
@@ -98,6 +98,6 @@ const styles = StyleSheet.create({
     padding: 5,
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#4228F8'
+    borderBottomColor: 'rgba(48, 136, 63,1)'
   }
 })

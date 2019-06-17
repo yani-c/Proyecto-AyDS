@@ -25,18 +25,17 @@ export default class GlobalScreen extends React.Component {
 
   constructor(props){
     super(props);
-    this.state={c1: "",c2:"",c3:"",c4:"",c5:"",c6:""};
+    this.state={correctas: "",incorrectas:""};
   }
 
   async componentWillMount () {
-    axios.get(API_HOST+"/statistics", {
+    axios.get(API_HOST+"/globalStatistics", {
         headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
     })
     .then(response => JSON.parse(JSON.stringify(response)))
     .then(response => {
-      const categorias =response.data;
-      this.setState({c1: categorias.categoria1, c2: categorias.categoria2, c3: categorias.categoria3,
-    c4: categorias.categoria4, c5: categorias.categoria5, c6: categorias.categoria6});
+      const cat =response.data;
+      this.setState({correctas:cat.correct, incorrectas:cat.incorrect});
     });
   }
 
@@ -44,41 +43,20 @@ export default class GlobalScreen extends React.Component {
 //Incorrectas: {JSON.stringify(c1.incorrect)}
   render() {
       //console.log(this.state.categoria1);
-      const c1= this.state.c1;
-      console.log(c1.estadisticas);
-      const c2= this.state.c2;
-      const c3= this.state.c3;
-      const c4= this.state.c4;
-      const c5= this.state.c5;
-      const c6= this.state.c6;
+      const correct= this.state.correctas;
+      const incorrect= this.state.incorrectas;
       //que me traiga las categorias y el nombre
       return(
         <View style={styles.container}>
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+            <ScrollView style={styles.container} contentContainerStyle={styles.getStartedContainer}>
                 <View style={styles.getStartedContainer}>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c1.nombre)}
-                    {JSON.stringify(c1.estadisticas)}
+                    Correctas: {" "}
+                    {correct}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c2.nombre)}
-                    {JSON.stringify(c2.estadisticas)}
-                    </Text>
-                    <Text style={styles.getStartedText}>
-                    {JSON.stringify(c3.nombre)}
-                    {JSON.stringify(c3.estadisticas)}
-                    </Text>
-                    <Text style={styles.getStartedText}>
-                    {JSON.stringify(c4.nombre)}
-                    {JSON.stringify(c4.estadisticas)}
-                    </Text>
-                    <Text style={styles.getStartedText}>
-                    {JSON.stringify(c5.nombre)}
-                    {JSON.stringify(c5.estadisticas)}
-                    </Text>
-                    <Text style={styles.getStartedText}>
-                    {JSON.stringify(c6.nombre)}
-                    {JSON.stringify(c6.estadisticas)}
+                    Incorrectas: {" "}
+                    {incorrect}
                     </Text>
                 </View>
             </ScrollView>
@@ -92,7 +70,7 @@ export default class GlobalScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'rgba(94, 0, 86, 1)',
     },
     developmentModeText: {
       marginBottom: 20,
@@ -143,8 +121,8 @@ const styles = StyleSheet.create({
     },
     getStartedText: {
       fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      lineHeight: 24,
+      color: 'rgba(255, 255, 255, 1)',
+      lineHeight: 40,
       textAlign: 'center',
     },
     tabBarInfoContainer: {

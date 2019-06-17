@@ -39,9 +39,9 @@ export default class StatisticsMenu extends React.Component {
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
                     <Text style={styles.espacio}> {"\n"} </Text>
-                    <Button color={'#20b2aa'} title="Estadisticas Globales" onPress= {()=> this.props.navigation.navigate('Global')} />
+                    <Button color={'rgba(48, 136, 63,1)'} title="Estadisticas Globales" onPress= {()=> this.props.navigation.navigate('Global')} />
                     <Text style={styles.espacio1}> {"\n"} </Text>
-                    <Button color={'#20b2aa'} title="Estadísticas por Categoria" onPress= {()=> this.props.navigation.navigate('CatStat')} />
+                    <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas por Categoria" onPress= {()=> this.props.navigation.navigate('CatStat')} />
                 </View>
             </ScrollView>
         </View>
@@ -54,7 +54,7 @@ export default class StatisticsMenu extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor:'rgba(94, 0, 86, 1)',
     },
     espacio: {
       fontSize: 50,

@@ -55,29 +55,52 @@ export default class CategStatScreen extends React.Component {
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
-                    <Text style={styles.getStartedText}>
-                    {JSON.stringify(c1.nombre)}
-                    {JSON.stringify(c1.estadisticas)}
+                    <Text style={styles.getTitleText}>
+                    {c1.nombre} {"\n"}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c2.nombre)}
-                    {JSON.stringify(c2.estadisticas)}
+                    Correctas:  {" "} {c1.correct} {" "}
+                    Incorrectas:  {" "} {c1.incorrect}
+                    </Text>
+                    <Text style={styles.getTitleText}>
+                    {"\n"} {"\n"}
+                    {c2.nombre} {"\n"}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c3.nombre)}
-                    {JSON.stringify(c3.estadisticas)}
+                    Correctas: {" "} {c2.correct} {" "}
+                    Incorrectas: {" "} {c2.incorrect}
+                    </Text>
+                    <Text style={styles.getTitleText}>
+                    {"\n"} {"\n"}
+                    {c3.nombre}{"\n"}
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c4.nombre)}
-                    {JSON.stringify(c4.estadisticas)}
+                    Correctas: {" "} {c3.correct} {" "}
+                    Incorrectas: {" "} {c3.incorrect}
+                    </Text>
+                    <Text style={styles.getTitleText}>
+                    {"\n"} {"\n"}
+                    {c4.nombre}{"\n"} 
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c5.nombre)}
-                    {JSON.stringify(c5.estadisticas)}
+                    Correctas: {" "} {c4.correct} {" "}
+                    Incorrectas: {" "} {c4.incorrect}
+                    </Text>
+                    <Text style={styles.getTitleText}>
+                    {"\n"} {"\n"}
+                    {c5.nombre} {"\n"} 
                     </Text>
                     <Text style={styles.getStartedText}>
-                    {JSON.stringify(c6.nombre)}
-                    {JSON.stringify(c6.estadisticas)}
+                    Correctas: {" "} {c5.correct} {" "}
+                    Incorrectas: {" "} {c5.incorrect}
+                    </Text>
+                    <Text style={styles.getTitleText}>
+                    {"\n"} {"\n"}
+                    {c6.nombre}{"\n"} 
+                    </Text>
+                    <Text style={styles.getStartedText}>
+                    Correctas: {" "} {c6.correct} {" "}
+                    Incorrectas: {" "}  {c6.incorrect}
                     </Text>
                 </View>
             </ScrollView>
@@ -91,7 +114,7 @@ export default class CategStatScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'rgba(94, 0, 86, 1)',
     },
     developmentModeText: {
       marginBottom: 20,
@@ -142,7 +165,13 @@ const styles = StyleSheet.create({
     },
     getStartedText: {
       fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
+      color: 'rgba(255, 255, 255, 1)',
+      lineHeight: 24,
+      textAlign: 'center',
+    },
+    getTitleText: {
+      fontSize: 17,
+      color: 'rgba(48, 136, 63,1)',
       lineHeight: 24,
       textAlign: 'center',
     },

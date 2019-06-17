@@ -39,19 +39,17 @@ export default class HomeScreen extends React.Component {
             />
           </View>
 
-         <View style={styles.getStartedContainer}>
+          <View style={styles.getTitleContainer}>
 
             <Text style={styles.getStartedText}>Trivia Veterinaria</Text>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-              <Text style={styles.getStartedText}>Menu Principal </Text>
-              <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
-
+            <Text style={styles.getStartedText}>Menu Principal </Text>
+            <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
           </View>
-
           <View style={styles.container}>
-            <Button color={'#20b2aa'} title="Jugar" onPress= {this._Game} />
+            <Button color={'rgba(48, 136, 63,1)'} title="Jugar" onPress= {this._Game} />
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Button color={'#20b2aa'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
+            <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
           </View>
 
         </ScrollView>
@@ -91,11 +89,14 @@ export default class HomeScreen extends React.Component {
 
 
 }
+// violeta : 'rgba(94, 0, 86, 1)'
+// verde:  'rgba(48, 136, 63,1)'
+//amarillo: 'rgba(255, 255, 0, 1)' NO QUEDO
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor:  'rgba(96, 0, 100, 1)' ,//'#fff',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -122,6 +123,7 @@ const styles = StyleSheet.create({
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
+   // backgroundColor:  'rgba(255, 255, 255, 1)',
   },
   homeScreenFilename: {
     marginVertical: 7,
@@ -136,8 +138,14 @@ const styles = StyleSheet.create({
   },
   getStartedText: {
     fontSize: 25,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
+    color: 'rgba(48, 136, 63,1)',
+    lineHeight: 39, //24
+    textAlign: 'center',
+  },
+  getTitleText: {
+    fontSize: 27,
+    color: 'rgba(94, 0, 86, 1)',
+    lineHeight: 24, //24
     textAlign: 'center',
   },
   tabBarInfoContainer: {
@@ -157,7 +165,7 @@ const styles = StyleSheet.create({
       },
     }),
     alignItems: 'center',
-    backgroundColor: '#fbfbfb',
+    backgroundColor: 'rgba(94, 0, 86, 1)' ,//'#fbfbfb',
     paddingVertical: 20,
   },
   tabBarInfoText: {
@@ -181,7 +189,7 @@ const styles = StyleSheet.create({
   },
   logout: {
     fontSize: 20,
-    color: '#2e78b7',
+    color: 'rgba(48, 136, 63,1)',
     textAlign: 'center',
   },
   espacio: {

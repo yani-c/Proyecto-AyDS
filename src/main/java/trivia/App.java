@@ -224,10 +224,25 @@ public class App{
 					s.set("incorrect", 0);
 					s.saveIt();
 				}
-				aux=aux+"\"categoria"+i+"\": {\"nombre\": \""+c.get("category_name")+"\", \"estadisticas\":"+s.toJson(true,"correct","incorrect")+"},";
+				aux=aux+"\"categoria"+i+"\": {\"nombre\": \""+c.get("category_name")+"\", \"correct\": \""+s.getInteger("correct")+"\",\"incorrect\": \""+s.getInteger("incorrect")+"\"},";
 				i++;
 			}
 			aux=aux+"\"Otro\":\"\"}";
+			res.type("application/json");
+			return aux;
+		});
+
+		//devuelve las estadisticas globales
+		get("/globalStatistics" , (req,res) ->{
+			//Statistic s= new Statistic();
+			List<Statistic> stats= Statistic.where("user_id = ?", currentUser.get("id"));
+			int corrects=0;
+			int incorrects=0;
+			for(Statistic s : stats){
+				corrects=corrects+s.getInteger("correct");
+				incorrects=incorrects+s.getInteger("incorrect");
+			}
+			String aux="{\"correct\":\""+corrects+"\", \"incorrect\":\""+incorrects+"\"}";
 			res.type("application/json");
 			return aux;
 		});
