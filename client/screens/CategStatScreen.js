@@ -41,6 +41,7 @@ export default class CategStatScreen extends React.Component {
     .then(response => JSON.parse(JSON.stringify(response)))
     .then(response => {
       const categorias =response.data;
+      console.log(response.data);
       this.setState({c1: categorias.categoria1, c2: categorias.categoria2, c3: categorias.categoria3,
     c4: categorias.categoria4, c5: categorias.categoria5, c6: categorias.categoria6});
     });
@@ -49,9 +50,8 @@ export default class CategStatScreen extends React.Component {
 // Correctas: {JSON.stringify(c1.correct)}
 //Incorrectas: {JSON.stringify(c1.incorrect)}
   render() {
-      //console.log(this.state.categoria1);
+      console.log(this.state.c1);
       const c1= this.state.c1;
-      console.log(c1.estadisticas);
       const c2= this.state.c2;
       const c3= this.state.c3;
       const c4= this.state.c4;
