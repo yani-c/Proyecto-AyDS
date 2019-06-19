@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     padding: 5,
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(48, 136, 63,1)'
+    borderBottomColor: 'rgba(48, 136, 63,1)',
+    color: 'white',
   }
 })
