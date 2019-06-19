@@ -28,7 +28,9 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} </Text>
+            <Text> {"\n"} {"\n"}  {"\n"} {"\n"}</Text>
+            <Text style={styles.textshadow}>Trivia Veterinaria</Text>
+            <Text style={styles.espacio}> {"\n"} </Text>
             <Image
               source={
                 __DEV__
@@ -40,22 +42,19 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.getTitleContainer}>
-
-            <Text style={styles.getStartedText}>Trivia Veterinaria</Text>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Text style={styles.getStartedText}>Menu Principal </Text>
             <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
           </View>
           <View style={styles.container}>
-            <Button color={'rgba(48, 136, 63,1)'} title="Jugar" onPress= {this._Game} />
+            <Button color={'#663399'} title="Jugar" onPress= {this._Game} />
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
+            <Button color={'#663399'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
           </View>
 
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.logout} onPress={this._handleLogout} >Logout</Text>
+          <Text style={styles.logout} onPress={this._handleLogout} >LogOut</Text>
 
         </View>
       </View>
@@ -96,7 +95,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:  'rgba(96, 0, 100, 1)' ,//'#fff',
+    backgroundColor:  '#9370db' ,//FONDO,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -119,11 +118,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
+    alignContent: 'center',
+    alignItems: 'center',
   },
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
-   // backgroundColor:  'rgba(255, 255, 255, 1)',
+   
   },
   homeScreenFilename: {
     marginVertical: 7,
@@ -137,15 +138,37 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   getStartedText: {
-    fontSize: 25,
-    color: 'rgba(48, 136, 63,1)',
-    lineHeight: 39, //24
+    fontSize: 45,
+    color: '#008000', // escrito
+    lineHeight: 46, 
     textAlign: 'center',
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(96,100,109, 0.8)',
   },
+
+
+textshadow:{ 
+ 
+  fontSize:40, 
+
+  color:'#ffff00', 
+
+  paddingLeft:30, 
+
+  paddingRight:30, 
+
+  textShadowColor:'#585858', 
+
+  textShadowOffset:{width: 5, height: 5}, 
+
+  textShadowRadius:10, 
+
+  },
+
   getTitleText: {
     fontSize: 27,
     color: 'rgba(94, 0, 86, 1)',
-    lineHeight: 24, //24
+    lineHeight: 24, 
     textAlign: 'center',
   },
   tabBarInfoContainer: {
@@ -165,7 +188,7 @@ const styles = StyleSheet.create({
       },
     }),
     alignItems: 'center',
-    backgroundColor: 'rgba(94, 0, 86, 1)' ,//'#fbfbfb',
+    backgroundColor: '#663399' ,//Parte BAJA,
     paddingVertical: 20,
   },
   tabBarInfoText: {
@@ -188,9 +211,10 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   logout: {
-    fontSize: 20,
-    color: 'rgba(48, 136, 63,1)',
+    fontSize: 18,
+    color: '#ffff00',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   espacio: {
     fontSize: 8,

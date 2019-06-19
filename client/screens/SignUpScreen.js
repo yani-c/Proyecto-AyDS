@@ -15,6 +15,13 @@ import axios from 'axios';
 export default class SignUpScreen extends React.Component {
   static navigationOptions = {
     title: 'Registrate',
+    headerStyle: {
+      backgroundColor: '#663399',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
 
   constructor(props) {
@@ -85,12 +92,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'rgba(94, 0, 86, 1)',
+    backgroundColor: '#9370db',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
     margin: 10,
+    color: '#f8f8ff',
+    textShadowColor:'#585858', 
+    textShadowOffset:{width: 5, height: 5}, 
+    textShadowRadius:10, 
   },
   input: {
     margin: 15,

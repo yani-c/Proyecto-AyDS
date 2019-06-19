@@ -14,6 +14,13 @@ import axios from 'axios';
 export default class AnswerScreen extends React.Component {
   static navigationOptions = {
     title: 'Respuesta',
+    headerStyle: {
+      backgroundColor: '#663399',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
   constructor(props){
     super(props);
@@ -40,6 +47,7 @@ export default class AnswerScreen extends React.Component {
     const desc =navigation.getParam('desc','NO-Desc');
     const cor = this.state.respuesta;
     var respuesta;
+    //<PricingCard wrapperStyle={(articleData.percent_change_1h >= 0) ? styles.green : styles.red} ../>
     if ( JSON.stringify(cor) == "true") {
       respuesta = "Correcta!"
     }
@@ -79,7 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'rgba(94, 0, 86, 1)',
+    backgroundColor: '#9370db',
   },
   welcome: {
     fontSize: 30,
@@ -89,16 +97,24 @@ const styles = StyleSheet.create({
 
   respuestac: {
     fontSize: 30,
+    color: '#f8f8ff',
+    lineHeight: 31,
     textAlign: 'center',
-    margin: 5,
-    color: 'rgba(255, 255, 255, 1)'
+    textShadowColor:'#585858', 
+    textShadowOffset:{width: 5, height: 5}, 
+    textShadowRadius:10, 
   },
-
   espacio: {
     fontSize: 5,
     textAlign: 'center',
     margin: 5,
   },
+    green: {
+      color: '#00ff00'
+    },
+    red: {
+      color: '#ff0000'
+    },
   input: {
     margin: 15,
     height: 40,
@@ -107,4 +123,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#4228F8'
   }
+  
 })

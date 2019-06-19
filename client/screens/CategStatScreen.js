@@ -19,7 +19,14 @@ import { MonoText } from '../components/StyledText';
 
 export default class CategStatScreen extends React.Component {
   static navigationOptions = {
-    title:'Estadísticas por Categoria'
+    title:'Estadísticas por Categoria',
+    headerStyle: {
+      backgroundColor: '#663399',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
 
   constructor(props){
@@ -55,14 +62,14 @@ export default class CategStatScreen extends React.Component {
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <View style={styles.getStartedContainer}>
-                    <Text style={styles.getTitleText}>
+                    <Text style={styles.categoryStyle}>
                     {c1.nombre} {"\n"}
                     </Text>
                     <Text style={styles.getStartedText}>
                     Correctas:  {" "} {c1.correct} {" "}
                     Incorrectas:  {" "} {c1.incorrect}
                     </Text>
-                    <Text style={styles.getTitleText}>
+                    <Text style={styles.categoryStyle}>
                     {"\n"} {"\n"}
                     {c2.nombre} {"\n"}
                     </Text>
@@ -70,7 +77,7 @@ export default class CategStatScreen extends React.Component {
                     Correctas: {" "} {c2.correct} {" "}
                     Incorrectas: {" "} {c2.incorrect}
                     </Text>
-                    <Text style={styles.getTitleText}>
+                    <Text style={styles.categoryStyle}>
                     {"\n"} {"\n"}
                     {c3.nombre}{"\n"}
                     </Text>
@@ -78,7 +85,7 @@ export default class CategStatScreen extends React.Component {
                     Correctas: {" "} {c3.correct} {" "}
                     Incorrectas: {" "} {c3.incorrect}
                     </Text>
-                    <Text style={styles.getTitleText}>
+                    <Text style={styles.categoryStyle}>
                     {"\n"} {"\n"}
                     {c4.nombre}{"\n"} 
                     </Text>
@@ -86,7 +93,7 @@ export default class CategStatScreen extends React.Component {
                     Correctas: {" "} {c4.correct} {" "}
                     Incorrectas: {" "} {c4.incorrect}
                     </Text>
-                    <Text style={styles.getTitleText}>
+                    <Text style={styles.categoryStyle}>
                     {"\n"} {"\n"}
                     {c5.nombre} {"\n"} 
                     </Text>
@@ -94,7 +101,7 @@ export default class CategStatScreen extends React.Component {
                     Correctas: {" "} {c5.correct} {" "}
                     Incorrectas: {" "} {c5.incorrect}
                     </Text>
-                    <Text style={styles.getTitleText}>
+                    <Text style={styles.categoryStyle}>
                     {"\n"} {"\n"}
                     {c6.nombre}{"\n"} 
                     </Text>
@@ -114,7 +121,7 @@ export default class CategStatScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'rgba(94, 0, 86, 1)',
+      backgroundColor: '#9370db',
     },
     developmentModeText: {
       marginBottom: 20,
@@ -137,6 +144,21 @@ const styles = StyleSheet.create({
       resizeMode: 'contain',
       marginTop: 3,
       marginLeft: -10,
+    },
+    categoryStyle: {
+        fontSize:20, 
+      
+        color:'#ffff00', 
+      
+        paddingLeft:30, 
+      
+        paddingRight:30, 
+      
+        textShadowColor:'#585858', 
+      
+        textShadowOffset:{width: 5, height: 5}, 
+      
+        textShadowRadius:10, 
     },
     getStartedContainer: {
       alignItems: 'center',

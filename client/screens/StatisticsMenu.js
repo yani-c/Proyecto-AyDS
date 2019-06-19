@@ -20,7 +20,14 @@ import { MonoText } from '../components/StyledText';
 
 export default class StatisticsMenu extends React.Component {
   static navigationOptions = {
-    title:'Menu Estadisticas'
+    title:'Menu Estadisticas',
+    headerStyle: {
+      backgroundColor: '#663399',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
 
   constructor(props){
@@ -54,7 +61,7 @@ export default class StatisticsMenu extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor:'rgba(94, 0, 86, 1)',
+      backgroundColor:'#9370db',
     },
     espacio: {
       fontSize: 50,

@@ -20,7 +20,14 @@ import { MonoText } from '../components/StyledText';
 
 export default class GlobalScreen extends React.Component {
   static navigationOptions = {
-    title:'Estadísticas Globales'
+    title:'Estadísticas Globales',
+    headerStyle: {
+      backgroundColor: '#663399',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
 
   constructor(props){
@@ -50,11 +57,13 @@ export default class GlobalScreen extends React.Component {
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.getStartedContainer}>
                 <View style={styles.getStartedContainer}>
-                    <Text style={styles.getStartedText}>
+                    <Text style={styles.getStartedText}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
+                    <Text style={styles.correctaStyle}>
                     Correctas: {" "}
                     {correct}
+                    <Text style={styles.getStartedText}> {"\n"} {"\n"} </Text>
                     </Text>
-                    <Text style={styles.getStartedText}>
+                    <Text style={styles.incorrectaStyle}>
                     Incorrectas: {" "}
                     {incorrect}
                     </Text>
@@ -70,14 +79,7 @@ export default class GlobalScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'rgba(94, 0, 86, 1)',
-    },
-    developmentModeText: {
-      marginBottom: 20,
-      color: 'rgba(0,0,0,0.4)',
-      fontSize: 14,
-      lineHeight: 19,
-      textAlign: 'center',
+      backgroundColor: '#9370db',
     },
     contentContainer: {
       paddingTop: 30,
@@ -86,6 +88,18 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginTop: 10,
       marginBottom: 20,
+    },
+    correctaStyle: {
+      fontSize: 30,
+      color: '#32cd32',
+      lineHeight: 41,
+      textAlign: 'center',
+    },
+    incorrectaStyle: {
+      fontSize: 29,
+      color: '#ff0000',
+      lineHeight: 30,
+      textAlign: 'center',
     },
     welcomeImage: {
       width: 100,
@@ -98,19 +112,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginHorizontal: 50,
     },
-    getQuestionText:{
-      alignItems: 'center',
-      fontSize: 30,
 
-    },
-    getOptionText:{
-      alignItems: 'center',
-      fontSize: 20,
-
-    },
-    homeScreenFilename: {
-      marginVertical: 7,
-    },
     codeHighlightText: {
       color: 'rgba(96,100,109, 0.8)',
     },

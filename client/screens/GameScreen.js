@@ -20,7 +20,14 @@ import { MonoText } from '../components/StyledText';
 
 export default class GameScreen extends React.Component {
   static navigationOptions = {
-    title: 'Juego'
+    title: 'Juego',
+    headerStyle: {
+      backgroundColor: '#663399',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
 
   constructor(props){
@@ -93,7 +100,7 @@ export default class GameScreen extends React.Component {
                     Categoria: {c}
                     </Text>
                     <Text style={styles.welcome}> {"\n"} {"\n"} </Text> 
-                     <Text style={styles.getQuestionText}>
+                     <Text style={styles.textshadow}>
                         ¿{q.description}
                      </Text>
                      <Text style={styles.welcome}> {"\n"} {"\n"} </Text>
@@ -142,7 +149,7 @@ export default class GameScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'rgba(94, 0, 86, 1)',
+      backgroundColor: '#9370db',
     },
     developmentModeText: {
       marginBottom: 20,
@@ -210,10 +217,13 @@ const styles = StyleSheet.create({
       paddingHorizontal: 4,
     },
     getStartedText: {
-      fontSize: 17,
-      color: 'rgba(48, 136, 63,1)',
-      lineHeight: 24,
+      fontSize: 27,
+      color: '#f8f8ff',
+      lineHeight: 28,
       textAlign: 'center',
+      textShadowColor:'#585858', 
+      textShadowOffset:{width: 5, height: 5}, 
+      textShadowRadius:10, 
     },
     opcionStyle: {
       fontSize: 17,
@@ -265,4 +275,21 @@ const styles = StyleSheet.create({
       color: '#2e78b7',
       textAlign: 'center',
     },
+    textshadow:{ 
+ 
+      fontSize:30, 
+    
+      color:'#ffff00', 
+    
+      paddingLeft:10, 
+    
+      paddingRight:10, 
+    
+      textShadowColor:'#585858', 
+    
+      textShadowOffset:{width: 5, height: 5}, 
+    
+      textShadowRadius:10, 
+    
+      },
   });
