@@ -224,7 +224,8 @@ public class App{
 					s.set("incorrect", 0);
 					s.saveIt();
 				}
-				aux=aux+"\"categoria"+i+"\": {\"nombre\": \""+c.get("category_name")+"\", \"correct\": \""+s.getInteger("correct")+"\",\"incorrect\": \""+s.getInteger("incorrect")+"\"},";
+				aux=aux+"\"categoria"+i+"\": {\"nombre\": \""+c.get("category_name")+"\", \"correct\": \"";
+				aux=aux++s.getInteger("correct")+"\",\"incorrect\": \""+s.getInteger("incorrect")+"\"},";;
 				i++;
 			}
 			aux=aux+"\"Otro\":\"\"}";
