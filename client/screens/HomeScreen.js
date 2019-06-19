@@ -42,21 +42,19 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.getTitleContainer}>
-            <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
+          <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} </Text>
+          <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} {"\n"} </Text>
           </View>
-          <View style={styles.container}>
-            <Button color={'#663399'} title="Jugar" onPress= {this._Game} />
-            <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Button color={'#663399'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
+
+          <View style={styles.tabBarInfoContainer}>
+            <Text style={styles.logout} onPress={this._Game} >Jugar</Text>
+            <Text style={styles.espacio}> {"\n"} </Text>
+            <Text style={styles.logout} onPress={()=> this.props.navigation.navigate('StatsMenu')} >Estadísticas</Text>
+            <Text style={styles.espacio}> {"\n"} </Text>
+            <Text style={styles.logout} onPress={this._handleLogout} >LogOut</Text>
           </View>
 
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.logout} onPress={this._handleLogout} >LogOut</Text>
-
-        </View>
       </View>
 
     );
