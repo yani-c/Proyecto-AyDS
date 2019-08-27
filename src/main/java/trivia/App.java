@@ -427,9 +427,11 @@ public class App{
 		post("/game" , (req,res) ->{
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			List<Question> questions = Question.where("active = ? and category_id = ? ", true, bodyParams.get("category_id"));
+			//hacer lista questionsC de preguntas que ya respondio correctamente (estadisticas, correct)
+			//hacer lista questionsNUEVA que esten las de questions que NO esten en questionC 
 			if(!questions.isEmpty()){
 				int num = (int) (Math.random() * questions.size());
-				Question q = Question.findById(questions.get(num).get("id"));
+				Question q = Question.findById(questions.get(num).get("id")); //sacar de questionNUEVA
 				List<Option> options= Option.where("question_id = ?", q.get("id"));
 				String aux=  "{\"Pregunta\":"+ q.toJson(true,"id","description", "category_id");
 				//aux= aux+", \"Opciones\": {\"";  
@@ -447,7 +449,9 @@ public class App{
 			}
 		});
 
-
+		
+		//hacer metodo que mire las estadisticas por categoria, si llega a 10 en x categoria, subirle un nivel.
+		//Este metodo se debe ejecutar siempre despues de responder 
 
 
 		//Recibe una respuesta, la carga e informa si es correcta o no
