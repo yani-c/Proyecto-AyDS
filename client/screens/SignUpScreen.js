@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  Image,
   StyleSheet,
 } from 'react-native';
 import axios from 'axios';
@@ -14,12 +15,15 @@ import axios from 'axios';
 
 export default class SignUpScreen extends React.Component {
   static navigationOptions = {
-    title: 'Registrate',
+    title: 'Registrarse',
     headerStyle: {
       backgroundColor: '#663399',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
+      textAlign: 'center', 
+      flexGrow:0.65, 
+      alignSelf:'center',
       fontWeight: 'bold',
     },
   };
@@ -36,17 +40,19 @@ export default class SignUpScreen extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-            <Text style={styles.welcome}> Ingrese sus datos </Text>
+            <Image style={{width:150, height:150, resizeMode:'contain', alignSelf:'center',}} source={require('../assets/images/logo.png')}/>
 
         <TextInput
           placeholder="Username"
+          placeholderTextColor = 'gray'
           style={styles.input}
           onChangeText={(value) => this.setState({ username: value })}
           value={this.state.username}
         />
 
         <TextInput
-          placeholder="Dni"
+          placeholder="DNI"
+          placeholderTextColor = 'gray'
           style={styles.input}
           onChangeText={(value) => this.setState({ dni: value })}
           value={this.state.dni}
@@ -54,13 +60,18 @@ export default class SignUpScreen extends React.Component {
 
         <TextInput
           placeholder="Password"
+          placeholderTextColor = 'gray'
           style={styles.input}
           secureTextEntry={true}
           onChangeText={(value) => this.setState({ password: value })}
           value={this.state.password}
         />
 
-        <Button color={'rgba(48, 136, 63,1)'} title="Sign up!" onPress={this._signUp} />
+        <Text style={styles.espacio}> {"\n"} </Text>
+
+        <View style={styles.button}>
+          <Button color={'#663399'} title="Sign up" onPress={this._signUp} />
+        </View>
 
         </View>
     );
@@ -92,24 +103,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#9370db',
+    backgroundColor: '#CDCDCD',
   },
-  welcome: {
-    fontSize: 30,
+  espacio: {
+    fontSize: 5,
     textAlign: 'center',
-    margin: 10,
-    color: '#f8f8ff',
-    textShadowColor:'#585858', 
-    textShadowOffset:{width: 5, height: 5}, 
-    textShadowRadius:10, 
+    margin: 2,
+  },
+  button: {
+    margin: 25,
   },
   input: {
-    margin: 15,
+    margin: 25,
     height: 40,
     padding: 5,
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(48, 136, 63,1)',
-    color: 'white',
+    borderBottomColor: '#663399',
+    color: 'black',
   }
 })

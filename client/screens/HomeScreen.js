@@ -20,43 +20,46 @@ import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'TRIVIA VETERINARIA',
+    headerStyle: {
+      backgroundColor: '#663399',
+    },
+    headerTintColor: '#FFFFFF',
+    headerTitleStyle: {
+      textAlign: 'center',
+      flexGrow:1, 
+      alignSelf:'center',
+      fontWeight: 'bold',
+    },
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Text> {"\n"} {"\n"}  {"\n"} {"\n"}</Text>
-            <Text style={styles.textshadow}>Trivia Veterinaria</Text>
-            <Text style={styles.espacio}> {"\n"} </Text>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/logo.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-
-          <View style={styles.getTitleContainer}>
+          
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+            <View style={styles.welcomeContainer}>
+              <Text style={styles.espacio}> {"\n"} </Text>
+              <Image
+                source={
+                  __DEV__
+                    ? require('../assets/images/logo.png')
+                    : require('../assets/images/robot-prod.png')
+                }
+                style={styles.welcomeImage}
+              />
+            </View>
+            <View style={styles.containerButton}>
+              <Button color={'#00B32C'} title="Jugar" onPress= {this._Game} />
+              <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
+              <Button color={'#00B32C'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
+            </View>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Text style={styles.espacio}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
-          </View>
-          <View style={styles.container}>
-            <Button color={'#663399'} title="Jugar" onPress= {this._Game} />
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Button color={'#663399'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
-          </View>
-
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.logout} onPress={this._handleLogout} >LogOut</Text>
-
-        </View>
+          <Text style={styles.logout} onPress={this._handleLogout}> SALIR </Text>
+          <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
+        
       </View>
 
     );
@@ -88,24 +91,18 @@ export default class HomeScreen extends React.Component {
 
 
 }
-// violeta : 'rgba(94, 0, 86, 1)'
-// verde:  'rgba(48, 136, 63,1)'
-//amarillo: 'rgba(255, 255, 0, 1)' NO QUEDO
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:  '#9370db' ,//FONDO,
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+    backgroundColor:'#CDCDCD',
+    margin: 3,
   },
   contentContainer: {
     paddingTop: 30,
+  },
+  containerButton: { 
+    margin: 25,
   },
   welcomeContainer: {
     alignItems: 'center',
@@ -121,104 +118,16 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-   
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 45,
-    color: '#008000', // escrito
-    lineHeight: 46, 
-    textAlign: 'center',
-    fontWeight: 'bold',
-    textShadowColor: 'rgba(96,100,109, 0.8)',
-  },
-
-
-textshadow:{ 
  
-  fontSize:40, 
-
-  color:'#ffff00', 
-
-  paddingLeft:30, 
-
-  paddingRight:30, 
-
-  textShadowColor:'#585858', 
-
-  textShadowOffset:{width: 5, height: 5}, 
-
-  textShadowRadius:10, 
-
-  },
-
-  getTitleText: {
-    fontSize: 27,
-    color: 'rgba(94, 0, 86, 1)',
-    lineHeight: 24, 
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#663399' ,//Parte BAJA,
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
   logout: {
-    fontSize: 18,
-    color: '#ffff00',
     textAlign: 'center',
+    color: '#663399',
     fontWeight: 'bold',
+    fontSize: 15,
   },
   espacio: {
     fontSize: 8,
     textAlign: 'center',
     margin: 2,
-  }
+  },
 });

@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   Button,
+  Image,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
@@ -13,12 +14,15 @@ import axios from 'axios';
 
 export default class SignInScreen extends React.Component {
   static navigationOptions = {
-    title: 'Please Sign In',
+    title: 'Login',
     headerStyle: {
       backgroundColor: '#663399',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
+      textAlign: 'center',
+      flexGrow:1, 
+      alignSelf:'center',
       fontWeight: 'bold',
     },
   };
@@ -34,10 +38,12 @@ export default class SignInScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}> Login! </Text>
+
+        <Image style={{width:150, height:150, resizeMode:'contain', alignSelf:'center',}} source={require('../assets/images/logo.png')}/>
 
         <TextInput
           placeholder="Username"
+          placeholderTextColor = 'gray' 
           style={styles.input}
           onChangeText={(value) => this.setState({ username: value })}
           value={this.state.username}
@@ -45,16 +51,22 @@ export default class SignInScreen extends React.Component {
 
         <TextInput
           placeholder="Password"
+          placeholderTextColor = 'gray' 
           style={styles.input}
           secureTextEntry={true}
           onChangeText={(value) => this.setState({ password: value })}
           value={this.state.password}
         />
 
-        <Button color={'#663399'} title="Sign in!" onPress={this._signIn} />
-        <Text style={styles.espacio}> {"\n"} </Text>
-        <Button color={'#663399'} title="Sign up!" onPress ={() => this.props.navigation.navigate('SignUp')} />
-
+        
+        <View style={styles.button}>
+         <Button color={'#663399'} title="Sign in" onPress={this._signIn} />
+         <Text style={styles.espacio}> {"\n"} </Text>
+         <Text style={styles.negrita}> Don't have an account? 
+          <Text style={styles.conButton} onPress ={() => this.props.navigation.navigate('SignUp')}>  SIGN UP </Text>
+         </Text>
+        </View>  
+     
       </View>
     );
   }
@@ -95,27 +107,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#9370db',
+    backgroundColor: '#cdcdcd',
   },
   espacio: {
-    fontSize: 8,
+    fontSize: 12,
     textAlign: 'center',
     margin: 2,
   },
-  welcome: {
-    fontSize: 30,
+  button: {
+    margin: 25,
+  },
+  conButton: {
     textAlign: 'center',
-    margin: 10,
+    color: '#663399',
     fontWeight: 'bold',
-    color: 'white',
+    fontSize: 15,
+  },
+  negrita:{
+    textAlign: 'center',
+    fontSize: 15,
   },
   input: {
-    margin: 15,
+    margin: 25,
     height: 40,
     padding: 5,
-    fontSize: 16,
+    fontSize: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#663399',
-    color: 'white',
+    color: 'black',
   }
 })
