@@ -427,25 +427,57 @@ public class App{
 		post("/game" , (req,res) ->{
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			List<Question> questions = Question.where("active = ? and category_id = ? ", true, bodyParams.get("category_id"));
-			//hacer lista questionsC de preguntas que ya respondio correctamente (estadisticas, correct)
-			//hacer lista questionsNUEVA que esten las de questions que NO esten en questionC 
-			if(!questions.isEmpty()){
-				int num = (int) (Math.random() * questions.size());
-				Question q = Question.findById(questions.get(num).get("id")); //sacar de questionNUEVA
-				List<Option> options= Option.where("question_id = ?", q.get("id"));
-				String aux=  "{\"Pregunta\":"+ q.toJson(true,"id","description", "category_id");
-				//aux= aux+", \"Opciones\": {\"";  
-				int i=1;
-				for(Option o : options){
-					aux= aux+", \"Opcion"+i+"\" : "+o.toJson(true,"id","description");
-					i++;
+			if(!questions.isEmpty()){ //si tengo preguntas 
+				//saco las respuestas correctas del usuario
+				List<Answer> resp = Answer.where("user_id= ? and correct= ?", currentUser.get("id"), true); 
+				List<Question> pregResp = new ArrayList<Question>();
+				for(int i=0;i<resp.size();i++){
+					Option o = Option.findById(resp.get(i).getInteger("option_id"));
+					pregResp.add(Question.findById(o.getInteger("question_id")));
+				}System.out.println("TODASSSSSSSSSSSS");
+				for(int i=0;i<questions.size();i++){	
+					System.out.println(questions.get(i).getString("description"));
 				}
-				aux=aux+"}";
-				res.type("application/json");
-				return aux;
+				System.out.println("LAS QUE RESPONDI BIEN");
+				for(int i=0;i<pregResp.size();i++){	
+					System.out.println(pregResp.get(i).getString("description"));
+				}
+				List<Question> qqq = new ArrayList<Question>();
+				for(int i=0;i<questions.size();i++){
+					boolean b= true;
+					for(int j=0;j<pregResp.size();j++){
+						if(pregResp.get(j).getInteger("id") == questions.get(i).getInteger("id")){	
+							b=false;
+						}
+					}
+					if(b){
+						qqq.add(questions.get(i));
+					}
+				}
+				//questions.removeAll(pregResp);
+				System.out.println("ACAAAAAAAAAAAAA LAS QUE NO");
+				for(int i=0;i<qqq.size();i++){	
+					System.out.println(qqq.get(i).getString("description"));
+				}
+				if(!questions.isEmpty()){ //si tengo preguntas que no respondio bien todavia
+					int num = (int) (Math.random() * qqq.size());					
+					Question q = Question.findById(qqq.get(num).get("id")); //sacar de questionNUEVA
+					List<Option> options= Option.where("question_id = ?", q.get("id"));
+					String aux=  "{\"Found\": true,\"Pregunta\":"+ q.toJson(true,"id","description", "category_id");
+					//aux= aux+", \"Opciones\": {\"";  
+					int i=1;
+					for(Option o : options){
+						aux= aux+", \"Opcion"+i+"\" : "+o.toJson(true,"id","description");
+						i++;
+					}
+					aux=aux+"}";
+					res.type("application/json");
+					return aux;
+				}
+				return "{\"Found\": false , \"Info\": Ya se respondieron todas}";
 			}
 			else{
-				return "No hay preguntas cargadas";
+				return "{\"Found\": false , \"Info\": No hay preguntas cargadas}";
 			}
 		});
 
@@ -459,10 +491,11 @@ public class App{
 		post("/answer" , (req,res) ->{
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			Answer a= new Answer();
+			Option o= Option.findById(bodyParams.get("id"));
 			a.set("user_id",currentUser.get("id"));
-			a.set("option_id", bodyParams.get("id"));
+			a.set("option_id", o.getInteger("id"));
+			a.set("correct", o.getBoolean("correct"));
 			a.saveIt();
-			Option o= Option.findById(a.getInteger("option_id"));
 			Question q= Question.findById(o.getInteger("question_id"));
 			Statistic s= Statistic.findFirst("user_id = ? and category_id = ?",currentUser.get("id"),q.getInteger("category_id"));
 			if(s==null){
