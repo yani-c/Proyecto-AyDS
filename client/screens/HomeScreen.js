@@ -74,7 +74,9 @@ export default class HomeScreen extends React.Component {
         .then(response => {
           const category= response.data.cat ;
           const name=response.data.name;
-          this.props.navigation.navigate('Game',{'category': category,'name_c':name});
+          console.log("elegi cat");
+          console.log(name);
+          this.props.navigation.navigate('Category',{'category': category,'name_c':name});
         })
     };
 

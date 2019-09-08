@@ -76,7 +76,7 @@ export default class AnswerScreen extends React.Component {
       const name=response.data.name;
       console.log(category);
       console.log(name);
-      this.props.navigation.navigate('Game',{'category': category,'name_c':name});
+      this.props.navigation.navigate('Category',{'category': category,'name_c':name});
     })
 };
 

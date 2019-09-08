@@ -459,9 +459,9 @@ public class App{
 				for(int i=0;i<qqq.size();i++){	
 					System.out.println(qqq.get(i).getString("description"));
 				}
-				if(!questions.isEmpty()){ //si tengo preguntas que no respondio bien todavia
+				if(!qqq.isEmpty()){ //si tengo preguntas que no respondio bien todavia
 					int num = (int) (Math.random() * qqq.size());					
-					Question q = Question.findById(qqq.get(num).get("id")); //sacar de questionNUEVA
+					Question q = qqq.get(num); //sacar de questionNUEVA
 					List<Option> options= Option.where("question_id = ?", q.get("id"));
 					String aux=  "{\"Found\": true,\"Pregunta\":"+ q.toJson(true,"id","description", "category_id");
 					//aux= aux+", \"Opciones\": {\"";  
@@ -474,10 +474,10 @@ public class App{
 					res.type("application/json");
 					return aux;
 				}
-				return "{\"Found\": false , \"Info\": Ya se respondieron todas}";
+				return "{\"Found\": false, \"Pregunta\":\"No-Question \", \"Opcion1\":\"No-Option1\", \"Opcion2\":\"No-Option2 \",\"Opcion3\":\"No-Option3 \",\"Opcion4\":\"No-Option4\"}";
 			}
 			else{
-				return "{\"Found\": false , \"Info\": No hay preguntas cargadas}";
+				return"{\"Found\": false, \"Pregunta\":\"No-Question \", \"Opcion1\":\"No-Option1\", \"Opcion2\":\"No-Option2 \",\"Opcion3\":\"No-Option3 \",\"Opcion4\":\"No-Option4\"}";
 			}
 		});
 

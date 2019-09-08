@@ -18,9 +18,9 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-export default class GameScreen extends React.Component {
+export default class CategoryScreen extends React.Component {
   static navigationOptions = {
-    title: 'Juego',
+    title: 'Categoria',
     headerStyle: {
       backgroundColor: '#663399',
     },
@@ -33,25 +33,75 @@ export default class GameScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {category:"",
-      question: "", option1:"",option2:"",option3:"",option4:"",
+      question: "", option1:"",option2:"",option3:"",option4:"", found:"",
     };
   }
 
+  async componentWillMount () {
+    console.log("por el prim");
+    const { navigation } = this.props;
+    const cat = navigation.getParam('category', 'NO-Category');
+    const name_c=navigation.getParam('name_c','NO-NameCategory');
+    axios.post(API_HOST+"/game", {
+      category_id: cat
+      }, {
+        headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
+    })
+    .then(response => JSON.parse(JSON.stringify(response)))
+    .then(response => {
+      console.log(response.data);
+      const f =JSON.parse(JSON.stringify(response.data.Found));
+      const q =JSON.parse(JSON.stringify(response.data.Pregunta));
+      const o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
+      const o2 =JSON.parse(JSON.stringify(response.data.Opcion2));
+      const o3 =JSON.parse(JSON.stringify(response.data.Opcion3));
+      const o4 =JSON.parse(JSON.stringify(response.data.Opcion4));
+      this.setState({category:name_c,question: q, option1: o1, option2: o2, option3: o3, option4: o4, found:f});
+    });
+  }
+
+  async componentWillReceiveProps () {
+    console.log("por seg");
+    const { navigation } = this.props;
+    const cat = navigation.getParam('category', 'NO-Category');
+    const name_c=navigation.getParam('name_c','NO-NameCategory');
+    axios.post(API_HOST+"/game", {
+      category_id: cat
+      }, {
+        headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
+    })
+    .then(response => JSON.parse(JSON.stringify(response)))
+    .then(response => {
+      console.log(response.data);
+      const f =JSON.parse(JSON.stringify(response.data.Found));
+      const q =JSON.parse(JSON.stringify(response.data.Pregunta));
+      const o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
+      const o2 =JSON.parse(JSON.stringify(response.data.Opcion2));
+      const o3 =JSON.parse(JSON.stringify(response.data.Opcion3));
+      const o4 =JSON.parse(JSON.stringify(response.data.Opcion4));
+      this.setState({category:name_c,question: q, option1: o1, option2: o2, option3: o3, option4: o4, found:f});
+    });
+  }
+
+  
+
   render() {
     const { navigation } = this.props;
-    const c=navigation.getParam('category', 'NO-Category');
-    const q=navigation.getParam('question', 'NO-Question');
-    const opcion1=(navigation.getParam('option1', 'NO-Option1')).description;
-    const opcion2=(navigation.getParam('option2', 'NO-Option2')).description;
-    const opcion3=(navigation.getParam('option3', 'NO-Option3')).description;
-    const opcion4=(navigation.getParam('option4', 'NO-Option4')).description;
-    var id1 = (navigation.getParam('option1', 'NO-Option1')).id;
-    console.log("a ver");
-    console.log(id1);
-    var id2 = (navigation.getParam('option2', 'NO-Option2')).id;
-    var id3 = (navigation.getParam('option3', 'NO-Option3')).id;
-    var id4 = (navigation.getParam('option4', 'NO-Option4')).id;
-    console.log(id1);
+    const c = navigation.getParam('name_c', 'NO-Category');
+    const found= this.state.found;
+    const q=this.state.question;
+    const opcion1=this.state.option1;
+    const opcion2=this.state.option2;
+    const opcion3=this.state.option3;
+    const opcion4=this.state.option4;
+    console.log(found);
+    console.log(c);
+    if(found == true){
+      console.log('chau');
+    }
+    else{
+      console.log('hola');
+    }
     return (
         <View style={styles.container}>          
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -59,48 +109,18 @@ export default class GameScreen extends React.Component {
                     <Text style={styles.getStartedText}>
                     Categoria: {c}
                     </Text>
-                    <Text style={styles.welcome}> {"\n"} {"\n"} </Text> 
-                     <Text style={styles.textshadow}>
-                        ¿{q.description}
-                     </Text>
                      <Text style={styles.welcome}> {"\n"} {"\n"} </Text>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
+                     <Button color={'rgba(48, 136, 63,1)'} title= ' Volver al menu ' onPress ={() => this.props.navigation.navigate('Home')} 
                      />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion1}
-                     </Text>
-                     </TouchableOpacity>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
-                     />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion2}
-                     </Text>
-                     </TouchableOpacity>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
-                     />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion3}
-                     </Text>
-                     </TouchableOpacity>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
-                     />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion4}
-                     </Text>
-                     </TouchableOpacity>
-                
+                       {found ? (
+                        <Button color={'rgba(48, 136, 63,1)'} title= ' Ver pregunta ' onPress={ () => this.props.navigation.navigate('Game', {'category':c, 'question':q,'option1':opcion1, 'option2': opcion2, 'option3':opcion3,'option4':opcion4})}  />
+                          ) : (
+                        <Text> No hay preguntas sin responder en esta categoría, vuelve a intentarlo </Text>
+                      )}
                 </View>
             </ScrollView>
         </View>
-    )};
+    )}
 
 }
 

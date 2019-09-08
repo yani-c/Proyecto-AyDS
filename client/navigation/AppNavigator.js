@@ -1,6 +1,7 @@
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
+import CategoryScreen from '../screens/CategoryScreen';
 import GameScreen from '../screens/GameScreen';
 import OtherScreen from '../screens/OtherScreen';
 import SignInScreen from '../screens/SignInScreen';
@@ -12,7 +13,7 @@ import StatisticsMenu from '../screens/StatisticsMenu.js';
 import CategStatScreen from '../screens/CategStatScreen.js';
 
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen,Global : GlobalStatScreen, Answer : AnswerScreen, StatsMenu : StatisticsMenu, CatStat : CategStatScreen});
+const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen, Category: CategoryScreen, Global : GlobalStatScreen, Answer : AnswerScreen, StatsMenu : StatisticsMenu, CatStat : CategStatScreen});
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: SignUpScreen });
 export default createAppContainer(createSwitchNavigator(
