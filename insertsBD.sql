@@ -7,7 +7,7 @@ INSERT INTO users (username, dni, administrator, password)
 VALUES ('Yani', '41824212', true, 'root');
 
 INSERT INTO users (username, dni, administrator, password)
-VALUES ('Pablo', '39246109', true, 'root');
+VALUES ('Alvaro', '37875800', true, 'root');
 
 -- NUEVAS Categorias
 INSERT INTO categories (category_name)

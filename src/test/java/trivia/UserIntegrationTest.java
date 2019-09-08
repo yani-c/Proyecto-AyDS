@@ -39,9 +39,9 @@ import com.google.gson.Gson;
 
 public class UserIntegrationTest {
     private static int PORT = 4567;
-	private static String ADMIN_USERNAME = "admin";
-    private static String ADMIN_PASSWORD = "admin";
-	private static String ADMIN_DNI="11111111";
+	private static String ADMIN_USERNAME = "Hernan";
+    private static String ADMIN_PASSWORD = "root";
+	private static String ADMIN_DNI="39546109";
 
     @AfterClass
     public static void tearDown() {
