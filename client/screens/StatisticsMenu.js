@@ -52,9 +52,9 @@ export default class StatisticsMenu extends React.Component {
           <View style={styles.container3}></View>
         
           <View style={styles.container2}>
-              <Button color={'#00B32C'} title="Estadisticas Globales" onPress= {()=> this.props.navigation.navigate('Global')} />
+              <Button color={'rgba(48, 136, 63,1)'} title="Estadisticas Globales" onPress= {()=> this.props.navigation.navigate('Global')} />
               <Text style={styles.espacio}> {"\n"} </Text>
-              <Button color={'#00B32C'} title="Estadísticas por Categoria" onPress= {()=> this.props.navigation.navigate('CatStat')} />        
+              <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas por Categoria" onPress= {()=> this.props.navigation.navigate('CatStat')} />        
             </View>
         </View>
       );

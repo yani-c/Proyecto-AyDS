@@ -13,7 +13,7 @@ import axios from 'axios';
 
 export default class AnswerScreen extends React.Component {
   static navigationOptions = {
-    title: 'Respuesta',
+    title: ' ',
     headerStyle: {
       backgroundColor: '#663399',
     },

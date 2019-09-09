@@ -7,16 +7,12 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Button,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
-
 import axios from 'axios';
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
 
 export default class CategoryScreen extends React.Component {
   static navigationOptions = {
@@ -26,6 +22,9 @@ export default class CategoryScreen extends React.Component {
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
+      textAlign: 'center',
+      flexGrow:0.7, 
+      alignSelf:'center',
       fontWeight: 'bold',
     },
   };
@@ -102,174 +101,63 @@ export default class CategoryScreen extends React.Component {
     else{
       console.log('hola');
     }
+    
     return (
-        <View style={styles.container}>          
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <View style={styles.getStartedContainer}>
-                    <Text style={styles.getStartedText}>
-                    Categoria: {c}
-                    </Text>
-                     <Text style={styles.welcome}> {"\n"} {"\n"} </Text>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' Volver al menu ' onPress ={() => this.props.navigation.navigate('Home')} 
-                     />
-                       {found ? (
-                        <Button color={'rgba(48, 136, 63,1)'} title= ' Ver pregunta ' onPress={ () => this.props.navigation.navigate('Game', {'category':c, 'question':q,'option1':opcion1, 'option2': opcion2, 'option3':opcion3,'option4':opcion4})}  />
-                          ) : (
-                        <Text> No hay preguntas sin responder en esta categoría, vuelve a intentarlo </Text>
-                      )}
-                </View>
-            </ScrollView>
+        <View style={styles.container}>
+
+            <Text style={styles.espacio}> {"\n"} </Text>
+            <Text style={styles.getStartedText}> {c} </Text>
+            <Text style={styles.espacio}> {"\n"} </Text>
+            <View style={styles.containerImage}>
+              <Image style={{width:250, height:250, resizeMode:'contain', alignSelf:'center',}} 
+                      source={
+                        c=="Ciencia" ? require('../assets/images/Ciencia.png')
+                                      : c=="Historia" ? require('../assets/images/Historia.png')
+                                                      : c=="Arte" ? require('../assets/images/Arte.png')
+                                                                  : c=="Geografia" ? require('../assets/images/Geografia.png')
+                                                                                    : c=="Entretenimiento"? require('../assets/images/Entretenimiento.png')
+                                                                                                          : c=="Deporte"? require('../assets/images/Deporte.png')
+                                                                                                                        : require('../assets/images/icon.png')
+                      }
+                />
+            </View>
+            
+            <View style={styles.button}>
+                {found ? ( <Button color={'rgba(48, 136, 63,1)'} title= ' JUGAR ' onPress={ () => this.props.navigation.navigate('Game', {'category':c, 'question':q,'option1':opcion1, 'option2': opcion2, 'option3':opcion3,'option4':opcion4})}  />) 
+                       : ( <Text> No hay preguntas sin responder en esta categoría, vuelve a intentarlo </Text>)
+                }
+                <Text style={styles.espacio}> {"\n"} </Text>
+                <Button color={'#663399'} title= ' VOLVER ' onPress ={() => this.props.navigation.navigate('Home')} />
+            </View>
+          
         </View>
     )}
-
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#9370db',
-    },
-    developmentModeText: {
-      marginBottom: 20,
-      color: 'rgba(0,0,0,0.4)',
-      fontSize: 14,
-      lineHeight: 19,
-      textAlign: 'center',
+      backgroundColor: '#FFFFFF',
     },
     contentContainer: {
       paddingTop: 30,
-    },
-    welcomeContainer: {
-      alignItems: 'center',
-      marginTop: 10,
-      marginBottom: 20,
-    },
-    welcomeImage: {
-      width: 100,
-      height: 80,
-      resizeMode: 'contain',
-      marginTop: 3,
-      marginLeft: -10,
     },
     getStartedContainer: {
       alignItems: 'center',
       marginHorizontal: 50,
     },
-    getQuestionText:{
-      alignItems: 'center',
-      fontSize: 30,
-      color: 'rgba(255, 255, 255, 1)',
-
+    button: {
+      margin: 80,
     },
-    getOptionText:{
-      alignItems: 'center',
-      fontSize: 20,
-
-    },SeparatorLine :{
- 
-      backgroundColor : '#fff',
-      width: 0,
-      height: 40
-       
-      },  
-      ButtonStyle: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: 'rgba(48, 136, 63,1)',
-        borderWidth: 0.5,
-       // borderColor: '#fff',
-        height: 40,
-        width: 300,
-        borderRadius: 5,
-        margin: 5,
-      },
-    homeScreenFilename: {
-      marginVertical: 7,
-    },
-    codeHighlightText: {
-      color: 'rgba(96,100,109, 0.8)',
-    },
-    codeHighlightContainer: {
-      backgroundColor: 'rgba(0,0,0,0.05)',
-      borderRadius: 3,
-      paddingHorizontal: 4,
+    espacio: {
+      fontSize: 10,
+      textAlign: 'center',
+      margin: 2,
     },
     getStartedText: {
       fontSize: 27,
-      color: '#f8f8ff',
-      lineHeight: 28,
+      color: '#000000',
       textAlign: 'center',
-      textShadowColor:'#585858', 
-      textShadowOffset:{width: 5, height: 5}, 
-      textShadowRadius:10, 
+      fontWeight: 'bold',
     },
-    opcionStyle: {
-      fontSize: 17,
-      color: 'rgba(255, 255, 255, 1)',
-      lineHeight: 24,
-      textAlign: 'left',
-    },
-    tabBarInfoContainer: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      ...Platform.select({
-        ios: {
-          shadowColor: 'black',
-          shadowOffset: { height: -3 },
-          shadowOpacity: 0.1,
-          shadowRadius: 3,
-        },
-        android: {
-          elevation: 20,
-        },
-      }),
-      alignItems: 'center',
-      backgroundColor: '#fbfbfb',
-      paddingVertical: 20,
-    },
-    tabBarInfoText: {
-      fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      textAlign: 'center',
-    },
-    navigationFilename: {
-      marginTop: 5,
-    },
-    helpContainer: {
-      marginTop: 15,
-      alignItems: 'center',
-    },
-    helpLink: {
-      paddingVertical: 15,
-    },
-    helpLinkText: {
-      fontSize: 14,
-      color: '#2e78b7',
-    },
-    logout: {
-      fontSize: 14,
-      color: '#2e78b7',
-      textAlign: 'center',
-    },
-    textshadow:{ 
- 
-      fontSize:30, 
-    
-      color:'#ffff00', 
-    
-      paddingLeft:10, 
-    
-      paddingRight:10, 
-    
-      textShadowColor:'#585858', 
-    
-      textShadowOffset:{width: 5, height: 5}, 
-    
-      textShadowRadius:10, 
-    
-      },
   });

@@ -50,9 +50,9 @@ export default class HomeScreen extends React.Component {
               />
             </View>
             <View style={styles.containerButton}>
-              <Button color={'#00B32C'} title="Jugar" onPress= {this._Game} />
+              <Button color={'rgba(48, 136, 63,1)'} title="Jugar" onPress= {this._Game} />
               <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-              <Button color={'#00B32C'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
+              <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
             </View>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   containerButton: { 
-    margin: 25,
+    margin: 50,
   },
   welcomeContainer: {
     alignItems: 'center',

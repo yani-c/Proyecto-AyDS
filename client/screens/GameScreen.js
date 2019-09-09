@@ -26,6 +26,9 @@ export default class GameScreen extends React.Component {
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
+      textAlign: 'center',
+      flexGrow:0.8, 
+      alignSelf:'center',
       fontWeight: 'bold',
     },
   };
