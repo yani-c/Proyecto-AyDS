@@ -47,12 +47,12 @@ export default class AnswerScreen extends React.Component {
     const desc =navigation.getParam('desc','NO-Desc');
     const cor = this.state.respuesta;
     var respuesta;
-    //<PricingCard wrapperStyle={(articleData.percent_change_1h >= 0) ? styles.green : styles.red} ../>
+
     if ( JSON.stringify(cor) == "true") {
-      respuesta = "Correcta!"
+      respuesta = "Correcta! 😃🎉🎊"
     }
     else {
-      respuesta = "Incorrecta :("
+      respuesta = "Incorrecta 😢"
     }
     return (
         <View style={styles.container}>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#9370db',
+    backgroundColor: '#FFFFFF',
   },
   welcome: {
     fontSize: 30,
@@ -97,12 +97,9 @@ const styles = StyleSheet.create({
 
   respuestac: {
     fontSize: 30,
-    color: '#f8f8ff',
-    lineHeight: 31,
+    color: '#000000',
+    lineHeight: 35,
     textAlign: 'center',
-    textShadowColor:'#585858', 
-    textShadowOffset:{width: 5, height: 5}, 
-    textShadowRadius:10, 
   },
   espacio: {
     fontSize: 5,
@@ -121,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 5,
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#4228F8'
+    borderBottomColor: '#000000'
   }
   
 })

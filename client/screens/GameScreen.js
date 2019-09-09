@@ -112,7 +112,7 @@ export default class GameScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#9370db',
+      backgroundColor: '#FFFFFF',
     },
     developmentModeText: {
       marginBottom: 20,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     getQuestionText:{
       alignItems: 'center',
       fontSize: 30,
-      color: 'rgba(255, 255, 255, 1)',
+      color: '#000000',
 
     },
     getOptionText:{
@@ -181,12 +181,9 @@ const styles = StyleSheet.create({
     },
     getStartedText: {
       fontSize: 27,
-      color: '#f8f8ff',
+      color: '#000000',
       lineHeight: 28,
       textAlign: 'center',
-      textShadowColor:'#585858', 
-      textShadowOffset:{width: 5, height: 5}, 
-      textShadowRadius:10, 
     },
     opcionStyle: {
       fontSize: 17,
@@ -242,17 +239,11 @@ const styles = StyleSheet.create({
  
       fontSize:30, 
     
-      color:'#ffff00', 
+      color:'#191970', 
     
       paddingLeft:10, 
     
       paddingRight:10, 
-    
-      textShadowColor:'#585858', 
-    
-      textShadowOffset:{width: 5, height: 5}, 
-    
-      textShadowRadius:10, 
     
       },
   });
