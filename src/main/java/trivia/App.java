@@ -434,13 +434,6 @@ public class App{
 				for(int i=0;i<resp.size();i++){
 					Option o = Option.findById(resp.get(i).getInteger("option_id"));
 					pregResp.add(Question.findById(o.getInteger("question_id")));
-				}System.out.println("TODASSSSSSSSSSSS");
-				for(int i=0;i<questions.size();i++){	
-					System.out.println(questions.get(i).getString("description"));
-				}
-				System.out.println("LAS QUE RESPONDI BIEN");
-				for(int i=0;i<pregResp.size();i++){	
-					System.out.println(pregResp.get(i).getString("description"));
 				}
 				List<Question> qqq = new ArrayList<Question>();
 				for(int i=0;i<questions.size();i++){
@@ -455,10 +448,6 @@ public class App{
 					}
 				}
 				//questions.removeAll(pregResp);
-				System.out.println("ACAAAAAAAAAAAAA LAS QUE NO");
-				for(int i=0;i<qqq.size();i++){	
-					System.out.println(qqq.get(i).getString("description"));
-				}
 				if(!qqq.isEmpty()){ //si tengo preguntas que no respondio bien todavia
 					int num = (int) (Math.random() * qqq.size());					
 					Question q = qqq.get(num); //sacar de questionNUEVA

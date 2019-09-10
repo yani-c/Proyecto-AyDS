@@ -52,10 +52,8 @@ export default class GlobalScreen extends React.Component {
 // Correctas: {JSON.stringify(c1.correct)}
 //Incorrectas: {JSON.stringify(c1.incorrect)}
   render() {
-      //console.log(this.state.categoria1);
       const correct= this.state.correctas;
       const incorrect= this.state.incorrectas;
-      //que me traiga las categorias y el nombre
       return(
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.getStartedContainer}>

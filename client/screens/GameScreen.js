@@ -49,12 +49,9 @@ export default class GameScreen extends React.Component {
     const opcion3=(navigation.getParam('option3', 'NO-Option3')).description;
     const opcion4=(navigation.getParam('option4', 'NO-Option4')).description;
     var id1 = (navigation.getParam('option1', 'NO-Option1')).id;
-    console.log("a ver");
-    console.log(id1);
     var id2 = (navigation.getParam('option2', 'NO-Option2')).id;
     var id3 = (navigation.getParam('option3', 'NO-Option3')).id;
     var id4 = (navigation.getParam('option4', 'NO-Option4')).id;
-    console.log(id1);
     return (
         <View style={styles.container}>          
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>

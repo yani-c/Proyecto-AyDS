@@ -37,7 +37,6 @@ export default class CategoryScreen extends React.Component {
   }
 
   async componentWillMount () {
-    console.log("por el prim");
     const { navigation } = this.props;
     const cat = navigation.getParam('category', 'NO-Category');
     const name_c=navigation.getParam('name_c','NO-NameCategory');
@@ -48,7 +47,6 @@ export default class CategoryScreen extends React.Component {
     })
     .then(response => JSON.parse(JSON.stringify(response)))
     .then(response => {
-      console.log(response.data);
       const f =JSON.parse(JSON.stringify(response.data.Found));
       const q =JSON.parse(JSON.stringify(response.data.Pregunta));
       const o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
@@ -60,7 +58,7 @@ export default class CategoryScreen extends React.Component {
   }
 
   async componentWillReceiveProps () {
-    console.log("por seg");
+
     const { navigation } = this.props;
     const cat = navigation.getParam('category', 'NO-Category');
     const name_c=navigation.getParam('name_c','NO-NameCategory');
@@ -71,7 +69,6 @@ export default class CategoryScreen extends React.Component {
     })
     .then(response => JSON.parse(JSON.stringify(response)))
     .then(response => {
-      console.log(response.data);
       const f =JSON.parse(JSON.stringify(response.data.Found));
       const q =JSON.parse(JSON.stringify(response.data.Pregunta));
       const o1 =JSON.parse(JSON.stringify(response.data.Opcion1));
@@ -93,15 +90,6 @@ export default class CategoryScreen extends React.Component {
     const opcion2=this.state.option2;
     const opcion3=this.state.option3;
     const opcion4=this.state.option4;
-    console.log(found);
-    console.log(c);
-    if(found == true){
-      console.log('chau');
-    }
-    else{
-      console.log('hola');
-    }
-    
     return (
         <View style={styles.container}>
 
