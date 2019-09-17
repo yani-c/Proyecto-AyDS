@@ -3,12 +3,12 @@ import { Text } from 'react-native';
 
 export default class OtherScreen extends React.Component {
   static navigationOptions = {
-    title: 'Please sign in',
+    title: 'Entre a su cuenta',
   };
 
   render() {
     return (
-      <Text> other screen </Text>
+      <Text> otra pantalla </Text>
     );
   }
 }

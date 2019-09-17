@@ -42,7 +42,7 @@ export default class SignInScreen extends React.Component {
         <Image style={{width:150, height:150, resizeMode:'contain', alignSelf:'center',}} source={require('../assets/images/logo.png')}/>
 
         <TextInput
-          placeholder="Username"
+          placeholder="Nombre de Usuario"
           placeholderTextColor = 'gray' 
           style={styles.input}
           onChangeText={(value) => this.setState({ username: value })}
@@ -50,7 +50,7 @@ export default class SignInScreen extends React.Component {
         />
 
         <TextInput
-          placeholder="Password"
+          placeholder="Contraseña"
           placeholderTextColor = 'gray' 
           style={styles.input}
           secureTextEntry={true}
@@ -60,10 +60,10 @@ export default class SignInScreen extends React.Component {
 
         
         <View style={styles.button}>
-         <Button color={'#663399'} title="Sign in" onPress={this._signIn} />
+         <Button color={'#663399'} title="Iniciar Sesión" onPress={this._signIn} />
          <Text style={styles.espacio}> {"\n"} </Text>
-         <Text style={styles.negrita}> Don't have an account? 
-          <Text style={styles.conButton} onPress ={() => this.props.navigation.navigate('SignUp')}>  SIGN UP </Text>
+         <Text style={styles.negrita}> No tiene una cuenta? 
+          <Text style={styles.conButton} onPress ={() => this.props.navigation.navigate('SignUp')}>  Crear Cuenta </Text>
          </Text>
         </View>  
      
@@ -93,11 +93,11 @@ export default class SignInScreen extends React.Component {
       })
     .catch((error) => {
       if(error.toString().match(/401/)) {
-        alert("Username or Password incorrect");
+        alert("Nombre de usuario o contraseña incorrecta");
         return;
       }
 
-      alert("Networking Error");
+      alert("Problema de Network");
     });
   };
 }

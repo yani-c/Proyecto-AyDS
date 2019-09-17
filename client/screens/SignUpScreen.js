@@ -43,7 +43,7 @@ export default class SignUpScreen extends React.Component {
             <Image style={{width:150, height:150, resizeMode:'contain', alignSelf:'center',}} source={require('../assets/images/logo.png')}/>
 
         <TextInput
-          placeholder="Username"
+          placeholder="Nombre de Usuario"
           placeholderTextColor = 'gray'
           style={styles.input}
           onChangeText={(value) => this.setState({ username: value })}
@@ -59,7 +59,7 @@ export default class SignUpScreen extends React.Component {
         />
 
         <TextInput
-          placeholder="Password"
+          placeholder="Contraseña"
           placeholderTextColor = 'gray'
           style={styles.input}
           secureTextEntry={true}
@@ -70,7 +70,7 @@ export default class SignUpScreen extends React.Component {
         <Text style={styles.espacio}> {"\n"} </Text>
 
         <View style={styles.button}>
-          <Button color={'#663399'} title="Sign up" onPress={this._signUp} />
+          <Button color={'#663399'} title="Crear Cuenta" onPress={this._signUp} />
         </View>
 
         </View>
@@ -93,9 +93,11 @@ export default class SignUpScreen extends React.Component {
     })
       .then(response => JSON.stringify(response))
       .then(response => {
-        // Handle the JWT response here
         this.props.navigation.navigate('SignIn');
       })
+      .catch((error) => {
+        alert("Error, vuelva a intentarlo.");
+      });
   };
 }
 
