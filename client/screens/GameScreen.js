@@ -35,6 +35,7 @@ export default class GameScreen extends React.Component {
 
   constructor(props){
     super(props);
+    this.jump = this.jump.bind(this)
     this.state = {category:"",
       question: "", option1:"",option2:"",option3:"",option4:"",
     };
@@ -96,15 +97,29 @@ export default class GameScreen extends React.Component {
                        {opcion4}
                      </Text>
                      </TouchableOpacity>
-                
+                     <Text style={styles.welcome}> {"\n"}</Text>
+                     
+                     <Button color={'rgba(48, 136, 63,1)'} title= 'Saltear Pregunta' onPress={this.jump}/>
+
                 </View>
             </ScrollView>
         </View>
     )};
 
+
+jump = async () => {
+  axios.get(API_HOST+"/randomCategory", {
+        headers: { 'Authorization' : await AsyncStorage.getItem('userToken')}
+  })
+  .then(response => JSON.parse(JSON.stringify(response)))
+  .then(response => {
+    const category= response.data.cat ;
+    const name=response.data.name;
+    this.props.navigation.navigate('Category',{'category': category,'name_c':name});
+  })
+};
+
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
