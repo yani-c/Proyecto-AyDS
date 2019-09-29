@@ -2,21 +2,12 @@ import React from 'react';
 import {API_HOST} from 'react-native-dotenv';
 import {
   AsyncStorage,
-  Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
-  Button,
-  Alert,
 } from 'react-native';
 
 import axios from 'axios';
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
 
 export default class GlobalScreen extends React.Component {
   static navigationOptions = {
@@ -52,28 +43,40 @@ export default class GlobalScreen extends React.Component {
 // Correctas: {JSON.stringify(c1.correct)}
 //Incorrectas: {JSON.stringify(c1.incorrect)}
   render() {
+    
+      function dosDecimales(n) {
+        let t=n.toString();
+        let regex=/(\d*.\d{0,2})/;
+        return t.match(regex)[0];
+      }
+
       const correct= this.state.correctas;
       const incorrect= this.state.incorrectas;
+      var totalPreg= parseInt(correct)+parseInt(incorrect);
+      var porcentajeCorrectas= dosDecimales(correct*100/totalPreg);
+      var porcentajeIncorrectas= dosDecimales(incorrect*100/totalPreg);
+      
+      
       return(
+        
         <View style={styles.container}>
-            <ScrollView style={styles.container} contentContainerStyle={styles.getStartedContainer}>
-                <View style={styles.getStartedContainer}>
-                    <Text style={styles.getStartedText}> {"\n"} {"\n"} {"\n"} {"\n"} {"\n"}</Text>
-                    <Text style={styles.correctaStyle}>
-                    Correctas: {" "}
-                    {correct}
-                    <Text style={styles.getStartedText}> {"\n"} {"\n"} </Text>
-                    </Text>
-                    <Text style={styles.incorrectaStyle}>
-                    Incorrectas: {" "}
-                    {incorrect}
-                    </Text>
-                </View>
-            </ScrollView>
-        </View>
-
+          <Text style={styles.espacio}> {"\n"} </Text>
+          <Text style={styles.espacio}> {"\n"} </Text>
+         <Text style={styles.correctaStyle}>
+              Correctas: {" "}
+              {porcentajeCorrectas+'%'}
+        </Text>
+        <Text style={styles.espacio}> {"\n"} </Text>
+        <Text style={styles.espacio}> {"\n"} </Text>
+        <Text style={styles.incorrectaStyle}>
+            Incorrectas: {" "}
+            {porcentajeIncorrectas+'%'}
+        </Text>
+     </View>
+      
       );
   }
+  
 
 }
 
@@ -97,6 +100,11 @@ const styles = StyleSheet.create({
     getStartedContainer: {
       alignItems: 'center',
       marginHorizontal: 50,
+    },
+    espacio: {
+      fontSize: 12,
+      textAlign: 'center',
+      margin: 2,
     },
     getStartedText: {
       fontSize: 17,
