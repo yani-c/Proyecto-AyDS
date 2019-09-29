@@ -212,7 +212,7 @@ public class App{
 		get("/statistics" , (req,res) ->{
 			Statistic s= new Statistic();
 			List<Category> categories= Category.findAll();
-			String aux="{";
+			String aux="{\"cant\": \""+categories.size()+"\", \"cats\": {";
 			int i=1;
 			for(Category c : categories){
 				s=Statistic.findFirst("user_id= ? and category_id =?", currentUser.get("id"), c.getInteger("id"));
@@ -224,11 +224,14 @@ public class App{
 					s.set("incorrect", 0);
 					s.saveIt();
 				}
-				aux=aux+"\"categoria"+i+"\": {\"nombre\": \""+c.get("category_name")+"\"";
-				aux=aux+", \"correct\": \""+s.getInteger("correct")+"\",\"incorrect\": \""+s.getInteger("incorrect")+"\"},";
+				aux=aux+"\"cat"+i+"\": {\"nombre\": \""+c.get("category_name")+"\",";
+				aux=aux+"\"correct\": \""+s.getInteger("correct")+"\",\"incorrect\": \""+s.getInteger("incorrect")+"\"}";
 				i++;
+				if(i<=categories.size()){
+					aux=aux+",";
+				}
 			}
-			aux=aux+"\"Otro\":\"\"}";
+			aux=aux+"}}";
 			res.type("application/json");
 			return aux;
 		});
