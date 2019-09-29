@@ -251,6 +251,13 @@ public class App{
 			return aux;
 		});
 
+		//devuelve la cantidad de veces que se repondio correcta e incorrectamente una pregunta
+		get("/statisticsQuestion/:id", (req,res) ->{
+			Question q= Question.findById(":id");
+			res.type("application/json");
+			String c="{\"corrects\":\""+q.getInteger("correct")+"\", \"incorrects\":\""+q.getInteger("incorrect")+"\"}";
+			return c;
+		});
 
 
 //------------------------------------POST------------------------------------
@@ -287,6 +294,8 @@ public class App{
 		    question.set("category_id", bodyParams.category_id);
 		    question.set("user_id",currentUser.get("id"));
 		    question.set("active", false);
+			question.set("correct",0);
+			question.set("incorrect",0);
         question.save();
         for(OptionParam item: bodyParams.options) {
           Option option = new Option();
@@ -484,11 +493,11 @@ public class App{
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			Answer a= new Answer();
 			Option o= Option.findById(bodyParams.get("id"));
+			Question q= Question.findById(o.getInteger("question_id"));
 			a.set("user_id",currentUser.get("id"));
 			a.set("option_id", o.getInteger("id"));
 			a.set("correct", o.getBoolean("correct"));
 			a.saveIt();
-			Question q= Question.findById(o.getInteger("question_id"));
 			Statistic s= Statistic.findFirst("user_id = ? and category_id = ?",currentUser.get("id"),q.getInteger("category_id"));
 			if(s==null){
 				s= new Statistic();
@@ -497,19 +506,32 @@ public class App{
 				s.set("correct", 0);
 				s.set("incorrect", 0);
 			}
+			String json;
 			if(o!=null){
+				
+				if(q.getInteger("correct")==null){
+					q.set("correct",0);
+					if(q.getInteger("incorrect")==null){
+						q.set("incorrect",0);
+					}
+				}
 				if(o.getBoolean("correct")){
+					q.set("correct",q.getInteger("correct")+1);
 					s.set("correct",s.getInteger("correct")+1);
 					s.saveIt();
-					String json = "{\"Respuesta\":true}";
-					return json;
+					q.saveIt();
+					json = "{\"Respuesta\":true}";
 				}
 				else{
+					q.set("incorrect",q.getInteger("incorrect")+1);
 					s.set("incorrect", s.getInteger("incorrect")+1);
 					s.saveIt();
-					String json = "{\"Respuesta\":false}";
-					return json;
+					q.saveIt();
+					json = "{\"Respuesta\":false}";
 				}
+				System.out.println("Esta preg tiene correctas:"+q.getInteger("correct"));
+				System.out.println("Esta preg tiene incorrectas:"+q.getInteger("incorrect"));
+				return json;
 			}
 			else{
 				return "Respuesta invalida";

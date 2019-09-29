@@ -28,6 +28,8 @@ create table if not exists questions(
 	user_id int(11),
     primary key (id),
     active BOOLEAN,
+	correct int(11),
+	incorrect int(11),
     constraint fkuser foreign key (user_id) references users (id),
 	constraint fkcategory foreign key (category_id) references categories (id),
     unique(description),
@@ -76,7 +78,6 @@ create table if not exists statistics (
     created_at datetime,
     update_at datetime
     );
-    
     
 
     
