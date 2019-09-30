@@ -56,6 +56,10 @@ export default class GlobalScreen extends React.Component {
       var porcentajeCorrectas= dosDecimales(correct*100/totalPreg);
       var porcentajeIncorrectas= dosDecimales(incorrect*100/totalPreg);
       
+      if (totalPreg==0){
+        porcentajeCorrectas=0;
+        porcentajeIncorrectas=0;
+      }
       
       return(
         
