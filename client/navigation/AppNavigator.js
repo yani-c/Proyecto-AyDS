@@ -11,9 +11,10 @@ import GlobalStatScreen from '../screens/GlobalStatScreen';
 import AnswerScreen from '../screens/AnswerScreen.js';
 import StatisticsMenu from '../screens/StatisticsMenu.js';
 import CategStatScreen from '../screens/CategStatScreen.js';
+import ScoreScreen from '../screens/ScoreScreen.js';
 
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen, Category: CategoryScreen, Global : GlobalStatScreen, Answer : AnswerScreen, StatsMenu : StatisticsMenu, CatStat : CategStatScreen});
+const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen, Category: CategoryScreen, Global : GlobalStatScreen, Answer : AnswerScreen, StatsMenu : StatisticsMenu, CatStat : CategStatScreen, Score: ScoreScreen});
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: SignUpScreen });
 export default createAppContainer(createSwitchNavigator(

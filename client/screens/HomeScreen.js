@@ -27,7 +27,7 @@ export default class HomeScreen extends React.Component {
     headerTintColor: '#FFFFFF',
     headerTitleStyle: {
       textAlign: 'center',
-      flexGrow:1, 
+      flexGrow:1,
       alignSelf:'center',
       fontWeight: 'bold',
     },
@@ -36,7 +36,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-          
+
         <ScrollView contentContainerStyle={styles.contentContainer}>
             <View style={styles.welcomeContainer}>
               <Text style={styles.espacio}> {"\n"} </Text>
@@ -55,11 +55,12 @@ export default class HomeScreen extends React.Component {
               <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
             </View>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
+            <Button color={'rgba(48, 136, 63,1)'} title="Puntaje" onPress= {()=> this.props.navigation.navigate('Score')} />
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
         </ScrollView>
           <Text style={styles.logout} onPress={this._handleLogout}> SALIR </Text>
           <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-        
+
       </View>
 
     );
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 30,
   },
-  containerButton: { 
+  containerButton: {
     margin: 50,
   },
   welcomeContainer: {
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
   },
- 
+
   logout: {
     textAlign: 'center',
     color: '#663399',

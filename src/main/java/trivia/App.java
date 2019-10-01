@@ -129,8 +129,8 @@ public class App{
 				return "{\"Error\": No hay categorias cargadas. Nada para mostrar}";
 			}
 		});
-	
-	
+
+
 		//muestra una categoria aleatoria
 		get("/randomCategory" , (req, res) ->{
 			List<Category> categories = Category.findAll();
@@ -259,6 +259,12 @@ public class App{
 			return c;
 		});
 
+    get("/score", (req,res) ->{
+      User u = User.findById(currentUser.get("id"));
+      res.type("aplication/json");
+      String aux= "{\"score\":\""+u.getInteger("score")+"\"}";
+      return aux;
+    });
 
 //------------------------------------POST------------------------------------
 
@@ -439,9 +445,9 @@ public class App{
 		post("/game" , (req,res) ->{
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			List<Question> questions = Question.where("active = ? and category_id = ? ", true, bodyParams.get("category_id"));
-			if(!questions.isEmpty()){ //si tengo preguntas 
+			if(!questions.isEmpty()){ //si tengo preguntas
 				//saco las respuestas correctas del usuario
-				List<Answer> resp = Answer.where("user_id= ? and correct= ?", currentUser.get("id"), true); 
+				List<Answer> resp = Answer.where("user_id= ? and correct= ?", currentUser.get("id"), true);
 				List<Question> pregResp = new ArrayList<Question>();
 				for(int i=0;i<resp.size();i++){
 					Option o = Option.findById(resp.get(i).getInteger("option_id"));
@@ -451,7 +457,7 @@ public class App{
 				for(int i=0;i<questions.size();i++){
 					boolean b= true;
 					for(int j=0;j<pregResp.size();j++){
-						if(pregResp.get(j).getInteger("id") == questions.get(i).getInteger("id")){	
+						if(pregResp.get(j).getInteger("id") == questions.get(i).getInteger("id")){
 							b=false;
 						}
 					}
@@ -461,11 +467,11 @@ public class App{
 				}
 				//questions.removeAll(pregResp);
 				if(!qqq.isEmpty()){ //si tengo preguntas que no respondio bien todavia
-					int num = (int) (Math.random() * qqq.size());					
+					int num = (int) (Math.random() * qqq.size());
 					Question q = qqq.get(num); //sacar de questionNUEVA
 					List<Option> options= Option.where("question_id = ?", q.get("id"));
 					String aux=  "{\"Found\": true,\"Pregunta\":"+ q.toJson(true,"id","description", "category_id");
-					//aux= aux+", \"Opciones\": {\"";  
+					//aux= aux+", \"Opciones\": {\"";
 					int i=1;
 					for(Option o : options){
 						aux= aux+", \"Opcion"+i+"\" : "+o.toJson(true,"id","description");
@@ -482,9 +488,9 @@ public class App{
 			}
 		});
 
-		
+
 		//hacer metodo que mire las estadisticas por categoria, si llega a 10 en x categoria, subirle un nivel.
-		//Este metodo se debe ejecutar siempre despues de responder 
+		//Este metodo se debe ejecutar siempre despues de responder
 
 
 		//Recibe una respuesta, la carga e informa si es correcta o no
@@ -499,16 +505,18 @@ public class App{
 			a.set("correct", o.getBoolean("correct"));
 			a.saveIt();
 			Statistic s= Statistic.findFirst("user_id = ? and category_id = ?",currentUser.get("id"),q.getInteger("category_id"));
+      User u= User.findById(currentUser.get("id"));
 			if(s==null){
 				s= new Statistic();
 				s.set("user_id", currentUser.get("id"));
 				s.set("category_id",q.getInteger("category_id"));
 				s.set("correct", 0);
 				s.set("incorrect", 0);
+        u.set("score", 0);
 			}
 			String json;
 			if(o!=null){
-				
+
 				if(q.getInteger("correct")==null){
 					q.set("correct",0);
 					if(q.getInteger("incorrect")==null){
@@ -518,15 +526,21 @@ public class App{
 				if(o.getBoolean("correct")){
 					q.set("correct",q.getInteger("correct")+1);
 					s.set("correct",s.getInteger("correct")+1);
+          u.set("score", u.getInteger("score")+10);
 					s.saveIt();
 					q.saveIt();
+          u.saveIt();
 					json = "{\"Respuesta\":true}";
 				}
 				else{
 					q.set("incorrect",q.getInteger("incorrect")+1);
 					s.set("incorrect", s.getInteger("incorrect")+1);
+          if (u.getInteger("score")>0){
+            u.set("score", u.getInteger("score")-10);
+          }
 					s.saveIt();
 					q.saveIt();
+          u.saveIt();
 					json = "{\"Respuesta\":false}";
 				}
 				System.out.println("Esta preg tiene correctas:"+q.getInteger("correct"));

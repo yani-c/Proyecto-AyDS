@@ -1,11 +1,12 @@
-create database if not exists trivia_test;
-use trivia_test;
+create database if not exists trivia_dev;
+use trivia_dev;
 CREATE TABLE if not exists users (
     username varchar(15) not null,
     dni int (8) not null,
     id int(11) not null auto_increment,
     administrator BOOLEAN,
     password VARCHAR(56),
+    score int(4),
     primary key (id),
     unique(dni), unique(username),
     created_at datetime,
@@ -38,6 +39,7 @@ create table if not exists questions(
 );
 create table if not exists levels (
 	id int(2) auto_increment not null,
+    lvl int(2) not null default 0,  
     category_id int(1) not null,
     constraint fklevel foreign key (category_id) references categories (id),
     primary key(id),
@@ -47,12 +49,11 @@ create table if not exists levels (
     
 create table if not exists options (
 	id int(1) not null auto_increment primary key,
-    description varchar(25),
+    description varchar(100),
     question_id int(11),
     correct boolean,
     constraint fktable foreign key (question_id) references questions (id)
     ON DELETE CASCADE,
-    unique(description),
     created_at datetime,
     update_at datetime
     );
@@ -71,7 +72,7 @@ create table if not exists answers (
 create table if not exists statistics (
 	id int(11) not null auto_increment primary key,
 	user_id int(50) not null,
-    category_id int(11) not null,
+    category_id int(10) not null,
     correct int(11), incorrect int(11),
     constraint fku foreign key(user_id) references users(id),
     constraint fkc foreign key(category_id) references categories(id),
@@ -80,13 +81,6 @@ create table if not exists statistics (
     );
     
 
-    
-
-    
-
-
-
-	
     
     
  
