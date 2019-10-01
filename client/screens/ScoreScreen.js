@@ -11,7 +11,7 @@ import axios from 'axios';
 
 export default class ScoreScreen extends React.Component {
   static navigationOptions = {
-    title:'',
+    title:'Puntaje',
     headerStyle: {
       backgroundColor: '#663399',
     },
