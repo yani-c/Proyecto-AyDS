@@ -33,6 +33,7 @@ class OptionParam
 public class App{
 
 	static User currentUser;
+	static int[] level = {0,2,6,12,20,30,42,56,72,90,110};
 
 	public static void main( String[] args ){
 
@@ -259,11 +260,39 @@ public class App{
 			return c;
 		});
 
-    get("/score", (req,res) ->{
-      User u = User.findById(currentUser.get("id"));
-      res.type("aplication/json");
-      String aux= "{\"score\":\""+u.getInteger("score")+"\"}";
-      return aux;
+    	get("/score", (req,res) ->{
+      		User u = User.findById(currentUser.get("id"));
+      		res.type("aplication/json");
+      		String aux= "{\"score\":\""+u.getInteger("score")+"\"}";
+      		return aux;
+    	});
+
+	  	get("/level", (req,res) ->{
+      		List<Level> lvl= Level.where("user_id = ?", currentUser.get("id"));
+      		if (lvl.isEmpty()){
+				List<Category> cat = Category.findAll();
+				for (Category c: cat){
+					Level l = new Level();
+					l.set("level",0);
+					l.set("user_id",currentUser.get("id"));
+					l.set("category_id",c.getInteger("id"));
+					l.saveIt();
+					l.reset();
+				}
+			 	lvl= Level.where("user_id = ?", currentUser.get("id"));
+			}
+			String aux ="{";
+			int i =1;
+			for (Level l: lvl){
+				Category c = Category.findById(l.getInteger("category_id"));
+				aux = aux+"\"c"+i+"\":{\"name\":\""+c.getString("category_name")+"\",\"level\":\""+l.getInteger("level")+"\"}";
+				i++;
+				if(i<=lvl.size()){
+					aux=aux+",";
+				}
+			}
+			aux =aux+"}";
+			return aux;
     });
 
 //------------------------------------POST------------------------------------
@@ -526,10 +555,25 @@ public class App{
 				if(o.getBoolean("correct")){
 					q.set("correct",q.getInteger("correct")+1);
 					s.set("correct",s.getInteger("correct")+1);
-          u.set("score", u.getInteger("score")+10);
+          			u.set("score", u.getInteger("score")+10);
 					s.saveIt();
 					q.saveIt();
-          u.saveIt();
+          			u.saveIt();
+					Statistic aux = Statistic.findFirst("user_id = ? and category_id = ?",currentUser.get("id"), q.getInteger("category_id"));
+					Level l = Level.findFirst("user_id=? and category_id=?", currentUser.get("id"),q.getInteger("category_id"));
+					if (l==null){
+						l.set("level",0);
+						l.set("user_id",currentUser.get("id"));
+						l.set("category_id",q.getInteger("category_id"));
+						l.saveIt();
+					}
+					for (int i=0; i<level.length ;i++){
+						if (level[i]>aux.getInteger("correct") ){
+							l.set("level",i-1);
+							l.saveIt();
+							i=level.length;
+						}
+					}
 					json = "{\"Respuesta\":true}";
 				}
 				else{
