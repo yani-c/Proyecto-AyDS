@@ -3,14 +3,11 @@ import {API_HOST} from 'react-native-dotenv';
 import {
   AsyncStorage,
   Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Button,
-  Alert,
 } from 'react-native';
 
 import axios from 'axios';
@@ -55,6 +52,8 @@ export default class HomeScreen extends React.Component {
               <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
               <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
               <Button color={'rgba(48, 136, 63,1)'} title="Puntaje" onPress= {()=> this.props.navigation.navigate('Score')} />
+              <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
+              <Button color={'rgba(48, 136, 63,1)'} title="Nivel" onPress= {()=> this.props.navigation.navigate('Level')} />
             </View>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
