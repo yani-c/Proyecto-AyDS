@@ -49,10 +49,10 @@ export default class AnswerScreen extends React.Component {
     var respuesta;
 
     if ( JSON.stringify(cor) == "true") {
-      respuesta = "Correcta! 😃🎉🎊"
+      respuesta = "Correcta 😃 \n \n +10 puntos ✅"
     }
     else {
-      respuesta = "Incorrecta 😢"
+      respuesta = "Incorrecta 😢 \n \n -10 puntos ❌"
     }
     return (
         <View style={styles.container}>

@@ -9,9 +9,9 @@ import {
 
 import axios from 'axios';
 
-export default class GlobalScreen extends React.Component {
+export default class ScoreScreen extends React.Component {
   static navigationOptions = {
-    title:'Estadísticas Globales',
+    title:'',
     headerStyle: {
       backgroundColor: '#663399',
     },
@@ -45,10 +45,13 @@ export default class GlobalScreen extends React.Component {
 
     return(
       <View style={styles.container}>
-        <Text style={styles.espacio}> {"\n"} </Text>
-        <Text style={styles.espacio}> {"\n"} </Text>
-       <Text style={styles.correctaStyle}>
-            Puntaje: {puntaje}
+       <Text style={styles.espacio}> {"\n \n \n \n \n \n \n \n \n \n \n \n"} </Text>
+       <Text style={styles.puntajeStyle}>
+          Puntaje: 
+      </Text>
+      <Text style={styles.espacio}> {"\n"} </Text>
+      <Text style= {styles.scoreStyle} > 
+        {puntaje}
       </Text>
       <Text style={styles.espacio}> {"\n"} </Text>
       <Text style={styles.espacio}> {"\n"} </Text>
@@ -64,17 +67,21 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#CDCDCD',
     },
-    correctaStyle: {
-      fontSize: 30,
-      color: '#32cd32',
-      lineHeight: 41,
+    puntajeStyle: {
+      fontSize: 50,
+      color: '#000000',
+      lineHeight: 70,
       textAlign: 'center',
+      
     },
-    incorrectaStyle: {
-      fontSize: 29,
-      color: '#ff0000',
-      lineHeight: 30,
+    scoreStyle: {
+      fontSize: 120,
+      color: '#228b22',
+      lineHeight: 121,
       textAlign: 'center',
+      fontStyle: 'italic',
+      fontWeight: 'bold',
+      textDecorationLine: 'underline',
     },
     getStartedContainer: {
       alignItems: 'center',
@@ -90,5 +97,6 @@ const styles = StyleSheet.create({
       color: 'rgba(255, 255, 255, 1)',
       lineHeight: 40,
       textAlign: 'center',
+
     },
   });

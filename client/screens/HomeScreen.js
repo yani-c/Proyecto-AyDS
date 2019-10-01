@@ -53,9 +53,10 @@ export default class HomeScreen extends React.Component {
               <Button color={'rgba(48, 136, 63,1)'} title="Jugar" onPress= {this._Game} />
               <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
               <Button color={'rgba(48, 136, 63,1)'} title="Estadísticas" onPress= {()=> this.props.navigation.navigate('StatsMenu')} />
+              <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
+              <Button color={'rgba(48, 136, 63,1)'} title="Puntaje" onPress= {()=> this.props.navigation.navigate('Score')} />
             </View>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
-            <Button color={'rgba(48, 136, 63,1)'} title="Puntaje" onPress= {()=> this.props.navigation.navigate('Score')} />
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
         </ScrollView>
           <Text style={styles.logout} onPress={this._handleLogout}> SALIR </Text>
