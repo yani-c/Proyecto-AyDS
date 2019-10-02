@@ -13,7 +13,7 @@ import axios from 'axios';
 
 export default class LevelScreen extends React.Component {
   static navigationOptions = {
-    title:'Nivel',
+    title:'NIVEL POR CATEGORIA',
     headerStyle: {
       backgroundColor: '#663399',
     },
@@ -47,7 +47,6 @@ export default class LevelScreen extends React.Component {
 
   render() {
     const level = this.state.level;
-    console.log(level);
     return(
         <View style={styles.container}>
         <FlatList          
@@ -56,11 +55,12 @@ export default class LevelScreen extends React.Component {
           renderItem={({ item }) => (
             
               <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+                <Text style={styles.espacio}> {"\n"} </Text>
                 <View style={styles.getStartedContainer}>
-                  <Text style={styles.categoryStyle}>
+                  <Text style={styles.levelCatStyle}>
                     {item.name} {"\n"}
                   </Text>
-                  <Text style={styles.correctas}>
+                  <Text style={styles.levelStyle}>
                     Nivel:  {" "} {item.level}
                   </Text>
                 </View>
@@ -80,16 +80,16 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#CDCDCD',
     },
-    correctaStyle: {
-      fontSize: 30,
-      color: '#32cd32',
-      lineHeight: 41,
-      textAlign: 'center',
+    levelCatStyle: {
+      fontSize:25, 
+      color:'#663399', 
+      paddingLeft:30, 
+      paddingRight:30, 
     },
-    incorrectaStyle: {
-      fontSize: 29,
-      color: '#ff0000',
-      lineHeight: 30,
+    levelStyle: {
+      fontSize: 20,
+      color: '#000000',
+      lineHeight: 41,
       textAlign: 'center',
     },
     getStartedContainer: {
@@ -97,14 +97,9 @@ const styles = StyleSheet.create({
       marginHorizontal: 50,
     },
     espacio: {
-      fontSize: 12,
+      fontSize: 7,
       textAlign: 'center',
       margin: 2,
     },
-    getStartedText: {
-      fontSize: 17,
-      color: 'rgba(255, 255, 255, 1)',
-      lineHeight: 40,
-      textAlign: 'center',
-    },
+  
   });
