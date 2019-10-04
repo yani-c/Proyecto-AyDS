@@ -2,35 +2,31 @@ import React from 'react';
 import {API_HOST} from 'react-native-dotenv';
 import {
   AsyncStorage,
-  Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   Button,
-  Alert,
 } from 'react-native';
 
 import axios from 'axios';
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
 
 export default class GameScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Juego',
-    headerStyle: {
-      backgroundColor: '#663399',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      textAlign: 'center',
-      flexGrow:0.8, 
-      alignSelf:'center',
-      fontWeight: 'bold',
-    },
+  static navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('category', 'NO-Category'),
+        headerStyle: {
+            backgroundColor: '#663399',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          textAlign: 'center',
+          flexGrow:0.8, 
+          alignSelf:'center',
+          fontWeight: 'bold',
+        },
+    };
   };
 
   constructor(props){
@@ -43,7 +39,6 @@ export default class GameScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const c=navigation.getParam('category', 'NO-Category');
     const q=navigation.getParam('question', 'NO-Question');
     const opcion1=(navigation.getParam('option1', 'NO-Option1')).description;
     const opcion2=(navigation.getParam('option2', 'NO-Option2')).description;
@@ -56,52 +51,35 @@ export default class GameScreen extends React.Component {
     return (
         <View style={styles.container}>          
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <View style={styles.getStartedContainer}>
-                    <Text style={styles.getStartedText}>
-                    Categoria: {c}
-                    </Text>
-                    <Text style={styles.welcome}> {"\n"} {"\n"} </Text> 
-                     <Text style={styles.textshadow}>
-                        ¿{q.description}
-                     </Text>
-                     <Text style={styles.welcome}> {"\n"} {"\n"} </Text>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} 
-                     />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion1}
-                     </Text>
-                     </TouchableOpacity>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} 
-                     />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion2}
-                     </Text>
-                     </TouchableOpacity>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}
-                     />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion3}
-                     </Text>
-                     </TouchableOpacity>
-                     <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
-                     <Button color={'rgba(48, 136, 63,1)'} title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} 
-                     />
-                     <View style={styles.SeparatorLine} />
-                     <Text style={styles.opcionStyle}>
-                       {opcion4}
-                     </Text>
-                     </TouchableOpacity>
-                     <Text style={styles.welcome}> {"\n"}</Text>
-                     
-                     <Button color={'rgba(48, 136, 63,1)'} title= 'Saltear Pregunta' onPress={this.jump}/>
-
-                </View>
+              <Text style={styles.espacio}> </Text>
+              <Text style={styles.espacio}> </Text>
+              <View style={styles.pregunta}>
+                <Text style={styles.espacio}> </Text> 
+                <Text style={styles.textshadow}> ¿{q.description} </Text>
+                <Text style={styles.espacio}> </Text>
+              </View>
+              <View style={styles.opciones}>
+                <Text style={styles.espacio}> </Text>
+                <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                  <Button color={'rgba(48, 136, 63,1)'} title= ' 1 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion1, 'ident': id1})} />
+                  <Text style={styles.opcionStyleText}> {opcion1} </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                  <Button color={'rgba(48, 136, 63,1)'} title= ' 2 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion2, 'ident': id2})} />
+                  <Text style={styles.opcionStyleText}> {opcion2}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                  <Button color={'rgba(48, 136, 63,1)'} title= ' 3 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion3, 'ident': id3})}/>
+                  <Text style={styles.opcionStyleText}> {opcion3}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.ButtonStyle} activeOpacity={0.5}>
+                  <Button color={'rgba(48, 136, 63,1)'} title= ' 4 ' onPress ={() => this.props.navigation.navigate('Answer', {'desc': opcion4, 'ident': id4})} />
+                  <Text style={styles.opcionStyleText}> {opcion4}</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.buttonSaltear}>
+                <Button color={'#663399'} title= 'Saltear Pregunta' onPress={this.jump}/>
+              </View>                  
             </ScrollView>
         </View>
     )};
@@ -124,72 +102,37 @@ jump = async () => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#FFFFFF',
-    },
-    developmentModeText: {
-      marginBottom: 20,
-      color: 'rgba(0,0,0,0.4)',
-      fontSize: 14,
-      lineHeight: 19,
-      textAlign: 'center',
+      backgroundColor: '#CDCDCD',
     },
     contentContainer: {
       paddingTop: 30,
     },
-    welcomeContainer: {
+    pregunta: {
+      backgroundColor: '#663399',
+      borderRadius:15,
+      margin: 15,
+    },
+    espacio: {
+      fontSize: 8,
+      textAlign: 'center',
+      margin: 5,
+    },
+    buttonSaltear: {
+      margin: 50,
+      borderRadius: 5,
+    },
+    opciones: {
       alignItems: 'center',
-      marginTop: 10,
-      marginBottom: 20,
     },
-    welcomeImage: {
-      width: 100,
-      height: 80,
-      resizeMode: 'contain',
-      marginTop: 3,
-      marginLeft: -10,
-    },
-    getStartedContainer: {
+    ButtonStyle: {
+      flexDirection: 'row',
       alignItems: 'center',
-      marginHorizontal: 50,
-    },
-    getQuestionText:{
-      alignItems: 'center',
-      fontSize: 30,
-      color: '#000000',
-
-    },
-    getOptionText:{
-      alignItems: 'center',
-      fontSize: 20,
-
-    },SeparatorLine :{
- 
-      backgroundColor : '#fff',
-      width: 0,
-      height: 40
-       
-      },  
-      ButtonStyle: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: 'rgba(48, 136, 63,1)',
-        borderWidth: 0.5,
-       // borderColor: '#fff',
-        height: 40,
-        width: 300,
-        borderRadius: 5,
-        margin: 5,
-      },
-    homeScreenFilename: {
-      marginVertical: 7,
-    },
-    codeHighlightText: {
-      color: 'rgba(96,100,109, 0.8)',
-    },
-    codeHighlightContainer: {
-      backgroundColor: 'rgba(0,0,0,0.05)',
-      borderRadius: 3,
-      paddingHorizontal: 4,
+      backgroundColor: 'rgba(48, 136, 63,1)',
+      borderWidth: 0.5,
+      height: 40,
+      width: 350,
+      borderRadius: 5,
+      margin: 5,
     },
     getStartedText: {
       fontSize: 27,
@@ -197,65 +140,16 @@ const styles = StyleSheet.create({
       lineHeight: 28,
       textAlign: 'center',
     },
-    opcionStyle: {
+    opcionStyleText: {
       fontSize: 17,
       color: 'rgba(255, 255, 255, 1)',
       lineHeight: 24,
       textAlign: 'left',
     },
-    tabBarInfoContainer: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      ...Platform.select({
-        ios: {
-          shadowColor: 'black',
-          shadowOffset: { height: -3 },
-          shadowOpacity: 0.1,
-          shadowRadius: 3,
-        },
-        android: {
-          elevation: 20,
-        },
-      }),
-      alignItems: 'center',
-      backgroundColor: '#fbfbfb',
-      paddingVertical: 20,
-    },
-    tabBarInfoText: {
-      fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      textAlign: 'center',
-    },
-    navigationFilename: {
-      marginTop: 5,
-    },
-    helpContainer: {
-      marginTop: 15,
-      alignItems: 'center',
-    },
-    helpLink: {
-      paddingVertical: 15,
-    },
-    helpLinkText: {
-      fontSize: 14,
-      color: '#2e78b7',
-    },
-    logout: {
-      fontSize: 14,
-      color: '#2e78b7',
-      textAlign: 'center',
-    },
     textshadow:{ 
- 
       fontSize:30, 
-    
-      color:'#191970', 
-    
+      color:'#FFFFFF', 
       paddingLeft:10, 
-    
       paddingRight:10, 
-    
-      },
+    },
   });
