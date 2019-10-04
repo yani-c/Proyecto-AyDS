@@ -47,21 +47,35 @@ export default class AnswerScreen extends React.Component {
     const desc =navigation.getParam('desc','NO-Desc');
     const cor = this.state.respuesta;
     var respuesta;
+    var styleResp;
 
     if ( JSON.stringify(cor) == "true") {
-      respuesta = "Correcta 😃 \n \n +10 puntos ✅"
+      respuesta = "Correcta 😃";
+      styleResp = true;
     }
     else {
-      respuesta = "Incorrecta 😢 \n \n -10 puntos ❌"
+      respuesta = "Incorrecta 😢";
+      styleResp = false;
     }
     return (
         <View style={styles.container}>
-          <Text style={styles.respuestac}> Su respuesta "{desc}"</Text>
-          <Text style={styles.respuestac}> ha sido {respuesta}</Text>
-          <Text style={styles.respuestac}> {"\n"} {"\n"} {"\n"} {"\n"} </Text>
-          <Button color={'rgba(48, 136, 63,1)'} title="Continuar" onPress={this._continuar} />
-          <Text style={styles.espacio}> {"\n"}  </Text>
-          <Button color={'rgba(48, 136, 63,1)'} title= "Volver" onPress={()=> this.props.navigation.navigate('Home')} />
+          <View style={styleResp==true ? styles.respCorrecta
+                                       : styles.respIncorrecta}>
+            <Text style={styles.espacio}> {"\n"} </Text>
+            <Text style={styles.respuestac}> Su respuesta "{desc}"</Text>
+            <Text style={styles.respuestac}> ha sido {respuesta}</Text>
+            <Text style={styles.espacio}> {"\n"} </Text>
+          </View>
+          <Text style={styleResp==true ? styles.puntoCorrecto
+                                       : styles.puntoIncorrecto}> {styleResp==true ? "+10 puntos ✅"
+                                                                                   : "-10 puntos ❌"}
+                                                                                     </Text>
+            <Text style={styles.respuestac}> {"\n"} </Text>
+          <View style={styles.buttonSt}>
+            <Button color={'rgba(48, 136, 63,1)'} title="Continuar" onPress={this._continuar} />
+            <Text style={styles.espacio}> {"\n"}  </Text>
+            <Button color={'#663399'} title= "Volver" onPress={()=> this.props.navigation.navigate('Home')} />
+          </View>
         </View>
     );
   }
@@ -85,38 +99,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#CDCDCD',
   },
-  welcome: {
+  respCorrecta: {
+    backgroundColor: '#32cd32',
+    margin: 30,
+  },
+  respIncorrecta: {
+    backgroundColor: '#ff0000',
+    margin: 30,
+  },
+  buttonSt: {
+    margin: 30,
+  },
+  puntoCorrecto: {
     fontSize: 30,
+    color: '#32cd32',
+    lineHeight: 35,
     textAlign: 'center',
-    margin: 5,
   },
-
+  puntoIncorrecto: {
+    fontSize: 30,
+    color: '#ff0000',
+    lineHeight: 35,
+    textAlign: 'center',
+  },
   respuestac: {
     fontSize: 30,
-    color: '#000000',
+    color: '#FFFFFF',
     lineHeight: 35,
     textAlign: 'center',
   },
   espacio: {
-    fontSize: 5,
+    fontSize: 8,
     textAlign: 'center',
     margin: 5,
   },
-    green: {
-      color: '#00ff00'
-    },
-    red: {
-      color: '#ff0000'
-    },
-  input: {
-    margin: 15,
-    height: 40,
-    padding: 5,
-    fontSize: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#000000'
-  }
-  
 })
