@@ -104,13 +104,15 @@ const styles = StyleSheet.create({
   respCorrecta: {
     backgroundColor: '#32cd32',
     margin: 30,
+    borderRadius:15,
   },
   respIncorrecta: {
     backgroundColor: '#ff0000',
     margin: 30,
+    borderRadius:15,
   },
   buttonSt: {
-    margin: 30,
+    margin: 35,
   },
   puntoCorrecto: {
     fontSize: 30,
