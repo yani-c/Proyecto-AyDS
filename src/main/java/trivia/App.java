@@ -562,6 +562,7 @@ public class App{
 					Statistic aux = Statistic.findFirst("user_id = ? and category_id = ?",currentUser.get("id"), q.getInteger("category_id"));
 					Level l = Level.findFirst("user_id=? and category_id=?", currentUser.get("id"),q.getInteger("category_id"));
 					if (l==null){
+						l = new Level();
 						l.set("level",0);
 						l.set("user_id",currentUser.get("id"));
 						l.set("category_id",q.getInteger("category_id"));
