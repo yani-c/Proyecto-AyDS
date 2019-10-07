@@ -66,11 +66,15 @@ export default class AnswerScreen extends React.Component {
             <Text style={styles.respuestac}> ha sido {respuesta}</Text>
             <Text style={styles.espacio}> {"\n"} </Text>
           </View>
-          <Text style={styleResp==true ? styles.puntoCorrecto
-                                       : styles.puntoIncorrecto}> {styleResp==true ? "+10 puntos ✅"
-                                                                                   : "-10 puntos ❌"}
-                                                                                     </Text>
-            <Text style={styles.respuestac}> {"\n"} </Text>
+          <View style={styleResp==true ? styles.circuloCorrecto : styles.circuloIncorrecto}>
+          <Text style={styles.espacio}> </Text>
+            <Text style={styleResp==true ? styles.puntoCorrecto
+                                        : styles.puntoIncorrecto}> {styleResp==true ? "+10 puntos ✅"
+                                                                                    : "-10 puntos ❌"}
+            </Text>
+            <Text style={styles.espacio}> </Text>
+          </View>
+          <Text style={styles.respuestac}> {"\n"} </Text>
           <View style={styles.buttonSt}>
             <Button color={'rgba(48, 136, 63,1)'} title="Continuar" onPress={this._continuar} />
             <Text style={styles.espacio}> {"\n"}  </Text>
@@ -100,6 +104,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#CDCDCD',
+  },
+  circuloCorrecto: {
+    borderRadius:15,
+    borderColor:'#32cd32',
+    borderWidth:5,
+    marginHorizontal: 30,
+  },
+  circuloIncorrecto: {
+    borderRadius:15,
+    borderColor:'#ff0000',
+    borderWidth:5,
+    marginHorizontal: 30,
   },
   respCorrecta: {
     backgroundColor: '#32cd32',

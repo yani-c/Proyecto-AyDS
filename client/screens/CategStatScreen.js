@@ -91,20 +91,29 @@ export default class CategStatScreen extends React.Component {
               
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                   <View style={styles.getStartedContainer}>
-                    <Text style={styles.categoryStyle}>
-                      {item.nombre} {"\n"}
-                    </Text>
+                    <Text style={styles.categoryStyle}>{item.nombre} {"\n"}</Text>
+
                     <Text style={styles.correctas}>
                       Correctas:  {" "} {calcularPorcentajeCorrrectas(item)+'%'} {" "}
-                      <Text style={styles.incorrectas}>
-                        Incorrectas:  {" "} {calcularPorcentajeIncorrrectas(item)+'%'}
-                      </Text>
                     </Text>
+                    <View style={styles.containerCorrectas}>
+                      <View style={{borderRadius: 3,backgroundColor: '#32cd32',width:(calcularPorcentajeCorrrectas(item)*199)/100, resizeMode:'contain'}}>
+                        <Text style={styles.espacio}> </Text>
+                      </View>
+                    </View>
+
+                    <Text style={styles.incorrectas}>
+                      Incorrectas:  {" "} {calcularPorcentajeIncorrrectas(item)+'%'}
+                    </Text>
+                    <View style={styles.containerIncorrectas}>
+                      <View style={{borderRadius: 3,backgroundColor: '#ff0000',width:(calcularPorcentajeIncorrrectas(item)*199)/100, resizeMode:'contain'}}>
+                        <Text style={styles.espacio}> </Text>
+                      </View>
+                    </View>
                   </View>
-                </ScrollView>
-                    
-            )}
-          ></FlatList>
+                </ScrollView>       
+            )}>
+            </FlatList>
         </View> 
       );
   }
@@ -124,11 +133,31 @@ const styles = StyleSheet.create({
         color:'#663399', 
         paddingLeft:30, 
         paddingRight:30, 
-     
     },
+    containerCorrectas: {
+      width:200,
+      height:30,
+      backgroundColor: '#CDCDCD',
+      borderColor:'#32cd32',
+      borderWidth:2,
+      borderRadius: 5,
+      margin: 5,
+    }, 
+    containerIncorrectas: {
+      width:200,
+      height:30,
+      backgroundColor: '#CDCDCD',
+      borderColor:'#ff0000',
+      borderWidth:2,
+      borderRadius: 5,
+      margin: 5,
+    }, 
     getStartedContainer: {
       alignItems: 'center',
-      marginHorizontal: 50,
+      borderColor:'#663399',
+      borderRadius: 5,
+      borderWidth: 3,
+      margin: 5,
     },
     correctas: {
       fontSize: 17,
@@ -141,5 +170,10 @@ const styles = StyleSheet.create({
       color: '#ff0000',
       lineHeight: 24,
       textAlign: 'center',
+    },
+    espacio: {
+      fontSize: 17,
+      textAlign: 'center',
+      margin: 2,
     },
   });
