@@ -62,58 +62,72 @@ export default class GlobalScreen extends React.Component {
       }
       
       return(
-        
         <View style={styles.container}>
+
           <Text style={styles.espacio}> {"\n"} </Text>
           <Text style={styles.espacio}> {"\n"} </Text>
-         <Text style={styles.correctaStyle}>
-              Correctas: {" "}
-              {porcentajeCorrectas+'%'}
-        </Text>
-        <Text style={styles.espacio}> {"\n"} </Text>
-        <Text style={styles.espacio}> {"\n"} </Text>
-        <Text style={styles.incorrectaStyle}>
-            Incorrectas: {" "}
-            {porcentajeIncorrectas+'%'}
-        </Text>
-     </View>
-      
+          <Text style={styles.espacio}> {"\n"} </Text>
+          <Text style={styles.espacio}> {"\n"} </Text>
+
+          <Text style={styles.correctaStyle}> CORRECTAS: {" "} {porcentajeCorrectas+'%'}</Text>
+          <View style={styles.containerCorrectas}>
+            <View style={{backgroundColor: '#32cd32',width:(porcentajeCorrectas*380)/100, resizeMode:'contain'}}>
+              <Text style={styles.espacio}> {"\n"} </Text>
+              <Text style={styles.espacio}> {"\n"} </Text>
+            </View>
+          </View>
+
+          <Text style={styles.espacio}> {"\n"} </Text>
+          <Text style={styles.espacio}> {"\n"} </Text>
+          <Text style={styles.espacio}> {"\n"} </Text>
+
+          <Text style={styles.incorrectaStyle}>INCORRECTAS: {" "} {porcentajeIncorrectas+'%'} </Text>
+          <View style={styles.containerIncorrectas}>
+            <View style={{backgroundColor: '#ff0000',width:(porcentajeIncorrectas*380)/100, resizeMode:'contain'}}>
+              <Text style={styles.espacio}> {"\n"} </Text>
+              <Text style={styles.espacio}> {"\n"} </Text>
+            </View>
+          </View>
+
+        </View>
       );
   }
-  
-
 }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#CDCDCD',
+    },
+    containerCorrectas: {
+      backgroundColor: '#CDCDCD',
+      borderColor:'#32cd32',
+      borderWidth:2,
+      borderRadius: 5,
+      margin: 5,
     }, 
+    containerIncorrectas: {
+      backgroundColor: '#CDCDCD',
+      borderColor:'#ff0000',
+      borderWidth:2,
+      borderRadius: 5,
+      margin: 5,
+    },  
     correctaStyle: {
-      fontSize: 30,
+      fontSize: 25,
       color: '#32cd32',
       lineHeight: 41,
       textAlign: 'center',
     },
     incorrectaStyle: {
-      fontSize: 29,
+      fontSize: 25,
       color: '#ff0000',
       lineHeight: 30,
       textAlign: 'center',
-    },
-    getStartedContainer: {
-      alignItems: 'center',
-      marginHorizontal: 50,
     },
     espacio: {
       fontSize: 12,
       textAlign: 'center',
       margin: 2,
-    },
-    getStartedText: {
-      fontSize: 17,
-      color: 'rgba(255, 255, 255, 1)',
-      lineHeight: 40,
-      textAlign: 'center',
     },
   });
