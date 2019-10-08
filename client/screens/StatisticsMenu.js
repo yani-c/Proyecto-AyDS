@@ -1,22 +1,12 @@
 import React from 'react';
 import {API_HOST} from 'react-native-dotenv';
 import {
-  AsyncStorage,
   Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Button,
-  Alert,
 } from 'react-native';
-
-import axios from 'axios';
-import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
-
 
 export default class StatisticsMenu extends React.Component {
   static navigationOptions = {
@@ -40,17 +30,13 @@ export default class StatisticsMenu extends React.Component {
     };
   }
 
-
-
-
   render(){
       return(
         <View style={styles.container}>
+          <Text style={styles.espacio}> {"\n"} </Text>
           <View style={styles.containerImage}>
-            <Image style={{width:250, height:250, resizeMode:'contain', alignSelf:'center',}} source={require('../assets/images/estad.png')}/>
+            <Image style={{width:300, height:250, resizeMode:'contain', alignSelf:'center',}} source={require('../assets/images/estad.png')}/>
           </View>
-          <View style={styles.container3}></View>
-        
           <View style={styles.container2}>
               <Button color={'rgba(48, 136, 63,1)'} title="Estadisticas Globales" onPress= {()=> this.props.navigation.navigate('Global')} />
               <Text style={styles.espacio}> {"\n"} </Text>
@@ -67,7 +53,13 @@ const styles = StyleSheet.create({
       backgroundColor:'#CDCDCD',
     },
     containerImage:{
+      height:219,
       backgroundColor:'#CDCDCD',
+      borderColor: '#663399',
+      borderWidth: 5,
+      borderRadius: 3,
+      margin: 40,
+      
     },
     container2: {
       margin:40,
