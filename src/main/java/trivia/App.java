@@ -262,6 +262,9 @@ public class App{
 
     	get("/score", (req,res) ->{
       		User u = User.findById(currentUser.get("id"));
+			if(u.getInteger("score") == null){
+				u.set("score", 0);
+			}
       		res.type("aplication/json");
       		String aux= "{\"score\":\""+u.getInteger("score")+"\"}";
       		return aux;
@@ -541,7 +544,7 @@ public class App{
 				s.set("category_id",q.getInteger("category_id"));
 				s.set("correct", 0);
 				s.set("incorrect", 0);
-        u.set("score", 0);
+        		u.set("score", 0);
 			}
 			String json;
 			if(o!=null){
@@ -550,6 +553,9 @@ public class App{
 					q.set("correct",0);
 					if(q.getInteger("incorrect")==null){
 						q.set("incorrect",0);
+						if(u.getInteger("score")==null){
+							u.set("score", 0);
+						}
 					}
 				}
 				if(o.getBoolean("correct")){
@@ -580,12 +586,12 @@ public class App{
 				else{
 					q.set("incorrect",q.getInteger("incorrect")+1);
 					s.set("incorrect", s.getInteger("incorrect")+1);
-          if (u.getInteger("score")>0){
-            u.set("score", u.getInteger("score")-10);
-          }
+          			if (u.getInteger("score")>0){
+          			u.set("score", u.getInteger("score")-10);
+        	    	}
 					s.saveIt();
 					q.saveIt();
-          u.saveIt();
+          			u.saveIt();
 					json = "{\"Respuesta\":false}";
 				}
 				System.out.println("Esta preg tiene correctas:"+q.getInteger("correct"));
