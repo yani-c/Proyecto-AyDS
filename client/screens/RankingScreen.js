@@ -65,8 +65,8 @@ export default class RankingScreen extends React.Component {
       const cant = this.state.cant;
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>react-native-simple-table</Text>
-            <Table height={320} columnWidth={60} columns={columns} dataSource={u} />
+            <Text style={styles.title}>Ranking Jugadores</Text>
+            <Table height={320} columnWidth={100} columns={columns} dataSource={u} />
         </View>
       )
   }
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     title: {
-      fontSize: 18,
+      fontSize: 40,
       padding: 10,
       textAlign: 'center'
     },

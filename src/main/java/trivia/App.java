@@ -71,7 +71,7 @@ public class App{
 				aux=aux+"\"user"+i+"\": {\"username\": \""+u.get("username")+"\",";
 				aux=aux+"\"dni\": \""+u.getInteger("dni")+"\",\"score\": \""+u.getInteger("score")+"\"}";
 				i++;
-				if(i<=user.size()){
+				if(i<=users.size()){
 					aux=aux+",";
 				}
 			}
