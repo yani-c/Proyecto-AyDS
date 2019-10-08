@@ -54,6 +54,8 @@ export default class HomeScreen extends React.Component {
               <Button color={'rgba(48, 136, 63,1)'} title="Puntaje" onPress= {()=> this.props.navigation.navigate('Score')} />
               <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
               <Button color={'rgba(48, 136, 63,1)'} title="Nivel" onPress= {()=> this.props.navigation.navigate('Level')} />
+              <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
+              <Button color={'rgba(48, 136, 63,1)'} title="Ranking" onPress= {()=> this.props.navigation.navigate('Rank')} />
             </View>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>
             <Text style={styles.espacio}> {"\n"} {"\n"} </Text>

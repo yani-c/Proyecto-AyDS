@@ -62,20 +62,22 @@ public class App{
 
 //------------------------------------GET------------------------------------
 
-	//muestra todos los usuarios
-		get("/users" , (req, res) ->{
+	//muestra el ranking
+		get("/rank" , (req, res) ->{
 			List<User> users = User.findAll();
-			if(!users.isEmpty()){
-				String u="";
-				for(User i : users){
-					u=u+"\n"+i.toJson(true);
+			String aux="{\"cant\": \""+users.size()+"\", \"users\": {";
+			int i=1;
+			for(User u : users){
+				aux=aux+"\"user"+i+"\": {\"username\": \""+u.get("username")+"\",";
+				aux=aux+"\"dni\": \""+u.getInteger("dni")+"\",\"score\": \""+u.getInteger("score")+"\"}";
+				i++;
+				if(i<=user.size()){
+					aux=aux+",";
 				}
-				res.type("application/json");
-				return u;
 			}
-			else{
-				return "Error: No hay usuarios cargados. Nada para mostrar";
-			}
+			aux=aux+"}}";
+			res.type("application/json");
+			return aux;
 		});
 
 	//muestra todas las pregunta
