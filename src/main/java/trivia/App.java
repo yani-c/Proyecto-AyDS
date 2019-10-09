@@ -61,13 +61,18 @@ public class App{
 		});
 
 //------------------------------------GET------------------------------------
-
 	//muestra el ranking
 		get("/rank" , (req, res) ->{
 			List<User> users = User.findAll();
+			for(User u : users){
+				if(u.getInteger("score") == null){
+				u.set("score", 0);
+				}
+			}
 			String aux="{\"cant\": \""+users.size()+"\", \"users\": {";
 			int i=1;
-			for(User u : users){
+			users= User.findAll().limit(10).orderBy("score desc");
+			for(User u: users){
 				aux=aux+"\"user"+i+"\": {\"username\": \""+u.get("username")+"\",";
 				aux=aux+"\"dni\": \""+u.getInteger("dni")+"\",\"score\": \""+u.getInteger("score")+"\"}";
 				i++;
@@ -546,7 +551,7 @@ public class App{
 				s.set("category_id",q.getInteger("category_id"));
 				s.set("correct", 0);
 				s.set("incorrect", 0);
-        		u.set("score", 0);
+				u.set("score", 0);
 			}
 			String json;
 			if(o!=null){
@@ -555,9 +560,6 @@ public class App{
 					q.set("correct",0);
 					if(q.getInteger("incorrect")==null){
 						q.set("incorrect",0);
-						if(u.getInteger("score")==null){
-							u.set("score", 0);
-						}
 					}
 				}
 				if(o.getBoolean("correct")){
