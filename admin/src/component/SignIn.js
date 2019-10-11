@@ -1,6 +1,7 @@
 import React,{Component,Redirect,alert} from "react";
 import {AsyncStorage} from "AsyncStorage";
 import ReactDOM from "react-dom";
+import Menu from './Menu';
 
 class SignIn extends Component{
     constructor(props) {
@@ -12,8 +13,7 @@ class SignIn extends Component{
       }
     
       handleChange(event) {
-        this.setState({value: event.target.username});
-        this.setState({value: event.target.password});
+        this.setState({username: event.target.username, password: event.target.password});
       }
     
       handleSubmit(event) {
@@ -22,23 +22,23 @@ class SignIn extends Component{
       }
       
       componentDidMount(){
-
-          var u = this.state.username;
-          var p = this.state.username;
-          fetch("http://192.168.0.144:4567/login",{
+         // var u = this.state.username;
+         // var p = this.state.username;
+          fetch(process.env.REACT_APP_API_HOST+"/login",{
               method: 'POST', 
-              body: {username: u, password: p }, 
-                auth: {
-                  username: u,
-                  password: p
-                } 
-            }).then(response => response.json())
+              body: JSON.stringify({username: this.state.username, password: this.state.password}), 
+              mode: "no-cors"
+            }) 
             .then(response => {
+              console.log(response);
                 AsyncStorage.setItem('userToken', response.config.headers.Authorization);
                 ReactDOM.render(
-                    <Redirect to="/menu" />,
+                   <Menu/>,
                     document.getElementById('root')
                 )
+              })
+              .catch(error => {
+                console.log(error)
               });
                    
       }

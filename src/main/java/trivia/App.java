@@ -4,6 +4,9 @@ import static spark.Spark.*;
 
 import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.DB;
+import java.util.Base64;
+import javax.xml.bind.DatatypeConverter;
+
 
 import trivia.User;
 import trivia.Statistic;
@@ -40,11 +43,17 @@ public class App{
 	//Lo que se ejecuta antes que todo
 		before((request, response) -> {
 			Base.open();
-			String headerToken = (String) request.headers("Authorization");
-			if (headerToken == null || headerToken.isEmpty() || !BasicAuth.authorize(headerToken)){
-				halt(401);
+			System.out.println(request.url().substring(25));
+			String login="/login";
+			System.out.println(!(login.equals(request.url().substring(25).toString())));
+			if(!(login.equals(request.url().substring(25).toString()))){
+				System.out.println("NO SOY LOGIN");
+				String headerToken = (String) request.headers("Authorization");
+				if (headerToken == null || headerToken.isEmpty() || !BasicAuth.authorize(headerToken)){
+					halt(401);
+				}
+				currentUser = BasicAuth.getUser(headerToken);
 			}
-			currentUser = BasicAuth.getUser(headerToken);
 		});
 
 	//Lo que se ejecuta despues de todo
@@ -468,9 +477,17 @@ public class App{
 
 
 		post("/login", (req,res) -> {
+			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			res.type("application/json");
-			// if there is currentUser is because headers are correct, so we only
-			// return the current user here
+			System.out.println("intentando señora");
+			System.out.println("username: "+bodyParams.get("username"));
+			String str = new String("admin:admin");
+			byte[] bytesEncoded = Base64.getEncoder().encode(str.getBytes());
+			String aux= new String(bytesEncoded);
+			System.out.println("aqui"+aux);
+			String ahorasi= new String("Basic".concat(aux));
+			currentUser = BasicAuth.getUser(ahorasi);
+			System.out.println("to? "+currentUser.getString("username"));
 			return currentUser.toJson(true);
 		});
 
