@@ -1,17 +1,19 @@
 import React,{Component} from "react";
-import { Link } from 'react-router-dom';
+import './Home.css';
 
 class Home extends Component{
-  
+
+  handleClick=() => {
+    this.props.history.push("/signIn")
+  }
+
   render () {
     return (
-        <div>
-           <Link to="/signIn" className="SignIn">Iniciar Sesion</Link>
-
-        </div>
+      <div className="Home-header">
+          <button className="button" onClick={this.handleClick}> Iniciar Sesion </button> 
+      </div>
     );
   }
 }
-
 
 export default Home;
