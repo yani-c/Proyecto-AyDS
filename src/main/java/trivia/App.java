@@ -1,21 +1,21 @@
 package trivia;
 
-import static spark.Spark.*;
+import static spark.Spark.after;
+import static spark.Spark.before;
+import static spark.Spark.delete;
+import static spark.Spark.get;
+import static spark.Spark.halt;
+import static spark.Spark.post;
+import static spark.Spark.put;
 
-import org.javalite.activejdbc.Base;
-import org.javalite.activejdbc.DB;
+import java.util.ArrayList;
 import java.util.Base64;
-import javax.xml.bind.DatatypeConverter;
-
-
-import trivia.User;
-import trivia.Statistic;
-import trivia.BasicAuth;
-
-import com.google.gson.Gson;
+import java.util.List;
 import java.util.Map;
 
- import java.util.*;
+import com.google.gson.Gson;
+
+import org.javalite.activejdbc.Base;
 
 
 class QuestionParam
@@ -43,10 +43,10 @@ public class App{
 	//Lo que se ejecuta antes que todo
 		before((request, response) -> {
 			Base.open();
-			System.out.println(request.url().substring(25));
+			System.out.println(request.pathInfo());
 			String login="/login";
 			System.out.println(!(login.equals(request.url().substring(25).toString())));
-			if(!(login.equals(request.url().substring(25).toString()))){
+			if(!(login.equals(request.pathInfo()))) {
 				System.out.println("NO SOY LOGIN");
 				String headerToken = (String) request.headers("Authorization");
 				if (headerToken == null || headerToken.isEmpty() || !BasicAuth.authorize(headerToken)){
@@ -485,10 +485,11 @@ public class App{
 			byte[] bytesEncoded = Base64.getEncoder().encode(str.getBytes());
 			String aux= new String(bytesEncoded);
 			System.out.println("aqui"+aux);
-			String ahorasi= new String("Basic".concat(aux));
+			String ahorasi= new String("Basic ".concat(aux));
 			currentUser = BasicAuth.getUser(ahorasi);
-			System.out.println("to? "+currentUser.getString("username"));
-			return currentUser.toJson(true);
+			String var ="{\"Authorization\":\""+ahorasi+"\", \"data\":"+currentUser.toJson(true)+"}";
+			System.out.println("to? "+var);
+			return var;
 		});
 
 
