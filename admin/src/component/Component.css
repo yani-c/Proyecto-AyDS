@@ -60,6 +60,27 @@
     color: #CDCDCD;
   }
 
+  .button-Menu {
+    padding: 30px 150px;
+    align-content: center;
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 1px solid #CDCDCD;
+    background-color: 250ms;
+    border-radius: 5px;
+    margin: 50px;
+    font-size: 15px;
+  }
+  .button-Menu:hover {
+    cursor: pointer;
+    background-color: #663399;
+    color: #CDCDCD;
+  }
+  .Block-Buttom-Menu{
+
+    text-align: center;
+    margin: 25px;
+  }
   .Home-logo {
     padding: 15px;
     margin-left: 450px;
@@ -68,6 +89,11 @@
     justify-content: center;
     height: 300px;
     width: 300px;
+  }
+  .Menu-logo {
+    margin: 25px;
+    height: 100px;
+    width: 100px;
   }
   .Sign-logo {
     padding: 15px;
@@ -86,6 +112,7 @@
     border-radius: 5px;
 
   }
+ 
   .form {
     z-index: 1;
     border-radius: 5px;
