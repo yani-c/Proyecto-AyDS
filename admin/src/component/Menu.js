@@ -1,14 +1,36 @@
 import React,{Component} from "react";
-import { Link } from 'react-router-dom';
+import logo from './logo.png';
+import './Component.css';
 
 class Menu extends Component{
   
+  handleClickNewQuestion=() => {
+    this.props.history.push("/newQuestion")
+  }
+
+  handleClickSignUp=() => {
+    this.props.history.push("/signUp")
+  }
+
   render () {
     return (
-        <div>
-           <h1> MENU  </h1>
-           <Link to="/newQuestion" className="NewQuestion">Cargar pregunta</Link>
+      <div className="Home-header">
+
+        <img className="Menu-logo" src={logo} alt="logo" /> 
+        <font className="Text-titulo"> MENU </font>
+        <div className="Block-prim">
+
+            <div className="Block-Buttom-Menu">
+
+              <button className="button-Menu" onClick={this.handleClickNewQuestion}> NUEVA PREGUNTA </button>
+              <button className="button-Menu" onClick={this.handleClickSignUp}> MODIFICAR AREAS </button> 
+              <button className="button-Menu" onClick={this.handleClickSignUp}> VER ESTADISTICAS </button> 
+              <button className="button-Menu" onClick={this.handleClickSignUp}> VER PREGUNTAS </button>  
+
+            </div>
         </div>
+
+      </div>
     );
   }
 }
