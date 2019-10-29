@@ -1,16 +1,33 @@
 import React,{Component} from "react";
-import './Home.css';
+import logo from './logo.png';
+import './Component.css';
 
 class Home extends Component{
 
-  handleClick=() => {
+  handleClickSignIn=() => {
     this.props.history.push("/signIn")
+  }
+
+  handleClickSignUp=() => {
+    this.props.history.push("/signUp")
   }
 
   render () {
     return (
       <div className="Home-header">
-          <button className="button" onClick={this.handleClick}> Iniciar Sesion </button> 
+
+        <font className="Text-titulo"> TRIVIAVET</font>
+        <div className="Block-prim">
+
+            <img className="Home-logo" src={logo} alt="logo" />
+            <div className="Block-Buttom">
+
+              <button className="button-Home" onClick={this.handleClickSignIn}> Iniciar Sesion </button>
+              <button className="button-Home" onClick={this.handleClickSignUp}> Registrarse </button>  
+
+            </div>
+        </div>
+
       </div>
     );
   }
