@@ -76,7 +76,7 @@ class SignIn extends Component{
                   <input type="password" placeholder="Contraseña" password={this.state.password} onChange={this.handleChange} />
                 </label>
                 <button type="submit"> iniciar sesion </button>
-                <p class="message">No tiene una cuenta? <a href="#">Crear cuenta</a></p>
+                <p class="message">No tiene una cuenta? <a href="signUp">Crear cuenta</a></p>
               </form>
             </div>
           </div>
