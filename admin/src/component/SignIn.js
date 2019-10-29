@@ -1,5 +1,6 @@
 import React,{Component,alert} from "react";
-import {AsyncStorage} from "AsyncStorage";
+import logo from './logo.png';
+import './Component.css';
 
 class SignIn extends Component{
     constructor(props) {
@@ -63,17 +64,22 @@ class SignIn extends Component{
 
   render () {
         return (
-            <form onSubmit={this.login()}>
-            <label>
-            username:
-            <input type="text" username={this.state.username} onChange={this.handleChange} />
-            </label>
-            <label>
-            password:
-            <input type="password" password={this.state.password} onChange={this.handleChange} />
-            </label>
-            <button type="submit"> iniciar sesion</button>
-        </form>
+
+          <div class="login-page">
+            <div class="form">
+            <img className="Sign-logo" src={logo} alt="logo" />
+              <form class="login-form" onSubmit={this.login()}>
+                <label> 
+                  <input type="text" placeholder="Nombre de usuario" username={this.state.username} onChange={this.handleChange} />
+                </label>
+                <label> 
+                  <input type="password" placeholder="Contraseña" password={this.state.password} onChange={this.handleChange} />
+                </label>
+                <button type="submit"> iniciar sesion </button>
+                <p class="message">No tiene una cuenta? <a href="#">Crear cuenta</a></p>
+              </form>
+            </div>
+          </div>
         ); 
   }
 }
