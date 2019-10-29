@@ -1,0 +1,166 @@
+.Home-header {
+    background-color: #663399;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+  }
+  .Text-titulo{
+    font-family: "Times New Roman", Times, serif;
+    color: #CDCDCD;
+    font-weight: 700;
+  }
+  .Block-prim {
+    border: 5px solid #CDCDCD;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    height: 600px;
+    width: 1200px;
+    background-color: #663399;
+    align-items: center;
+    justify-content: center;
+  }
+  .Block-Buttom{
+    padding: 20px;
+    height: 30px;
+    width: 1200px;
+    margin-left: 200px;
+  }
+  .button-Home {
+    padding: 30px 100px;
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 1px solid #CDCDCD;
+    background-color: 250ms;
+    border-radius: 5px;
+    margin: 50px;
+    font-size: 15px;
+  }
+  .button-Home:hover {
+    cursor: pointer;
+    background-color: #663399;
+    color: #CDCDCD;
+  }
+  .button-SignIn {
+    padding: 10px 50px;
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 1px solid #CDCDCD;
+    background-color: 250ms;
+    border-radius: 5px;
+    margin: 50px;
+    font-size: 15px;
+  }
+  .button-SignIn:hover {
+    cursor: pointer;
+    background-color: #663399;
+    color: #CDCDCD;
+  }
+
+  .Home-logo {
+    padding: 15px;
+    margin-left: 450px;
+    margin-right: 450px;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 300px;
+  }
+  .Sign-logo {
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 120px;
+    margin: 15px;
+  }
+  .login-page {
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+   
+    padding: 8% 0 0;
+    border-radius: 5px;
+
+  }
+  .form {
+    z-index: 1;
+    border-radius: 5px;
+    background: #CDCDCD;
+    height: 500px;
+    width: 800px;
+    margin: auto;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+  }
+  .form input {
+    font-family: "Times New Roman", Times, serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 46%;
+    border: 0;
+    margin: 0 0 20px;
+    padding: 20px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  .form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #663399;
+    width: 51%;
+    margin: 15px;
+    border: 0;
+    padding: 13px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .form button:hover,.form button:active,.form button:focus {
+    background: #663399;
+  }
+  .form .message {
+    margin: 30px 0 0;
+    color: #000000;
+    font-size: 14px;
+  }
+  .form .message a {
+    color: #663399;
+    text-decoration: none;
+  }
+  .form .register-form {
+    display: none;
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .container:before, .container:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .container .info {
+    margin: 50px auto;
+    text-align: center;
+  }
+  body {
+    background: #663399; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #663399, #663399);
+    background: -moz-linear-gradient(right, #663399, #663399);
+    background: -o-linear-gradient(right, #663399, #663399);
+    background: linear-gradient(to left, #663399, #663399);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;      
+  }
