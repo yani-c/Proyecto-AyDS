@@ -11,10 +11,10 @@ class SignIn extends Component{
         this.handleChange = this.handleChange.bind(this);
       }
     
-      handleChange(e) {
-        let change = {}
-    change[e.target.name] = e.target.value
-    this.setState(change)
+      handleChange(event) {
+        this.setState({ 
+          [event.target.name] : event.target.value
+        });
       }
     
     
@@ -24,7 +24,7 @@ class SignIn extends Component{
        console.log(this.state.password);
         const h = new Headers(); 
         h.append('Accept', 'application/json');
-         await fetch(process.env.REACT_APP_API_HOST+"/login",{
+         await fetch(process.env.REACT_APP_API_HOST+"/loginAdmin",{
               method: 'POST', 
               headers:h,
               body: JSON.stringify({username: this.state.username, password: this.state.password}), 
@@ -37,11 +37,10 @@ class SignIn extends Component{
             .then((res) => {
               console.log(res);
               AsyncStorage.setItem('userToken', res.Authorization);
-              //lo comento para poder probar el login, porque despues una vez
-              //que me logeo, no viene mas al login si esta descomentado
-              //this.props.history.push('/Menu');
+              this.props.history.push('/Menu');
             })
               .catch(error => {
+                //agregar alerta
                 console.log(error)
               });
       }
@@ -54,10 +53,10 @@ class SignIn extends Component{
             <img className="Sign-logo" src={logo} alt="logo" />
               <form className="login-form" >
                 <label> 
-                  <input type="text" placeholder="Nombre de usuario" username={this.state.username} onChange={this.handleChange} />
+                  <input type="text" placeholder="Nombre de usuario" name="username" value={this.state.username} onChange={this.handleChange} />
                 </label>
                 <label> 
-                  <input type="password" placeholder="Contraseña" password={this.state.password} onChange={this.handleChange} />
+                  <input type="password" placeholder="Contraseña" name="password" value={this.state.password} onChange={this.handleChange} />
                 </label>
                 <p className="message">No tiene una cuenta? <a href="signUp">Crear cuenta</a></p>
               </form>

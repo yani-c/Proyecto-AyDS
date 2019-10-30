@@ -44,10 +44,11 @@ public class App{
 		before((request, response) -> {
 			Base.open();
 			System.out.println(request.pathInfo());
-			String login="/login";
+			String login="/loginAdmin";
 			System.out.println(!(login.equals(request.url().substring(25).toString())));
 			if(!(login.equals(request.pathInfo()))) {
 				System.out.println("NO SOY LOGIN");
+				System.out.println("autorizado?"+request.headers("Authorization"));
 				String headerToken = (String) request.headers("Authorization");
 				if (headerToken == null || headerToken.isEmpty() || !BasicAuth.authorize(headerToken)){
 					halt(401);
@@ -475,13 +476,22 @@ public class App{
 
 //------------------------------------GAME------------------------------------
 
+     post("/login", (req,res) -> {
+			res.type("application/json");
+			// if there is currentUser is because headers are correct, so we only
+			// return the current user here
+			return currentUser.toJson(true);
+		});
 
-		post("/login", (req,res) -> {
+     //agregar para que se fije si es admin
+		post("/loginAdmin", (req,res) -> {
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			res.type("application/json");
+			System.out.println("mirando "+bodyParams.size());
 			System.out.println("intentando señora");
+			System.out.println();
 			System.out.println("username: "+bodyParams.get("username"));
-			String str = new String("admin:admin");
+			String str = new String(bodyParams.get("username")+":"+bodyParams.get("password"));
 			byte[] bytesEncoded = Base64.getEncoder().encode(str.getBytes());
 			String aux= new String(bytesEncoded);
 			System.out.println("aqui"+aux);
