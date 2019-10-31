@@ -1,6 +1,6 @@
 import React,{Component, Redirect} from "react";
 import {AsyncStorage} from "AsyncStorage";
-import ReactDOM from "react-dom";
+
 
 
 class NewQuestion extends Component{
@@ -24,22 +24,24 @@ class NewQuestion extends Component{
       console.log(await AsyncStorage.getItem('userToken'));
       h.append('Content-Type','application/json; charset=UTF-8');
       h.append('Authorization', await AsyncStorage.getItem('userToken'));
-      // h.set('Authorization', "Basic YWRtaW46YWRtaW4=");
+      // ESTO DEBERIA CAMBIARSE CUANDO ESTE HECHO EL COMPONENTE CATEGORIA,
+      //PARA PODER ELEGIR ENTRE ALGUNA DE ELLAS Y AHI PONERLE EL ID 
           var c=  2;
           await fetch(process.env.REACT_APP_API_HOST+"/questions",{
               method: 'POST', 
-              body: {description: this.state.description, category_id: c, options: [
+              body: JSON.stringify({description: this.state.description, category_id: c, options: [
                 { description: this.state.option1, correct: false}, 
                 {description: this.state.option2, correct: false},
                 {description: this.state.option3, correct: false}, 
                 {description: this.state.optionCorrect, correct: true}
               ]
-              }, 
+              }), 
               headers: h
             }).then(response => response.json())
             .then(response => {
                 console.log(response);
-
+                alert("Pregunta cargada correctamente");
+                this.props.history.push('/Menu');
               })
               .catch(error => {
                 console.log("ñeeeeeeee");
