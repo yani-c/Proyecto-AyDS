@@ -21,7 +21,6 @@ import org.javalite.activejdbc.Base;
 
 class QuestionParam
 {
-	int user_id;
 	String description;
 	ArrayList<OptionParam> options;
 	int category_id;
@@ -353,7 +352,9 @@ public class App{
 
 	//carga una pregunta y sus opciones
       post("/questions", (req, res) -> {
-        QuestionParam bodyParams = new Gson().fromJson(req.body(), QuestionParam.class);
+		  System.out.println("probando cargar pregunta");
+		  Gson g = new Gson();
+        QuestionParam bodyParams = g.fromJson(req.body(), QuestionParam.class);
         Question question = new Question();
 		    question.set("description", bodyParams.description);
 		    question.set("category_id", bodyParams.category_id);
@@ -362,6 +363,7 @@ public class App{
 			question.set("correct",0);
 			question.set("incorrect",0);
         question.save();
+		System.out.println("pregunta lista");
         for(OptionParam item: bodyParams.options) {
           Option option = new Option();
           option.set("description", item.description).set("correct", item.correct);
@@ -370,6 +372,7 @@ public class App{
 		    question.set("active", question.comprobateActive());
 		    question.saveIt();
 		    String json= question.toJson(true);
+			System.out.println("listoo");
         return json;
       });
 

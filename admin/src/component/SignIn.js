@@ -38,7 +38,7 @@ class SignIn extends Component{
             })
             .then((res) => {
               console.log(res);
-              AsyncStorage.setItem('userToken', base64.encode(res.username + ":" + res.password));
+              AsyncStorage.setItem('userToken', 'Basic '+base64.encode(res.username + ":" + res.password));
               this.props.history.push('/Menu');
             })
               .catch(error => {

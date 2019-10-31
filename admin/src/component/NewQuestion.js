@@ -23,14 +23,19 @@ class NewQuestion extends Component{
       console.log("aqui");
       console.log(await AsyncStorage.getItem('userToken'));
       h.append('Content-Type','application/json; charset=UTF-8');
-      h.append('Authorization',await AsyncStorage.getItem('userToken'));
-          var c= 'Ciencia';
+      h.append('Authorization', await AsyncStorage.getItem('userToken'));
+      // h.set('Authorization', "Basic YWRtaW46YWRtaW4=");
+          var c=  2;
           await fetch(process.env.REACT_APP_API_HOST+"/questions",{
-            credentials:"include",
               method: 'POST', 
-              body: {description: this.state.description, option1: this.state.option1, 
-                option2: this.state.option2, option3: this.state.option3, optionCorrect:this.state.optionCorrect, cat:c}, 
-                headers: h,
+              body: {description: this.state.description, category_id: c, options: [
+                { description: this.state.option1, correct: false}, 
+                {description: this.state.option2, correct: false},
+                {description: this.state.option3, correct: false}, 
+                {description: this.state.optionCorrect, correct: true}
+              ]
+              }, 
+              headers: h
             }).then(response => response.json())
             .then(response => {
                 console.log(response);
