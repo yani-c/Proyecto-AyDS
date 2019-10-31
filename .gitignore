@@ -1,1 +1,5 @@
 target/
+admin/.env
+client/.env
+admin/node_modules
+

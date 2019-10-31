@@ -22,8 +22,10 @@ class SignIn extends Component{
      login= async() => {
        console.log(this.state.username);
        console.log(this.state.password);
+       let base64 = require('base-64');
         const h = new Headers(); 
         h.append('Accept', 'application/json');
+        h.set('Authorization', 'Basic ' + base64.encode(this.state.username+ ":" +this.state.password));
          await fetch(process.env.REACT_APP_API_HOST+"/loginAdmin",{
               method: 'POST', 
               headers:h,
@@ -36,7 +38,7 @@ class SignIn extends Component{
             })
             .then((res) => {
               console.log(res);
-              AsyncStorage.setItem('userToken', res.Authorization);
+              AsyncStorage.setItem('userToken', base64.encode(res.username + ":" + res.password));
               this.props.history.push('/Menu');
             })
               .catch(error => {
