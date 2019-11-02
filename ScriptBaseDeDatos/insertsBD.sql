@@ -10,23 +10,23 @@ INSERT INTO users (username, dni, administrator, password)
 VALUES ('Alvaro', '37875800', true, 'root');
 
 -- NUEVAS Categorias
-INSERT INTO categories (category_name)
-VALUES ('Geografia');
+INSERT INTO categories (category_name,correct,incorrect)
+VALUES ('Geografia',0,0);
 
-INSERT INTO categories (category_name)
-VALUES ('Ciencia');
+INSERT INTO categories (category_name,correct,incorrect)
+VALUES ('Ciencia',0,0);
 
-INSERT INTO categories (category_name)
-VALUES ('Arte');
+INSERT INTO categories (category_name,correct,incorrect)
+VALUES ('Arte',0,0);
 
-INSERT INTO categories (category_name)
-VALUES ('Entretenimiento');
+INSERT INTO categories (category_name,correct,incorrect)
+VALUES ('Entretenimiento',0,0);
 
-INSERT INTO categories (category_name)
-VALUES ('Historia');
+INSERT INTO categories (category_name,correct,incorrect)
+VALUES ('Historia',0,0);
 
-INSERT INTO categories (category_name)
-VALUES ('Deporte');
+INSERT INTO categories (category_name,correct,incorrect)
+VALUES ('Deporte',0,0);
 
 -- Preguntas NUEVAS Geometria y opciones
 INSERT INTO questions (description, category_id, user_id, active)

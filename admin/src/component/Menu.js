@@ -12,6 +12,10 @@ class Menu extends Component{
     this.props.history.push("/signUp")
   }
 
+  handleClickStatistics=() => {
+    this.props.history.push("/statistics")
+  }
+
   render () {
     return (
       <div className="Home-header">
@@ -24,7 +28,7 @@ class Menu extends Component{
 
               <button className="button-Menu" onClick={this.handleClickNewQuestion}> NUEVA PREGUNTA </button>
               <button className="button-Menu" onClick={this.handleClickSignUp}> MODIFICAR AREAS </button> 
-              <button className="button-Menu" onClick={this.handleClickSignUp}> VER ESTADISTICAS </button> 
+              <button className="button-Menu" onClick={this.handleClickStatistics}> VER ESTADISTICAS </button> 
               <button className="button-Menu" onClick={this.handleClickSignUp}> VER PREGUNTAS </button>  
 
             </div>

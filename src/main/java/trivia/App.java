@@ -145,7 +145,7 @@ public class App{
 				String aux="{";
 				int i=1;
 				for(Category c : categories){
-					aux=aux+"\"Categoria"+i+"\": \""+c.toJson(true,"category_name","id")+"\",";
+					aux=aux+"\"Categoria"+i+"\": \""+c.toJson(true,"category_name","id", "correct","incorrect")+"\",";
 					i++;
 				}
 				res.type("application/json");
@@ -156,6 +156,7 @@ public class App{
 				return "{\"Error\": No hay categorias cargadas. Nada para mostrar}";
 			}
 		});
+
 
 
 		//muestra una categoria aleatoria
@@ -184,6 +185,38 @@ public class App{
 				return aux;
 			}
 			return "Error: No se encontro la persona";
+		});
+
+			//retorna las estadisticas de un usuario dado su dni
+		get("/users/:dni" , (req, res) ->{
+			User u = User.findFirst("dni=?",req.params(":dni"));
+			if(u!=null){
+				Statistic s= new Statistic();
+			List<Category> categories= Category.findAll();
+			String aux="{\"cant\": \""+categories.size()+"\", \"cats\": {";
+			int i=1;
+			for(Category c : categories){
+				s=Statistic.findFirst("user_id= ? and category_id =?", u.get("id"), c.getInteger("id"));
+				if(s==null){
+					s= new Statistic();
+					s.set("user_id", u.get("id"));
+					s.set("category_id",c.getInteger("id"));
+					s.set("correct", 0);
+					s.set("incorrect", 0);
+					s.saveIt();
+				}
+				aux=aux+"\"cat"+i+"\": {\"nombre\": \""+c.get("category_name")+"\",";
+				aux=aux+"\"correct\": \""+s.getInteger("correct")+"\",\"incorrect\": \""+s.getInteger("incorrect")+"\"}";
+				i++;
+				if(i<=categories.size()){
+					aux=aux+",";
+				}
+			}
+			aux=aux+"}}";
+			res.type("application/json");
+			return aux;
+			}
+			return "{\"Error\": \"No se encontro al usuario\"}";
 		});
 
 
@@ -235,6 +268,19 @@ public class App{
 			}
 		});
 
+			//muestra todas las preguntas de una categoria
+		get("/questions/:id" , (req, res) ->{
+			List<Question> questions = Question.where("category_id=?",req.params(":id"));
+			if(!questions.isEmpty()){
+				Gson g= new Gson();
+				res.type("application/json");
+				return g.toJson(questions.toArray());
+			}
+			else{
+				return "Error: No hay respuestas cargadas. Nada para mostrar";
+			}
+		});
+
 		//muestras las estadisticas del current User, por categoria
 		get("/statistics" , (req,res) ->{
 			Statistic s= new Statistic();
@@ -263,7 +309,7 @@ public class App{
 			return aux;
 		});
 
-		//devuelve las estadisticas globales
+		//devuelve las estadisticas globales del currentUser
 		get("/globalStatistics" , (req,res) ->{
 			//Statistic s= new Statistic();
 			List<Statistic> stats= Statistic.where("user_id = ?", currentUser.get("id"));
@@ -344,6 +390,8 @@ public class App{
 			Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
 			Category c = new Category();
 			c.set("category_name", bodyParams.get("category_name"));
+			c.set("correct",0);
+			c.set("incorrect",0);
 			c.saveIt();
 			res.type("application/json");
 			return c.toJson(true);
@@ -573,6 +621,7 @@ public class App{
 			Answer a= new Answer();
 			Option o= Option.findById(bodyParams.get("id"));
 			Question q= Question.findById(o.getInteger("question_id"));
+			Category c= Category.findById(q.getInteger("category_id"));
 			a.set("user_id",currentUser.get("id"));
 			a.set("option_id", o.getInteger("id"));
 			a.set("correct", o.getBoolean("correct"));
@@ -597,6 +646,7 @@ public class App{
 					}
 				}
 				if(o.getBoolean("correct")){
+					c.set("correct",c.getInteger("correct")+1);
 					q.set("correct",q.getInteger("correct")+1);
 					s.set("correct",s.getInteger("correct")+1);
           			u.set("score", u.getInteger("score")+10);
@@ -622,6 +672,7 @@ public class App{
 					json = "{\"Respuesta\":true}";
 				}
 				else{
+					c.set("incorrect",c.getInteger("incorrect"+1));
 					q.set("incorrect",q.getInteger("incorrect")+1);
 					s.set("incorrect", s.getInteger("incorrect")+1);
           			if (u.getInteger("score")>0){

@@ -16,6 +16,8 @@ CREATE TABLE if not exists users (
 create table if not exists categories (
 	id int(1) auto_increment  not null,
 	category_name varchar(20) not null,
+	correct int(11),
+	incorrect int(11),
 	primary key(id),
     unique(category_name),
     created_at datetime,
