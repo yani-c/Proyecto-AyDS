@@ -62,6 +62,7 @@ class Statistics extends Component{
       })
       .then(response => response.json())
       .then(response => {
+        console.log("A VER");
         console.log(response);
         let cats = [];
 
@@ -110,14 +111,11 @@ class Statistics extends Component{
     })
     .then(response => response.json())
     .then(response => {
-      console.log(response.cats);
-      console.log("aqui");
       let cats = [];
 
       Object.values(response.cats).forEach(item => {
           cats = cats.concat(item);
       });
-      console.log(cats);
       this.setState({u:cats});
       
     })
@@ -132,9 +130,18 @@ class Statistics extends Component{
           console.log(this.state.statistics);
           if(this.state.statistics=="category"){
             return (
-              <hi>
-              holi
-            </hi>
+              <div>
+              {this.state.cats.map(cats => 
+                <li>
+                  {"\n"}
+                  {cats.nombre} 
+                  {"\n"}
+                  {cats.correct}
+                  {"\n"}
+                  {cats.incorrect}
+                  </li>
+                  )}
+            </div>
               );
           }
           else if(this.state.statistics=="question"){
