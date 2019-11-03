@@ -174,27 +174,25 @@ class Statistics extends Component{
           }
           else if(this.state.statistics=="cats"){
             return (
-              <div>
-                  <DropdownButton id="dropdown-item-button" title="Categoria">
-                {this.state.categories.map(cats => 
-                  <li key={cats.id}>
-                      <Dropdown.Item as="button" onClick={()=> this.questions(cats.id)}> soy {cats.category_name}</Dropdown.Item>
-                  </li>
-                  )}
-                    </DropdownButton>
-              </div>
+                <div className="Block-Buttom-newCat">
+                    {this.state.categories.map(cats => 
+                      <div key={cats.id}>
+                        <button className="button-Cate" onClick={()=> this.questions(cats.id)}> {cats.category_name} </button> 
+                        </div>
+                        )}
+                  </div>
             );
 
           }
           else if(this.state.statistics=="user"){
             return (
-              <div>
+              <div className= "Block-Stat-User">
                 <form className="login-form" >
                   <label> 
-                    <input type="text" placeholder="DNI"name="dni" value={this.state.dni} onChange={this.handleChange}/>
+                    <input className="input-DNI" type="text" placeholder="DNI"name="dni" value={this.state.dni} onChange={this.handleChange}/>
                   </label>
+                  <button className="button-Buscar" onClick={this.user}> Buscar </button>
                 </form>
-                <button onClick={this.user}> Buscar </button>
                 </div>
             );
           }
@@ -217,7 +215,7 @@ class Statistics extends Component{
            );
           }
           else{
-              return(<h1>ACA TOY</h1>);
+              return(<h1></h1>);
           }
       }
 

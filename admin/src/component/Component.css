@@ -78,6 +78,37 @@
     text-align: center;
     margin: 25px;
   }
+  .input-DNI {
+    padding: 10px 20px;
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 1px solid #000000;
+    background-color: 250ms;
+    border-radius: 3px;
+    margin: 3px;
+    font-size: 14px;
+  }
+  .button-Buscar {
+    padding: 10px 50px;
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 2px solid #000000;
+    background-color: 250ms;
+    border-radius: 3px;
+    margin: 3px;
+    font-size: 14px;
+  }
+  .button-Buscar:hover {
+    cursor: pointer;
+    background-color: #663399;
+    color: #CDCDCD;
+  }
+  .Block-Stat-User {
+    text-align: center;
+    margin: 30px;
+    align-items: center;
+    justify-content: center;
+  }
   .button-SignIn {
     padding: 10px 50px;
     background-color: #CDCDCD;
