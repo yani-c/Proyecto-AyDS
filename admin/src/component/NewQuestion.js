@@ -1,4 +1,5 @@
 import React,{Component, Redirect} from "react";
+import {Button, ButtonGroup} from 'reactstrap';
 import {AsyncStorage} from "AsyncStorage";
 
 
@@ -6,7 +7,7 @@ import {AsyncStorage} from "AsyncStorage";
 class NewQuestion extends Component{
     constructor(props) {
         super(props);
-        this.state = {description: '',option1: '',option2:'',option3:'',optionCorrect:''};
+        this.state = {category: false,categories:[],description: '',option1: '',option2:'',option3:'',optionCorrect:''};
     
         this.handleChange = this.handleChange.bind(this);
       }
@@ -19,6 +20,7 @@ class NewQuestion extends Component{
   
       
       loadQuestion= async() => {
+      this.setState({category:true});
       const h = new Headers(); 
       console.log("aqui");
       console.log(await AsyncStorage.getItem('userToken'));
@@ -46,13 +48,40 @@ class NewQuestion extends Component{
               .catch(error => {
                 console.log("ñeeeeeeee");
                 console.log(error)
-              });
-                   
+              });       
       }
 
-  render () {
-        return (
-          <div className="newQuestion-page">
+      categories= async() => {
+        this.setState({category:false});
+        const h = new Headers(); 
+        console.log(await AsyncStorage.getItem('userToken'));
+        h.append('Content-Type','application/json; charset=UTF-8');
+        h.append('Authorization', await AsyncStorage.getItem('userToken'));
+        await fetch(process.env.REACT_APP_API_HOST+"/categories",{
+          method: 'GET', 
+          headers: h
+        })
+        .then(response => response.json())
+        .then(response => {
+          console.log("from categories");
+          console.log(response);
+          let cats = [];
+  
+        Object.values(response).forEach(item => {
+           cats = cats.concat(item);
+        });
+        this.setState({categories:cats});
+        })
+        .catch(error => {
+          console.log(error)
+        });
+    }
+
+
+      show(){
+        if(this.state.category){
+          return (
+            <div className="newQuestion-page">
             <div className="form">
               <form className="question-form" >
             <label>
@@ -73,8 +102,33 @@ class NewQuestion extends Component{
             </form>
             <button onClick={this.loadQuestion}> Guardar</button>
             </div>
-            </div>
-        ); 
+            </div> 
+          );
+        }
+        else{
+          return(
+            <div className="Block-Buttom-newCat">
+              <button className="button-Cate2" onClick={this.categories}> ELEGIR CATEGORIA </button>
+                {this.state.categories.map(c => 
+                  <div key={c.id}>
+                    <button className="button-Cate" onClick={this.loadQuestion}> {c.category_name} </button> 
+                    </div>
+                    )}
+              </div>
+          );
+        } 
+      }
+
+  render () {
+    
+        return (
+          <div className="Home-header">
+            <font className="Text-titulo"> NUEVA PREGUNTA </font>
+            <div className="Block-prim">
+              {this.show()}
+          </div>
+        </div>
+      ); 
   }
 }
 
