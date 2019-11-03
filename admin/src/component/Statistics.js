@@ -145,9 +145,9 @@ class Statistics extends Component{
                   {"\n"}
                   {cats.category_name} 
                   {"\n"}
-                  {cats.correct}
+                  Respondidas correctamente: {cats.correct}
                   {"\n"}
-                  {cats.incorrect}
+                  Respondidas incorrectamente: {cats.incorrect}
                   </li>
                   )}
             </div>

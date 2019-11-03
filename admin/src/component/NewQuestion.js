@@ -7,7 +7,7 @@ import {AsyncStorage} from "AsyncStorage";
 class NewQuestion extends Component{
     constructor(props) {
         super(props);
-        this.state = {category: false,categories:[],description: '',option1: '',option2:'',option3:'',optionCorrect:''};
+        this.state = {id_c:'',category: false,categories:[],description: '',option1: '',option2:'',option3:'',optionCorrect:''};
     
         this.handleChange = this.handleChange.bind(this);
       }
@@ -28,7 +28,7 @@ class NewQuestion extends Component{
       h.append('Authorization', await AsyncStorage.getItem('userToken'));
       // ESTO DEBERIA CAMBIARSE CUANDO ESTE HECHO EL COMPONENTE CATEGORIA,
       //PARA PODER ELEGIR ENTRE ALGUNA DE ELLAS Y AHI PONERLE EL ID 
-          var c=  2;
+          var c=  this.state.id_c;
           await fetch(process.env.REACT_APP_API_HOST+"/questions",{
               method: 'POST', 
               body: JSON.stringify({description: this.state.description, category_id: c, options: [
@@ -111,7 +111,7 @@ class NewQuestion extends Component{
               <button className="button-Cate2" onClick={this.categories}> ELEGIR CATEGORIA </button>
                 {this.state.categories.map(c => 
                   <div key={c.id}>
-                    <button className="button-Cate" onClick={this.loadQuestion}> {c.category_name} </button> 
+                    <button className="button-Cate" onClick={()=> this.setState({id_c:c.id, category:true})}> {c.category_name} </button> 
                     </div>
                     )}
               </div>
