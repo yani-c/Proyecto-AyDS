@@ -93,18 +93,18 @@
     background-color: #663399;
     color: #CDCDCD;
   }
-  .button-Menu {
-    padding: 30px 150px;
+  .Button-Menu {
+    padding: 30px 140px;
     align-content: center;
     background-color: #CDCDCD;
     color: #663399;
     border: 1px solid #CDCDCD;
     background-color: 250ms;
     border-radius: 5px;
-    margin: 50px;
-    font-size: 15px;
+    margin: 70px;
+    font-size: 14px;
   }
-  .button-Menu:hover {
+  .Button-Menu:hover {
     cursor: pointer;
     background-color: #663399;
     color: #CDCDCD;
