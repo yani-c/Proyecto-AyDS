@@ -232,9 +232,9 @@ class Statistics extends Component{
         <div className="Block-prim">
           <div className="Block-buttonGroup">
             <ButtonGroup>
-              <Button color="button-Group" onClick={this.Statistics_categories} >POR CATEGORIA</Button>
-              <Button color="button-Group" onClick={this.categories}>POR PREGUNTA</Button>
-              <Button color="button-Group" onClick={()=>this.setState({statistics:"user"})} >POR USUARIO</Button>
+              <Button className="button-Group" onClick={this.Statistics_categories} >POR CATEGORIA</Button>
+              <Button className="button-Group" onClick={this.categories}>POR PREGUNTA</Button>
+              <Button className="button-Group" onClick={()=>this.setState({statistics:"user"})} >POR USUARIO</Button>
             </ButtonGroup>
           </div>
           <div>
