@@ -175,7 +175,7 @@ class Statistics extends Component{
           else if(this.state.statistics=="cats"){
             return (
               <div>
-                  <DropdownButton id="dropdown-item-button" title="Dropdown button">
+                  <DropdownButton id="dropdown-item-button" title="Categoria">
                 {this.state.categories.map(cats => 
                   <li key={cats.id}>
                       <Dropdown.Item as="button" onClick={()=> this.questions(cats.id)}> soy {cats.category_name}</Dropdown.Item>
