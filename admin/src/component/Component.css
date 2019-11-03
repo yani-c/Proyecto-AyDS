@@ -36,13 +36,47 @@
     border: 1px solid #CDCDCD;
     background-color: 250ms;
     border-radius: 5px;
-    margin: 50px;
+    margin: 10px;
     font-size: 15px;
   }
   .button-Home:hover {
     cursor: pointer;
     background-color: #663399;
     color: #CDCDCD;
+  }
+  .button-Cate {
+    padding: 20px 80px;
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 1px solid #000000;
+    background-color: 250ms;
+    border-radius: 3px;
+    margin: 10px;
+    font-size: 15px;
+  }
+  .button-Cate:hover {
+    cursor: pointer;
+    background-color: #663399;
+    color: #000000;
+  }
+  .button-Cate2 {
+    padding: 20px 80px;
+    background-color: #663399;
+    color: #CDCDCD;
+    border: 3px solid #CDCDCD;
+    background-color: 250ms;
+    border-radius: 3px;
+    margin: 10px;
+    font-size: 15px;
+  }
+  .button-Cate2:hover {
+    cursor: pointer;
+    background-color: #CDCDCD;
+    color: #663399;
+  }
+  .Block-Buttom-newCat{
+    text-align: center;
+    margin: 25px;
   }
   .button-SignIn {
     padding: 10px 50px;
@@ -59,7 +93,6 @@
     background-color: #663399;
     color: #CDCDCD;
   }
-
   .button-Menu {
     padding: 30px 150px;
     align-content: center;
@@ -76,10 +109,27 @@
     background-color: #663399;
     color: #CDCDCD;
   }
+  .button-Group {
+    padding: 10px 80px;
+    align-content: center;
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 2px solid #000000;
+    background-color: 250ms;
+    font-size: 15px;
+  }
+  .button-Group:hover {
+    cursor: pointer;
+    background-color: #663399;
+    color: #CDCDCD;
+  }
   .Block-Buttom-Menu{
-
     text-align: center;
-    margin: 25px;
+    margin: 5px;
+  }
+  .Block-buttonGroup{
+    text-align: center;
+    margin: 5px;
   }
   .Home-logo {
     padding: 15px;
@@ -107,10 +157,8 @@
     align-items: center;
     justify-content: center;
     margin: 20px;
-   
     padding: 8% 0 0;
     border-radius: 5px;
-
   }
  
   .form {
