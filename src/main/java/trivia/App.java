@@ -145,11 +145,14 @@ public class App{
 				String aux="{";
 				int i=1;
 				for(Category c : categories){
-					aux=aux+"\"Categoria"+i+"\": \""+c.toJson(true,"category_name","id", "correct","incorrect")+"\",";
+					aux=aux+"\"Categoria"+i+"\": "+c.toJson(true,"category_name","id", "correct","incorrect");
 					i++;
+					if(i<categories.size()+1){
+						aux=aux+",";
+					}
 				}
 				res.type("application/json");
-				aux=aux+"\"Otro\": \"\"}";
+				aux=aux+"}";
 				return aux;
 			}
 			else{
@@ -272,9 +275,17 @@ public class App{
 		get("/questions/:id" , (req, res) ->{
 			List<Question> questions = Question.where("category_id=?",req.params(":id"));
 			if(!questions.isEmpty()){
-				Gson g= new Gson();
+				String aux="{";
+				for(int i=0;i<questions.size();i++){
+					aux=aux+"\"question"+i+"\":"+questions.get(i).toJson(true);
+					if(i<questions.size()-1){
+						aux=aux+",";
+					}
+				}
+				aux=aux+"}";
 				res.type("application/json");
-				return g.toJson(questions.toArray());
+				System.out.println("es "+aux);
+				return aux;
 			}
 			else{
 				return "Error: No hay respuestas cargadas. Nada para mostrar";

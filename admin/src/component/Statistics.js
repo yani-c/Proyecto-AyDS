@@ -8,11 +8,13 @@ class Statistics extends Component{
 
     constructor(props) {
         super(props);
-        //en cats se guardan las estadisticas por categoria
-        //en c todas las categorias
-        //en question todas las preguntas de la categoria elegida
-        //en u las estadisticas del usuario buscado por dni
-        this.state = {statistics:'',cats:[], c:[],q:[],u:[], dni:'',cat:''}
+        //en catStatistics se guardan las estadisticas por categoria
+        //en categories todas las categorias
+        //en questions todas las preguntas de la categoria elegida
+        //en userStatistics las estadisticas del usuario buscado por dni
+        //en dni el dni de quien se van a buscar las categorias
+        //en cat la categoria en donde se van a bsucar las preguntas
+        this.state = {statistics:'',catStatistics:[], categories:[],questions:[],userStatistics:[], dni:'',cat:''}
 
         this.handleChange = this.handleChange.bind(this);
 
@@ -31,7 +33,7 @@ class Statistics extends Component{
         console.log(await AsyncStorage.getItem('userToken'));
         h.append('Content-Type','application/json; charset=UTF-8');
         h.append('Authorization', await AsyncStorage.getItem('userToken'));
-        await fetch(process.env.REACT_APP_API_HOST+"/statistics",{
+        await fetch(process.env.REACT_APP_API_HOST+"/categories",{
           method: 'GET', 
           headers: h
         })
@@ -40,10 +42,10 @@ class Statistics extends Component{
           console.log(response);
           let cats = [];
 
-        Object.values(response.cats).forEach(item => {
+        Object.values(response).forEach(item => {
             cats = cats.concat(item);
         });
-        this.setState({cats:cats});
+        this.setState({catStatistics:cats});
         })
         .catch(error => {
           console.log(error)
@@ -62,22 +64,23 @@ class Statistics extends Component{
       })
       .then(response => response.json())
       .then(response => {
-        console.log("A VER");
+        console.log("from categories");
         console.log(response);
         let cats = [];
 
-      Object.values(response.cats).forEach(item => {
+      Object.values(response).forEach(item => {
          cats = cats.concat(item);
       });
-      this.setState({c:cats});
+      this.setState({categories:cats});
       })
       .catch(error => {
         console.log(error)
       });
   }
 
-  questions= async() => {
-    this.setState({statistics:"questions"});
+  questions= async(id) => {
+    console.log("vamos por questions");
+    this.setState({statistics:"question", cat:id});
     const h = new Headers(); 
     console.log(await AsyncStorage.getItem('userToken'));
     h.append('Content-Type','application/json; charset=UTF-8');
@@ -89,8 +92,14 @@ class Statistics extends Component{
     })
     .then(response => response.json())
     .then(response => {
+      console.log("from question");
       console.log(response);
+      let q = [];
 
+      Object.values(response).forEach(item => {
+          q = q.concat(item);
+      });
+      this.setState({questions:q});
 
     })
     .catch(error => {
@@ -116,7 +125,7 @@ class Statistics extends Component{
       Object.values(response.cats).forEach(item => {
           cats = cats.concat(item);
       });
-      this.setState({u:cats});
+      this.setState({userStatistics:cats});
       
     })
     .catch(error => {
@@ -131,10 +140,10 @@ class Statistics extends Component{
           if(this.state.statistics=="category"){
             return (
               <div>
-              {this.state.cats.map(cats => 
-                <li>
+              {this.state.catStatistics.map(cats => 
+                <li key={cats.id}>
                   {"\n"}
-                  {cats.nombre} 
+                  {cats.category_name} 
                   {"\n"}
                   {cats.correct}
                   {"\n"}
@@ -145,17 +154,31 @@ class Statistics extends Component{
               );
           }
           else if(this.state.statistics=="question"){
+            console.log("qqqqqq");
               return(
-                <h1> HOLIS</h1>
+                <div>
+                {this.state.questions.map(q => 
+                  <li key={q.id}>
+                    {"\n"}
+                    Activa: {q.active} 
+                    {"\n"}
+                    Descripcion: {q.description} 
+                    {"\n"}
+                    respondida correctamente: {q.correct}
+                    {"\n"}
+                    respondida incorrectamente: {q.incorrect}
+                    </li>
+                    )}
+              </div>
               );
           }
           else if(this.state.statistics=="cats"){
             return (
               <div>
                   <DropdownButton id="dropdown-item-button" title="Dropdown button">
-                {this.state.c.map(cats => 
-                  <li>
-                      <Dropdown.Item as="button">{cats.category_name}</Dropdown.Item>
+                {this.state.categories.map(cats => 
+                  <li key={cats.id}>
+                      <Dropdown.Item as="button" onClick={()=> this.questions(cats.id)}> soy {cats.category_name}</Dropdown.Item>
                   </li>
                   )}
                     </DropdownButton>
@@ -176,13 +199,9 @@ class Statistics extends Component{
             );
           }
           else if(this.state.statistics=="showUser"){
-            console.log(this.state.u);
-            const c = this.state.u;
-            console.log("y ahora?");
-            console.log(c);
             return (
               <div>
-              {this.state.u.map(statistics => 
+              {this.state.userStatistics.map(statistics => 
                 <li key={statistics.nombre.toString()}>
                   {"\n"}
                   {statistics.nombre}
@@ -206,18 +225,6 @@ class Statistics extends Component{
 
 
   render () {
-
-    function Item(props) {
-        return <li>{props.value}</li>;
-     }
-     
-     function MyList(items) {
-        return (
-         <ul>
-           {items.map((item) => <Item key={item.nombre} value={item} />)}
-         </ul>
-       );
-     }
 
     return (
       <div className="Statics-header">
