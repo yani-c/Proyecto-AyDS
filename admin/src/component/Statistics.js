@@ -227,14 +227,14 @@ class Statistics extends Component{
   render () {
 
     return (
-      <div className="Statics-header">
+      <div className="Home-header">
         <font className="Text-titulo"> ESTADISTICAS </font>
         <div className="Block-prim">
-          <div className="Block-Buttom-Menu">
+          <div className="Block-buttonGroup">
             <ButtonGroup>
-              <Button color="primary" onClick={this.Statistics_categories} >POR CATEGORIA</Button>
-              <Button color="primary" onClick={this.categories}>POR PREGUNTA</Button>
-              <Button color="primary" onClick={()=>this.setState({statistics:"user"})} >POR USUARIO</Button>
+              <Button color="button-Group" onClick={this.Statistics_categories} >POR CATEGORIA</Button>
+              <Button color="button-Group" onClick={this.categories}>POR PREGUNTA</Button>
+              <Button color="button-Group" onClick={()=>this.setState({statistics:"user"})} >POR USUARIO</Button>
             </ButtonGroup>
           </div>
           <div>
@@ -244,7 +244,5 @@ class Statistics extends Component{
     </div>
     );
   }
-
-
 }
 export default Statistics;
