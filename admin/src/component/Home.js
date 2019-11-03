@@ -22,8 +22,8 @@ class Home extends Component{
             <img className="Home-logo" src={logo} alt="logo" />
             <div className="Block-Buttom">
 
-              <button className="button-Home" onClick={this.handleClickSignIn}> Iniciar Sesion </button>
-              <button className="button-Home" onClick={this.handleClickSignUp}> Registrarse </button>  
+              <button className="Button-Home" onClick={this.handleClickSignIn}> Iniciar Sesion </button>
+              <button className="Button-Home" onClick={this.handleClickSignUp}> Registrarse </button>  
 
             </div>
         </div>

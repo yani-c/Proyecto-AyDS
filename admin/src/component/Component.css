@@ -29,17 +29,17 @@
     width: 1200px;
     margin-left: 200px;
   }
-  .button-Home {
+  .Button-Home {
     padding: 30px 100px;
     background-color: #CDCDCD;
     color: #663399;
     border: 1px solid #CDCDCD;
     background-color: 250ms;
     border-radius: 5px;
-    margin: 10px;
+    margin: 50px;
     font-size: 15px;
   }
-  .button-Home:hover {
+  .Button-Home:hover {
     cursor: pointer;
     background-color: #663399;
     color: #CDCDCD;
