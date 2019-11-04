@@ -192,17 +192,6 @@ public class App{
       return "{\"Error\": \"No se encontro al usuario\"}";
     });
 
-    //retorna una categoria dado su id
-    get("/category/:id" , (req, res) ->{
-      Category c  = Category.findById(req.params(":id"));
-      if(c!=null){
-        String aux= c.toJson(true);
-        res.type("application/json");
-        return aux;
-      }
-      return "Error: No se encontro la categoria";
-    });
-
     //retorna una pregunta y sus opciones dado su id
     get("/question/:id" , (req, res) ->{
       Question q = Question.findById(req.params(":id"));
@@ -310,7 +299,7 @@ public class App{
       return c;
     });
 
-    //retorna el puntajje del currentUser
+    //retorna el puntaje del currentUser
     get("/score", (req,res) ->{
       User u = User.findById(currentUser.get("id"));
       if(u.getInteger("score") == null){
@@ -360,6 +349,7 @@ public class App{
       user.set("password", bodyParams.get("password"));
       user.set("username", bodyParams.get("username"));
       user.set("administrator",bodyParams.get("administrator"));
+      user.set("score",0);
       user.saveIt();
       res.type("application/json");
       return user.toJson(true);
@@ -405,23 +395,10 @@ public class App{
 
 //------------------------------------DELETE------------------------------------
 
-    //borra un usuario
-    delete("/user/:id", (req, res) -> {
-      User u = User.findById(req.params(":id"));
-      if(u!=null){
-        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-        u.delete();
-        res.type("application/json");
-        return "Se ha borrado"+u.toJson(true,"id","dni");
-      }
-      return "Error: No se pudo borrar.No se encontraron registro de la persona";
-    });
-
     //borrar una pregunta y sus opciones
     delete("/question/:id", (req, res) -> {
       Question q = Question.findById(req.params(":id"));
       if(q!=null){
-        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         q.delete();
         res.type("application/json");
         return "Se ha borrado"+q.toJson(true,"id","description")+" y sus respectivas opciones";
@@ -429,35 +406,17 @@ public class App{
       return "Error: No se pudo borrar.No se encontraron registro de la pregunta";
     });
 
-    //borrar una opcion
-    delete("/option/:id", (req, res) -> {
-      Option o = Option.findById(req.params(":id"));
-      if(o!=null){
-        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-        o.delete();
+    delete("/category/:id", (req, res) -> {
+      Category c = Category.findById(req.params(":id"));
+      if(c!=null){
+        c.delete();
         res.type("application/json");
-        return "Se ha borrado"+o.toJson(true,"id","description");
+        return c.toJson(true,"id","category_name"); //probar esto de retornarla
       }
       return "Error: No se pudo borrar.No se encontraron registro de la opcion";
     });
 
 //------------------------------------PUT------------------------------------
-
-    //actualiza datos de un usuario
-    put("/user/:id" , (req,res) -> {
-      User u = User.findById(req.params(":id"));
-      if(u!=null){
-        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-        u.set("dni", bodyParams.get("dni"));
-        u.set("password", bodyParams.get("password"));
-        u.set("username", bodyParams.get("username"));
-        u.saveIt();
-        res.type("application/json");
-        return "Actualizado con exito : "+u.toJson(true);
-      }
-      res.type("application/json");
-      return "Error: No se pudo actualizar.No se encontraron registros de la persona";
-    });
 
     //actualiza datos de una pregunta
     put("/question/:id", (req, res) -> {
@@ -532,7 +491,7 @@ public class App{
       return "";
     });
 
-    //game: elige una pregunta aleatoriamente y redirecciona a mostrarla
+    //game: elige una pregunta aleatoriamente la retorna
     post("/game" , (req,res) ->{
       Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
       List<Question> questions = Question.where("active = ? and category_id = ? ", true, bodyParams.get("category_id"));
