@@ -395,6 +395,18 @@ public class App{
 
 //------------------------------------DELETE------------------------------------
 
+    //borra un usuario
+    delete("/user/:id", (req, res) -> {
+      User u = User.findById(req.params(":id"));
+      if(u!=null){
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        u.delete();
+        res.type("application/json");
+        return "Se ha borrado"+u.toJson(true,"id","dni");
+      }
+      return "Error: No se pudo borrar.No se encontraron registro de la persona";
+    });
+
     //borrar una pregunta y sus opciones
     delete("/question/:id", (req, res) -> {
       Question q = Question.findById(req.params(":id"));
