@@ -15,19 +15,14 @@ class Home extends Component{
   render () {
     return (
       <div className="Home-header">
-
         <font className="Text-titulo"> TRIVIAVET</font>
         <div className="Block-prim">
-
-            <img className="Home-logo" src={logo} alt="logo" />
-            <div className="Block-Buttom">
-
-              <button className="Button-Home" onClick={this.handleClickSignIn}> Iniciar Sesion </button>
-              <button className="Button-Home" onClick={this.handleClickSignUp}> Registrarse </button>  
-
-            </div>
+          <img className="Home-logo" src={logo} alt="logo" />
+          <div className="Block-Buttom">
+            <button className="Button-Home" onClick={this.handleClickSignIn}> Iniciar Sesion </button>
+            <button className="Button-Home" onClick={this.handleClickSignUp}> Registrarse </button>  
+          </div>
         </div>
-
       </div>
     );
   }
