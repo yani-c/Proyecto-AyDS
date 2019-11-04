@@ -7,6 +7,7 @@ import Statistics from './component/Statistics';
 import './App.css';
 import SignIn from './component/SignIn';
 import NewQuestion from './component/NewQuestion';
+import Category from './component/Category';
 
 class App extends Component{
   
@@ -37,6 +38,9 @@ class App extends Component{
               <Route
               path="/statistics"
               component={Statistics} />
+              <Route
+              path="/category"
+              component={Category} />
           </Switch>
         </div>
       </BrowserRouter>

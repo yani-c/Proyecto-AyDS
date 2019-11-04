@@ -418,14 +418,14 @@ public class App{
       return "Error: No se pudo borrar.No se encontraron registro de la pregunta";
     });
 
-    delete("/category/:id", (req, res) -> {
+    post("/category/:id", (req, res) -> {
       Category c = Category.findById(req.params(":id"));
       if(c!=null){
         c.delete();
         res.type("application/json");
         return c.toJson(true,"id","category_name"); //probar esto de retornarla
       }
-      return "Error: No se pudo borrar.No se encontraron registro de la opcion";
+      return "Error: No se pudo borrar.No se encontraron registro de la categoria";
     });
 
 //------------------------------------PUT------------------------------------
