@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import {Button, ButtonGroup} from 'reactstrap';
 import Table from 'react-bootstrap/Table'
+import estad from './estad.png';
 import styles from './App.module.css';
 import './Component.css';
 
@@ -181,14 +182,6 @@ class Statistics extends Component{
                 </tbody>
               )}
             </table>
-            <div className={styles.pagination}>
-              <span>&laquo;</span>
-              <span onClick={() => this.questions()} className={styles.active}>1</span>
-              <span onClick={() => this.questions()}> 2 </span>
-              <span onClick={() => this.questions()}> 3</span>
-              <span onClick={() => this.questions()}> 4</span>
-              <span>&raquo;</span>
-            </div>
           </div>
       );
     }
@@ -240,7 +233,9 @@ class Statistics extends Component{
       );
     }
     else{
-      return(<h1></h1>);
+      return (
+          <img className="Sign-estadistica" src={estad} alt="estad"/>
+      );
     }
   }
 

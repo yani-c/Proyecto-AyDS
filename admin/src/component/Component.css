@@ -17,7 +17,7 @@
     padding: 20px;
     margin: 20px;
     border-radius: 5px;
-    height: 600px;
+    height: 650px;
     width: 1200px;
     background-color: #663399;
     align-items: center;
@@ -191,7 +191,6 @@
     padding: 8% 0 0;
     border-radius: 5px;
   }
- 
   .form {
     z-index: 1;
     border-radius: 5px;
@@ -283,6 +282,12 @@
     color: #663399;
     border: 1px solid #000000;
     background-color: 250ms;
+  }
+  .Sign-estadistica {
+    margin-left: 300px;
+    margin-top: 100px;
+    height: 300px;
+    width: 500px;
   }
   
   
