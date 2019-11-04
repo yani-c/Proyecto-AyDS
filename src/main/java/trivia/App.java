@@ -399,12 +399,12 @@ public class App{
     delete("/user/:id", (req, res) -> {
       User u = User.findById(req.params(":id"));
       if(u!=null){
-        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
         u.delete();
+        System.out.println("existo? "+u.toJson(true));
         res.type("application/json");
-        return "Se ha borrado"+u.toJson(true,"id","dni");
+        return u.toJson(true,"id","dni");
       }
-      return "Error: No se pudo borrar.No se encontraron registro de la persona";
+      return "{\"Error\": \"No se pudo borrar.No se encontraron registro de la persona\"}";
     });
 
     //borrar una pregunta y sus opciones
@@ -413,19 +413,19 @@ public class App{
       if(q!=null){
         q.delete();
         res.type("application/json");
-        return "Se ha borrado"+q.toJson(true,"id","description")+" y sus respectivas opciones";
+        return q.toJson(true,"id","description");
       }
-      return "Error: No se pudo borrar.No se encontraron registro de la pregunta";
+      return "{\"Error\": \"No se pudo borrar.No se encontraron registro de la pregunta\"}";
     });
 
-    post("/category/:id", (req, res) -> {
+    delete("/category/:id", (req, res) -> {
       Category c = Category.findById(req.params(":id"));
       if(c!=null){
         c.delete();
         res.type("application/json");
-        return c.toJson(true,"id","category_name"); //probar esto de retornarla
+        return c.toJson(true,"id","category_name"); 
       }
-      return "Error: No se pudo borrar.No se encontraron registro de la categoria";
+      return "{\"Error\": \"No se pudo borrar.No se encontraron registro de la categoria\"}";
     });
 
 //------------------------------------PUT------------------------------------
