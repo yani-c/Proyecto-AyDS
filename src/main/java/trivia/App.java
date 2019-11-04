@@ -440,6 +440,17 @@ public class App{
       }
       return "Error: No se pudo borrar.No se encontraron registro de la opcion";
     });
+    //borra una categoria
+    delete("/category/:id", (req, res) -> {
+      Category c = Category.findById(req.params(":id"));
+      if(c!=null){
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        c.delete();
+        res.type("application/json");
+        return "Se ha borrado"+c.toJson(true,"id","category_name");
+      }
+      return "Error: No se pudo borrar.No se encontraron registro de la categoria";
+    });
 
 //------------------------------------PUT------------------------------------
 
