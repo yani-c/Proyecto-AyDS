@@ -17,9 +17,7 @@ class Statistics extends Component{
         //en dni el dni de quien se van a buscar las categorias
         //en cat la categoria en donde se van a bsucar las preguntas
         this.state = {statistics:'',catStatistics:[], categories:[],questions:[],userStatistics:[], dni:'',cat:''}
-
         this.handleChange = this.handleChange.bind(this);
-
     }
 
     handleChange(event) {
@@ -135,128 +133,118 @@ class Statistics extends Component{
     });
   }
                      
-      show(){
-          console.log(this.state.statistics);
-          if(this.state.statistics=="category"){
-            return (
-              <div>
-                <Table className="PropTable">
-                  <thead className="PropTable">
-                    <tr >
-                      <th className="PropTable2">CATEGORIA</th>
-                      <th className="PropTable2">CORRECTAS</th>
-                      <th className="PropTable2">INCORRECTAS</th>
-                    </tr>
-                  </thead >
-                  {this.state.catStatistics.map(cats => 
-                  <tbody key={cats.id} className="PropTable">
-                    <tr>
-                      <td className="PropTable2">{cats.category_name}</td>
-                      <td className="PropTable2" >{cats.correct}</td>
-                      <td className="PropTable2">{cats.incorrect}</td>
-                    </tr>
-                  </tbody>
-                  
-                  )}
-            </Table>
-           </div>
-              );
-          }
-          else if(this.state.statistics=="question"){
-            console.log("qqqqqq");
-              return(
-                
-              <div className={styles.app}>
-        
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th className="PropTable2"> PREGUNTA </th>
-                    <th className="PropTable2"> RESPONDIERON CORRECTAMENTE</th>
-                    <th className="PropTable2"> RESPONDIERON INCORRECTAMENTE</th>
-                  </tr>
-                </thead>
-                {this.state.questions.map(q =>
+  show(){
+    console.log(this.state.statistics);
+    if(this.state.statistics=="category"){
+      return (
+        <div>
+          <Table className="PropTable">
+            <thead className="PropTable">
+              <tr >
+                <th className="PropTable2">CATEGORIA</th>
+                <th className="PropTable2">CORRECTAS</th>
+                <th className="PropTable2">INCORRECTAS</th>
+              </tr>
+            </thead >
+            {this.state.catStatistics.map(cats => 
+              <tbody key={cats.id} className="PropTable">
+                <tr>
+                  <td className="PropTable2">{cats.category_name}</td>
+                  <td className="PropTable2" >{cats.correct}</td>
+                  <td className="PropTable2">{cats.incorrect}</td>
+                </tr>
+              </tbody>
+            )}
+          </Table>
+        </div>
+      );
+    }
+    else if(this.state.statistics=="question"){
+      console.log("qqqqqq");
+      return(
+          <div className={styles.app}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th className="PropTable2"> PREGUNTA </th>
+                  <th className="PropTable2"> RESPONDIERON CORRECTAMENTE</th>
+                  <th className="PropTable2"> RESPONDIERON INCORRECTAMENTE</th>
+                </tr>
+              </thead>
+              {this.state.questions.map(q =>
                 <tbody key={q.id}>
-                    <tr>
-                      <td className="PropTable2">{q.description}</td>
-                      <td className="PropTable2">{q.correct}</td>
-                      <td className="PropTable2">{q.incorrect}</td>
-                    </tr>
+                  <tr>
+                    <td className="PropTable2">{q.description}</td>
+                    <td className="PropTable2">{q.correct}</td>
+                    <td className="PropTable2">{q.incorrect}</td>
+                  </tr>
                 </tbody>
-                 )}
-              </table>
-              <div className={styles.pagination}>
-                <span>&laquo;</span>
-                <span onClick={() => this.questions()} className={styles.active}>1</span>
-                <span onClick={() => this.questions()}> 2 </span>
-                <span onClick={() => this.questions()}> 3</span>
-                <span onClick={() => this.questions()}> 4</span>
-                <span>&raquo;</span>
-              </div>
-      
+              )}
+            </table>
+            <div className={styles.pagination}>
+              <span>&laquo;</span>
+              <span onClick={() => this.questions()} className={styles.active}>1</span>
+              <span onClick={() => this.questions()}> 2 </span>
+              <span onClick={() => this.questions()}> 3</span>
+              <span onClick={() => this.questions()}> 4</span>
+              <span>&raquo;</span>
             </div>
-              );
-          }
-          else if(this.state.statistics=="cats"){
-            return (
-                <div className="Block-Buttom-newCat">
-                    {this.state.categories.map(cats => 
-                      <div key={cats.id}>
-                        <button className="button-Cate" onClick={()=> this.questions(cats.id)}> {cats.category_name} </button> 
-                        </div>
-                        )}
-                  </div>
-            );
-
-          }
-          else if(this.state.statistics=="user"){
-            return (
-              <div className= "Block-Stat-User">
-                <form className="login-form" >
-                  <label> 
-                    <input className="input-DNI" type="text" placeholder="DNI"name="dni" value={this.state.dni} onChange={this.handleChange}/>
-                  </label>
-                  <button className="button-Buscar" onClick={this.user}> Buscar </button>
-                </form>
-                </div>
-            );
-          }
-          else if(this.state.statistics=="showUser"){
-            return (
-              <div>
-                 <Table className="PropTable">
-                  <thead className="PropTable">
-                    <tr >
-                      <th className="PropTable2">CATEGORIA</th>
-                      <th className="PropTable2">CORRECTAS</th>
-                      <th className="PropTable2">INCORRECTAS</th>
-                    </tr>
-                  </thead >
-                  {this.state.userStatistics.map(statistics => 
-                  <tbody key={statistics.nombre.toString()} className="PropTable">
-                    <tr>
-                      <td className="PropTable2">{statistics.nombre}</td>
-                      <td className="PropTable2" >{statistics.correct}</td>
-                      <td className="PropTable2">{statistics.incorrect}</td>
-                    </tr>
-                  </tbody>
-                  
-                  )}
-                </Table>
-                </div>
-           );
-          }
-          else{
-              return(<h1></h1>);
-          }
-      }
-
-
-
+          </div>
+      );
+    }
+    else if(this.state.statistics=="cats"){
+      return (
+        <div className="Block-Buttom-newCat">
+          {this.state.categories.map(cats => 
+            <div key={cats.id}>
+              <button className="button-Cate" onClick={()=> this.questions(cats.id)}> {cats.category_name} </button> 
+            </div>
+          )}
+        </div>
+      );
+    }
+    else if(this.state.statistics=="user"){
+      return (
+        <div className= "Block-Stat-User">
+          <form className="login-form" >
+            <label> 
+              <input className="input-DNI" type="text" placeholder="DNI"name="dni" value={this.state.dni} onChange={this.handleChange}/>
+            </label>
+            <button className="button-Buscar" onClick={this.user}> Buscar </button>
+          </form>
+        </div>
+      );
+    }
+    else if(this.state.statistics=="showUser"){
+      return (
+        <div>
+          <Table className="PropTable">
+            <thead className="PropTable">
+              <tr>
+                <th className="PropTable2">CATEGORIA</th>
+                <th className="PropTable2">CORRECTAS</th>
+                <th className="PropTable2">INCORRECTAS</th>
+              </tr>
+            </thead >
+            {this.state.userStatistics.map(statistics => 
+              <tbody key={statistics.nombre.toString()} className="PropTable">
+                <tr>
+                  <td className="PropTable2">{statistics.nombre}</td>
+                  <td className="PropTable2" >{statistics.correct}</td>
+                  <td className="PropTable2">{statistics.incorrect}</td>
+                </tr>
+              </tbody>
+            )}
+          </Table>
+        </div>
+      );
+    }
+    else{
+      return(<h1></h1>);
+    }
+  }
 
   render () {
-
     return (
       <div className="Home-header">
         <font className="Text-titulo"> ESTADISTICAS </font>
@@ -269,10 +257,10 @@ class Statistics extends Component{
             </ButtonGroup>
           </div>
           <div>
-          {this.show()}
+            {this.show()}
           </div>
         </div>
-    </div>
+      </div>
     );
   }
 }
