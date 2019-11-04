@@ -89,7 +89,7 @@ class Category extends Component{
       const h = new Headers();
       h.append('Content-Type','application/json; charset=UTF-8');
       h.append('Authorization', await AsyncStorage.getItem('userToken'));
-      await fetch(process.env.REACT_APP_API_HOST+"/category/"+id,{
+      await fetch(process.env.REACT_APP_API_HOST+"/categories/"+id,{
         method: 'POST',
         headers: h,
       })

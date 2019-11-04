@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import logo from './logo.png';
 import './Component.css';
+import {AsyncStorage} from "AsyncStorage";
 
 class Menu extends Component{
   
@@ -8,8 +9,8 @@ class Menu extends Component{
     this.props.history.push("/newQuestion")
   }
 
-  handleClickSignUp=() => {
-    this.props.history.push("/signUp")
+  handleClickLogout= async() =>  {
+    this.props.history.push("/signIn")
   }
 
   handleClickStatistics=() => {
@@ -32,7 +33,7 @@ class Menu extends Component{
               <button className="Button-Menu" onClick={this.handleClickNewQuestion}> NUEVA PREGUNTA </button>
               <button className="Button-Menu" onClick={this.handleClickCategory}> MODIFICAR AREAS </button> 
               <button className="Button-Menu" onClick={this.handleClickStatistics}> VER ESTADISTICAS </button> 
-              <button className="Button-Menu" onClick={this.handleClickSignUp}> VER PREGUNTAS </button>  
+              <button className="Button-Menu" onClick={this.handleClickLogout}> CERRAR SESION </button>  
 
             </div>
         </div>
