@@ -393,6 +393,31 @@ public class App{
       return json;
     });
 
+    //actualiza datos de una categoria
+    post("/category/:id", (req, res) -> {
+      Category c = Category.findById(req.params(":id"));
+      if(c!=null){
+        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+        c.set("category_name", bodyParams.get("category_name"));
+        c.saveIt();
+        res.type("application/json");
+        return "Actualizado con exito : "+c.toJson(true);
+      }
+      res.type("application/json");
+      return "Error: No se pudo actualizar.No se encontraron registros de la persona";
+    });
+
+    //Borra la categoria
+    post("/category/:id", (req, res) -> {
+      Category c = Category.findById(req.params(":id"));
+      if(c!=null){
+        c.delete();
+        res.type("application/json");
+        return c.toJson(true,"id","category_name"); 
+      }
+      return "{\"Error\": \"No se pudo borrar.No se encontraron registro de la categoria\"}";
+    });
+
 //------------------------------------DELETE------------------------------------
 
     //borra un usuario
@@ -417,16 +442,7 @@ public class App{
       }
       return "{\"Error\": \"No se pudo borrar.No se encontraron registro de la pregunta\"}";
     });
-
-    post("/category/:id", (req, res) -> {
-      Category c = Category.findById(req.params(":id"));
-      if(c!=null){
-        c.delete();
-        res.type("application/json");
-        return c.toJson(true,"id","category_name"); 
-      }
-      return "{\"Error\": \"No se pudo borrar.No se encontraron registro de la categoria\"}";
-    });
+    
 
 //------------------------------------PUT------------------------------------
 
@@ -464,19 +480,6 @@ public class App{
       return "Error: No se pudo actualizar.No se encontraron registros de la persona";
     });
 
-    //actualiza datos de una categoria
-    post("/category/:id", (req, res) -> {
-      Category c = Category.findById(req.params(":id"));
-      if(c!=null){
-        Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
-        c.set("category_name", bodyParams.get("category_name"));
-        c.saveIt();
-        res.type("application/json");
-        return "Actualizado con exito : "+c.toJson(true);
-      }
-      res.type("application/json");
-      return "Error: No se pudo actualizar.No se encontraron registros de la persona";
-    });
 
 //------------------------------------GAME------------------------------------
 
