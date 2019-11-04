@@ -1,7 +1,9 @@
 import React,{Component} from "react";
 import {Button, ButtonGroup} from 'reactstrap';
+import Table from 'react-bootstrap/Table'
+import styles from './App.module.css';
 import './Component.css';
-import {Dropdown, DropdownButton } from 'react-bootstrap';
+
 import {AsyncStorage} from "AsyncStorage";
 
 class Statistics extends Component{
@@ -132,44 +134,68 @@ class Statistics extends Component{
       console.log(error)
     });
   }
-
-  
                      
       show(){
           console.log(this.state.statistics);
           if(this.state.statistics=="category"){
             return (
               <div>
-              {this.state.catStatistics.map(cats => 
-                <li key={cats.id}>
-                  {"\n"}
-                  {cats.category_name} 
-                  {"\n"}
-                  Respondidas correctamente: {cats.correct}
-                  {"\n"}
-                  Respondidas incorrectamente: {cats.incorrect}
-                  </li>
+                <Table className="PropTable">
+                  <thead className="PropTable">
+                    <tr >
+                      <th className="PropTable2">CATEGORIA</th>
+                      <th className="PropTable2">CORRECTAS</th>
+                      <th className="PropTable2">INCORRECTAS</th>
+                    </tr>
+                  </thead >
+                  {this.state.catStatistics.map(cats => 
+                  <tbody key={cats.id} className="PropTable">
+                    <tr>
+                      <td className="PropTable2">{cats.category_name}</td>
+                      <td className="PropTable2" >{cats.correct}</td>
+                      <td className="PropTable2">{cats.incorrect}</td>
+                    </tr>
+                  </tbody>
+                  
                   )}
-            </div>
+            </Table>
+           </div>
               );
           }
           else if(this.state.statistics=="question"){
             console.log("qqqqqq");
               return(
-                <div>
-                {this.state.questions.map(q => 
-                  <li key={q.id}>
-                    {"\n"}
-                    Activa: {q.active} 
-                    {"\n"}
-                    Descripcion: {q.description} 
-                    {"\n"}
-                    respondida correctamente: {q.correct}
-                    {"\n"}
-                    respondida incorrectamente: {q.incorrect}
-                    </li>
-                    )}
+                
+              <div className={styles.app}>
+        
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th className="PropTable2"> PREGUNTA </th>
+                    <th className="PropTable2"> RESPONDIERON CORRECTAMENTE</th>
+                    <th className="PropTable2"> RESPONDIERON INCORRECTAMENTE</th>
+                  </tr>
+                </thead>
+                {this.state.questions.map(q =>
+                <tbody key={q.id}>
+                    <tr>
+                      <td className="PropTable2">{q.description}</td>
+                      <td className="PropTable2">{q.correct}</td>
+                      <td className="PropTable2">{q.incorrect}</td>
+                    </tr>
+                </tbody>
+                 )}
+              </table>
+              <div className={styles.pagination}>
+                <span>&laquo;</span>
+                <span onClick={() => this.questions()} className={styles.active}>1</span>
+                <span onClick={() => this.questions()}> 2 </span>
+                <span onClick={() => this.questions()}> 3</span>
+                <span onClick={() => this.questions()}> 4</span>
+                <span>&raquo;</span>
               </div>
+      
+            </div>
               );
           }
           else if(this.state.statistics=="cats"){
@@ -199,18 +225,25 @@ class Statistics extends Component{
           else if(this.state.statistics=="showUser"){
             return (
               <div>
-              {this.state.userStatistics.map(statistics => 
-                <li key={statistics.nombre.toString()}>
-                  {"\n"}
-                  {statistics.nombre}
-                  {"\n"}
-                  correctas: 
-                  {statistics.correct}
-                  {"\n"}
-                  incorrectas: 
-                  {statistics.incorrect}
-                </li>
-                )}
+                 <Table className="PropTable">
+                  <thead className="PropTable">
+                    <tr >
+                      <th className="PropTable2">CATEGORIA</th>
+                      <th className="PropTable2">CORRECTAS</th>
+                      <th className="PropTable2">INCORRECTAS</th>
+                    </tr>
+                  </thead >
+                  {this.state.userStatistics.map(statistics => 
+                  <tbody key={statistics.nombre.toString()} className="PropTable">
+                    <tr>
+                      <td className="PropTable2">{statistics.nombre}</td>
+                      <td className="PropTable2" >{statistics.correct}</td>
+                      <td className="PropTable2">{statistics.incorrect}</td>
+                    </tr>
+                  </tbody>
+                  
+                  )}
+                </Table>
                 </div>
            );
           }

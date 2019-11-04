@@ -270,3 +270,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;      
   }
+
+  .PropTable{
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 1px solid #000000;
+    background-color: 250ms;
+    border-radius: 3px;
+  }
+  .PropTable2{
+    background-color: #CDCDCD;
+    color: #663399;
+    border: 1px solid #000000;
+    background-color: 250ms;
+  }
+  
+  
