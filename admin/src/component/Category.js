@@ -9,7 +9,7 @@ import { throws } from "assert";
 class Category extends Component{
     constructor(props) {
         super(props);
-        this.state = {Categorias: [], option:'', editar:'',eliminar:'', nombre_nuevo: "", nombre_editado:""};
+        this.state = {Categorias: [], option:'', editar:'',eliminar:'', nombre_nuevo: "", nombre_editado:"", id_elegido: ""};
         this.handleChange = this.handleChange.bind(this);
       }
       
@@ -42,13 +42,13 @@ class Category extends Component{
           console.log(error)
         });
     }
-  	editar= async() => {
+  	editar= async(id_elegido) => {
       this.setState({option:"editar" });
       const h = new Headers();
         h.append('Content-Type','application/json; charset=UTF-8');
         h.append('Authorization', await AsyncStorage.getItem('userToken'));
-        await fetch(process.env.REACT_APP_API_HOST+"/category/"+this.state.editar,{
-          method: 'PUT',
+        await fetch(process.env.REACT_APP_API_HOST+"/category/"+id_elegido,{
+          method: 'POST',
           body: JSON.stringify({category_name: this.state.nombre_editado,
           }),
           headers: h,
@@ -58,7 +58,7 @@ class Category extends Component{
         .then(response => {
           console.log(response);
           alert("Categoria Actualizada");
-          this.props.history.push('/Category');
+          this.props.history.push('/Menu');
         })
        .catch(error => {
           console.log(error);
@@ -77,7 +77,7 @@ class Category extends Component{
         .then(response => response.json())
         .then(response => {
           alert("Categoria borrada existosamente");
-          this.props.history.push('/Category');
+          this.props.history.push('/Menu');
         });
     }
       
@@ -110,7 +110,7 @@ class Category extends Component{
           <div>
           {this.state.Categorias.map(c => 
             <li key={c.id}>
-              <button onClick={() =>this.setState({option:"editando", id:c.id} ) }> {c.category_name} </button>
+              <button onClick={() =>this.setState({option:"editando", id_elegido:c.id} ) }> {c.category_name} </button>
             </li>          
           )}
           </div>
@@ -118,14 +118,14 @@ class Category extends Component{
         }
         else if(this.state.option=="editando"){
           return(
-            <form>
+            <div>
             <label>
             <input type="text" placeholder="Editar Categoria" name="nombre_editado" value={this.state.nombre_editado} onChange={this.handleChange} />
             </label>
-            <Button color="primary" onClick={() =>this.editar()} >Guardar</Button>
-            </form>
-                );
-                }
+            <Button color="primary" onClick={() =>this.editar(this.state.id_elegido)} >Guardar</Button>
+            </div> 
+          );
+        }
   //                ELIMINARRRRRR      
           else if (this.state.option=="eliminar"){
           return(

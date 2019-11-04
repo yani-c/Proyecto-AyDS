@@ -418,7 +418,7 @@ public class App{
       return "{\"Error\": \"No se pudo borrar.No se encontraron registro de la pregunta\"}";
     });
 
-    delete("/category/:id", (req, res) -> {
+    post("/category/:id", (req, res) -> {
       Category c = Category.findById(req.params(":id"));
       if(c!=null){
         c.delete();
@@ -465,7 +465,7 @@ public class App{
     });
 
     //actualiza datos de una categoria
-    put("/category/:id", (req, res) -> {
+    post("/category/:id", (req, res) -> {
       Category c = Category.findById(req.params(":id"));
       if(c!=null){
         Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
