@@ -408,7 +408,7 @@ public class App{
     });
 
     //Borra la categoria
-    post("/category/:id", (req, res) -> {
+    post("/categories/:id", (req, res) -> {
       Category c = Category.findById(req.params(":id"));
       if(c!=null){
         c.delete();
