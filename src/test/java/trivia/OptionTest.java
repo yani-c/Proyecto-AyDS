@@ -10,18 +10,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class OptionTest {
+
   @Before
   public void before(){
+    if(!Base.hasConnection()){
       Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/trivia_test", "root", "root");
-      System.out.println("OptionTest setup");
       Base.openTransaction();
+    }
+    System.out.println("OptionTest setup");
   }
 
   @After
   public void after(){
-      System.out.println("OptionTest tearDown");
+    System.out.println("OptionTest tearDown");
+    if(Base.hasConnection()){
       Base.rollbackTransaction();
       Base.close();
+    }
   }
 
 
@@ -30,7 +35,5 @@ public class OptionTest {
     Option o = new Option();
     assertEquals("A parametre can't be empty", o.isValid(), false);
   }
-
-
 
 }

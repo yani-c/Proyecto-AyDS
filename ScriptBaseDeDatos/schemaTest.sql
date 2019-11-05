@@ -16,6 +16,8 @@ CREATE TABLE if not exists users (
 create table if not exists categories (
 	id int(1) auto_increment  not null,
 	category_name varchar(20) not null,
+	correct int(11),
+	incorrect int(11),
 	primary key(id),
     unique(category_name),
     created_at datetime,
@@ -32,7 +34,8 @@ create table if not exists questions(
 	correct int(11),
 	incorrect int(11),
     constraint fkuser foreign key (user_id) references users (id),
-	constraint fkcategory foreign key (category_id) references categories (id),
+	constraint fkcategory foreign key (category_id) references categories (id)
+    on delete cascade,
     unique(description),
     created_at datetime,
     update_at datetime
@@ -43,7 +46,8 @@ create table if not exists levels (
     category_id int(1) not null,
     user_id int(11),
     constraint fkUserLevel foreign key (user_id) references users(id),
-    constraint fklevel foreign key (category_id) references categories (id),
+    constraint fklevel foreign key (category_id) references categories (id)
+    on delete cascade,
     primary key(id),
     created_at datetime,
     update_at datetime

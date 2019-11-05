@@ -18,10 +18,11 @@ public class BasicAuth {
 
   private static String[] getCredentials(String headerAuth) {
     try {
+      System.out.println("dentro: "+headerAuth);
       String base64Credentials = headerAuth.substring("Basic".length()).trim();
       byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
       String credentials = new String(credDecoded, "UTF-8");
-
+      System.out.println("y decoder "+credentials);
       return credentials.split(":", 2);
 
     } catch (UnsupportedEncodingException e) {

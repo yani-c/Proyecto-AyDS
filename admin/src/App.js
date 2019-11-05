@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import React,{Component} from "react";
+import Home from './component/Home';
+import Menu from './component/Menu';
+import SignUp from './component/SignUp';
+import Statistics from './component/Statistics';
 import './App.css';
+import SignIn from './component/SignIn';
+import NewQuestion from './component/NewQuestion';
+import Category from './component/Category';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  
+  render () {
+    require('dotenv').config();
+    return (
+      <BrowserRouter>
+        <div>
+          <Redirect 
+          from="/"
+           to= "/home" />
+          <Switch>
+            <Route
+              path="/home"
+              component={Home} />
+              <Route
+              path="/signIn"
+              component={SignIn} />
+               <Route
+              path="/signUp"
+              component={SignUp} />
+              <Route
+              path="/menu"
+              component={Menu} />
+              <Route
+              path="/newQuestion"
+              component={NewQuestion} />
+              <Route
+              path="/statistics"
+              component={Statistics} />
+              <Route
+              path="/category"
+              component={Category} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
