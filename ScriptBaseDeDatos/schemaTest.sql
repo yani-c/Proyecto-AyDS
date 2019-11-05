@@ -10,7 +10,7 @@ CREATE TABLE if not exists users (
     primary key (id),
     unique(dni), unique(username),
     created_at datetime,
-    update_at datetime
+    updated_at datetime
     );
 
 create table if not exists categories (
