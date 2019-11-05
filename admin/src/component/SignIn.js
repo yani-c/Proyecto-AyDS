@@ -60,7 +60,6 @@ class SignIn extends Component{
                 <label> 
                   <input type="password" placeholder="Contraseña" name="password" value={this.state.password} onChange={this.handleChange} />
                 </label>
-                <p className="message">No tiene una cuenta? <a href="signUp">Crear cuenta</a></p>
               </form>
               <button onClick ={this.login}>
                 iniciar sesion

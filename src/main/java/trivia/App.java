@@ -594,6 +594,7 @@ public class App{
         }
         if(o.getBoolean("correct")){
           c.set("correct",c.getInteger("correct")+1);
+          c.saveIt();
           q.set("correct",q.getInteger("correct")+1);
           s.set("correct",s.getInteger("correct")+1);
           u.set("score", u.getInteger("score")+10);
@@ -620,6 +621,7 @@ public class App{
         }
         else{
           c.set("incorrect",c.getInteger("incorrect")+1);
+          c.saveIt();
           q.set("incorrect",q.getInteger("incorrect")+1);
           s.set("incorrect", s.getInteger("incorrect")+1);
           if (u.getInteger("score")>0){
