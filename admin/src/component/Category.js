@@ -9,7 +9,7 @@ import { throws } from "assert";
 class Category extends Component{
     constructor(props) {
       super(props);
-      this.state = {Categorias: [], option:'', editar:'',eliminar:'', nombre_nuevo: "", nombre_editado:"", id_elegido: ""};
+      this.state = {Categorias: [], option:"", editar:'',eliminar:'', nombre_nuevo: "", nombre_editado:"", id_elegido: ""};
       this.handleChange = this.handleChange.bind(this);
     }
       
@@ -100,8 +100,20 @@ class Category extends Component{
       });
     }
       
+    showButton(){
+      return(
+        <div className="form">
+              <img className="Sign-logo" src={logo} alt="logo" />
+              <h1>Modificar Areas</h1>
+              <Button color="primary" onClick={() =>this.setState({option:"añadir"})} >Añadir</Button>
+              <Button color="primary" onClick={() =>this.load_categories("editar")}  >Editar</Button>
+              <Button color="primary" onClick={() =>this.load_categories("eliminar")} >Eliminar</Button>
+      </div>
+      );
+    }
+
     show(){
-      if(this.state.option=="editar"){
+     if(this.state.option=="editar"){
         return(
         <div>
         {this.state.Categorias.map(c => 
@@ -136,30 +148,34 @@ class Category extends Component{
       else if(this.state.option=="añadir"){
         return(
           <div className="newCategory-page">
-            <div className="form">
+            <div className="form2">
               <h1>
                 Ingrese su nueva Categoria
               </h1>
               <label>
-                <input type="text" placeholder="Nombre" name="nombre_nuevo" value={this.state.nombre_nuevo} onChange={this.handleChange} />
+                <input type="text" placeholder="Nueva categoria" name="nombre_nuevo" value={this.state.nombre_nuevo} onChange={this.handleChange} />
               </label>
-              <button onClick={this.añadir}> Guardar</button>
+              <button onClick={this.añadir}> Guardar </button>
             </div>
           </div>
+        );
+      }
+      else {
+        return(
+          <div className="form">
+                <img className="Sign-logo" src={logo} alt="logo" />
+                <h1>Modificar Areas</h1>
+                <Button color="primary" onClick={() =>this.setState({option:"añadir"})} >Añadir</Button>
+                <Button color="primary" onClick={() =>this.load_categories("editar")}  >Editar</Button>
+                <Button color="primary" onClick={() =>this.load_categories("eliminar")} >Eliminar</Button>
+        </div>
         );
       }
     }
       render () {
         return (
           <div className="Modificar-Area">
-            <div className="form">
-              <img className="Sign-logo" src={logo} alt="logo" />
-              <h1>Modificar Areas</h1>
-              <Button color="primary" onClick={() =>this.setState({option:"añadir"})} >Añadir</Button>
-              <Button color="primary" onClick={() =>this.load_categories("editar")}  >Editar</Button>
-              <Button color="primary" onClick={() =>this.load_categories("eliminar")} >Eliminar</Button>
-            </div>
-            <div> 
+            <div>
               {this.show()}
             </div>
           </div>
