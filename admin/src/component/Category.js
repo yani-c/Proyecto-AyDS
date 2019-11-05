@@ -115,56 +115,65 @@ class Category extends Component{
     show(){
      if(this.state.option=="editar"){
         return(
-        <div>
-        {this.state.Categorias.map(c => 
-        <li key={c.id}>
-            <button onClick={() =>this.setState({option:"editando", id_elegido:c.id} ) }> {c.category_name} </button>
-        </li>          
-        )}
-        </div>
+          <div className="form2">
+            <div className="blockTit2">
+              <font className="Text-titulo2"> EDITAR CATEGORIA </font>
+              </div>
+              {this.state.Categorias.map(c => 
+                <div key={c.id}>
+                  <button className="button-Cate" onClick={() =>this.setState({option:"editando", id_elegido:c.id} ) }> {c.category_name} </button>
+                </div>          
+              )}
+          </div>
         );
       }
       else if(this.state.option=="editando"){
         return(
-          <div>
-            <label>
-              <input type="text" placeholder="Editar Categoria" name="nombre_editado" value={this.state.nombre_editado} onChange={this.handleChange} />
+          <div className="form">
+          <div className="blockTit">
+            <font className="Text-titulo2"> EDITAR AREA </font>
+          </div>
+          <label>
+              <input type="text" placeholder="Editar area" name="nombre_editado" value={this.state.nombre_editado} onChange={this.handleChange} />
             </label>
-            <Button color="primary" onClick={() =>this.editar(this.state.id_elegido)} >Guardar</Button>
+            <button onClick={() =>this.editar(this.state.id_elegido)} >Guardar</button>
           </div> 
         );
       }    
       else if (this.state.option=="eliminar"){
         return(
-          <div>
-            {this.state.Categorias.map(c => 
-            <li key={c.id}>
-              <button onClick={() =>this.eliminar(c.id)}> {c.category_name} </button>
-            </li>          
-            )}
+          <div className="form2">
+              <div className="blockTit2">
+              <font className="Text-titulo2"> ELIMINAR AREA </font>
+              </div>
+                {this.state.Categorias.map(c =>      
+                  <div key={c.id}>
+                    <button className="button-Cate" onClick={() =>this.eliminar(c.id)}> {c.category_name} </button> 
+                  </div>
+                )}
           </div>
           );
       }
       else if(this.state.option=="añadir"){
         return(
-          <div className="newCategory-page">
-            <div className="form2">
-              <h1>
-                Ingrese su nueva Categoria
-              </h1>
+            <div className="form">
+              <div className="blockTit">
+                <font className="Text-titulo2"> NUEVA AREA </font>
+              </div>
               <label>
-                <input type="text" placeholder="Nueva categoria" name="nombre_nuevo" value={this.state.nombre_nuevo} onChange={this.handleChange} />
+                <input type="text" placeholder="Nueva area" name="nombre_nuevo" value={this.state.nombre_nuevo} onChange={this.handleChange} />
               </label>
               <button onClick={this.añadir}> Guardar </button>
             </div>
-          </div>
         );
       }
       else {
         return(
           <div className="form">
-                <img className="Sign-logo" src={logo} alt="logo" />
-                <h1>Modificar Areas</h1>
+               
+                <div className="blockTit">
+                <font className="Text-titulo2"> MODIFICAR AREAS </font>
+                </div>
                 <Button color="primary" onClick={() =>this.setState({option:"añadir"})} >Añadir</Button>
                 <Button color="primary" onClick={() =>this.load_categories("editar")}  >Editar</Button>
                 <Button color="primary" onClick={() =>this.load_categories("eliminar")} >Eliminar</Button>
