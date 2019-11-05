@@ -42,6 +42,7 @@ class Category extends Component{
         console.log(error)
         });
     }
+
     añadir= async() => {
       this.setState({option:"añadir"});
       const h = new Headers();
@@ -63,25 +64,25 @@ class Category extends Component{
         this.props.history.push('/Menu');
       }) ;
     }
+    
   	editar= async(id_elegido) => {
-      this.setState({option:"editar" });
+      this.setState({option:"editar"});
       const h = new Headers();
       h.append('Content-Type','application/json; charset=UTF-8');
       h.append('Authorization', await AsyncStorage.getItem('userToken'));
       await fetch(process.env.REACT_APP_API_HOST+"/category/"+id_elegido,{
         method: 'POST',
-        body: JSON.stringify({category_name: this.state.nombre_editado,
-        }),
+        body: JSON.stringify({category_name: this.state.nombre_editado,}),
         headers: h,
       })
       .then(response => response.json())
-      .then(response => {
+      .then(respone => {
         alert("Categoria Actualizada");
         this.props.history.push('/Menu');
       })
       .catch(error => {
         console.log(error);
-      }) ;
+      });
     }
     
     eliminar= async(id) => {
@@ -98,18 +99,6 @@ class Category extends Component{
         alert("Categoria borrada existosamente");
         this.props.history.push('/Menu');
       });
-    }
-      
-    showButton(){
-      return(
-        <div className="form">
-              <img className="Sign-logo" src={logo} alt="logo" />
-              <h1>Modificar Areas</h1>
-              <Button color="primary" onClick={() =>this.setState({option:"añadir"})} >Añadir</Button>
-              <Button color="primary" onClick={() =>this.load_categories("editar")}  >Editar</Button>
-              <Button color="primary" onClick={() =>this.load_categories("eliminar")} >Eliminar</Button>
-      </div>
-      );
     }
 
     show(){
@@ -136,7 +125,7 @@ class Category extends Component{
           <label>
               <input type="text" placeholder="Editar area" name="nombre_editado" value={this.state.nombre_editado} onChange={this.handleChange} />
             </label>
-            <button onClick={() =>this.editar(this.state.id_elegido)} >Guardar</button>
+            <button onClick={() =>this.editar(this.state.id_elegido)}>Guardar</button>
           </div> 
         );
       }    
@@ -170,7 +159,6 @@ class Category extends Component{
       else {
         return(
           <div className="form">
-               
                 <div className="blockTit">
                 <font className="Text-titulo2"> MODIFICAR AREAS </font>
                 </div>

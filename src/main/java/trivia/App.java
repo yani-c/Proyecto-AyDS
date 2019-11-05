@@ -409,7 +409,7 @@ public class App{
         c.set("category_name", bodyParams.get("category_name"));
         c.saveIt();
         res.type("application/json");
-        return "Actualizado con exito : "+c.toJson(true);
+        return c.toJson(true);
       }
       res.type("application/json");
       return "Error: No se pudo actualizar.No se encontraron registros de la persona";
