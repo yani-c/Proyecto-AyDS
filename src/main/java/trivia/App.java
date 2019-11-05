@@ -351,6 +351,14 @@ public class App{
       user.set("administrator",bodyParams.get("administrator"));
       user.set("score",0);
       user.saveIt();
+      List<Category> cats = Category.findAll();
+      for(Category c: cats){
+        Level l = new Level();
+            l.set("level",0);
+            l.set("user_id",currentUser.get("id"));
+            l.set("category_id",c.getInteger("id"));
+            l.saveIt();
+      }
       res.type("application/json");
       return user.toJson(true);
     });
@@ -521,7 +529,7 @@ public class App{
         List<Question> qqq = new ArrayList<Question>();
         for(int i=0;i<questions.size();i++){
           boolean b= true;
-          for(int j=0;j<pregResp.size();j++){
+          for(int j=0;j<pregResp.size() && b;j++){
             if(pregResp.get(j).getInteger("id") == questions.get(i).getInteger("id")){
               b=false;
             }
@@ -611,7 +619,7 @@ public class App{
           json = "{\"Respuesta\":true}";
         }
         else{
-          c.set("incorrect",c.getInteger("incorrect"+1));
+          c.set("incorrect",c.getInteger("incorrect")+1);
           q.set("incorrect",q.getInteger("incorrect")+1);
           s.set("incorrect", s.getInteger("incorrect")+1);
           if (u.getInteger("score")>0){

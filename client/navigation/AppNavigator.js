@@ -2,7 +2,6 @@ import { createSwitchNavigator, createStackNavigator, createAppContainer } from 
 
 import HomeScreen from '../screens/HomeScreen';
 import CategoryScreen from '../screens/CategoryScreen';
-import GameScreen from '../screens/GameScreen';
 import OtherScreen from '../screens/OtherScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -16,7 +15,7 @@ import LevelScreen from '../screens/LevelScreen.js';
 import RankingScreen from '../screens/RankingScreen.js';
 
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Game: GameScreen, Category: CategoryScreen, Global : GlobalStatScreen, Answer : AnswerScreen, StatsMenu : StatisticsMenu, CatStat : CategStatScreen, Score: ScoreScreen, Level: LevelScreen, Rank: RankingScreen});
+const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen , Category: CategoryScreen, Global : GlobalStatScreen, Answer : AnswerScreen, StatsMenu : StatisticsMenu, CatStat : CategStatScreen, Score: ScoreScreen, Level: LevelScreen, Rank: RankingScreen});
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: SignUpScreen });
 export default createAppContainer(createSwitchNavigator(

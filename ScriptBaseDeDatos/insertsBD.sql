@@ -1,13 +1,13 @@
 use trivia_dev;
 -- Carga Usuarios
-INSERT INTO users (username, dni, administrator, password)
-VALUES ('Hernan', '39546109', true, 'root');
+INSERT INTO users (username, dni, administrator, password,score)
+VALUES ('Hernan', '39546109', true, 'root','0');
 
-INSERT INTO users (username, dni, administrator, password)
-VALUES ('Yani', '41824212', true, 'root');
+INSERT INTO users (username, dni, administrator, password,score)
+VALUES ('Yani', '41824212', true, 'root','0');
 
-INSERT INTO users (username, dni, administrator, password)
-VALUES ('Alvaro', '37875800', true, 'root');
+INSERT INTO users (username, dni, administrator, password,score)
+VALUES ('Alvaro', '37875800', true, 'root','0');
 
 -- NUEVAS Categorias
 INSERT INTO categories (category_name,correct,incorrect)
@@ -27,6 +27,47 @@ VALUES ('Historia','0','0');
 
 INSERT INTO categories (category_name,correct,incorrect)
 VALUES ('Deporte','0','0');
+
+-- Setear niveles de los usuarios
+
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','1','1');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','2','1');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','3','1');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','4','1');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','5','1');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','6','1');
+
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','1','2');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','2','2');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','3','2');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','4','2');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','5','2');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','6','2');
+
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','1','3');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','2','3');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','3','3');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','4','3');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','5','3');
+INSERT INTO levels (level,category_id,user_id)
+VALUES ('0','6','3');
 
 -- Preguntas NUEVAS Geometria y opciones
 INSERT INTO questions (description, category_id, user_id, active,correct,incorrect)
